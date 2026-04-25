@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1.0" />
+<title>Predict.fun 数据批量查询</title>
+<style>
+:root{
+  --c-primary:#16a34a;--c-primary-dark:#15803d;--c-primary-light:#86efac;
+  --c-bg:#f8fafc;--c-card:#fff;--c-border:#e2e8f0;
+  --c-text:#0f172a;--c-sub:#64748b;--c-green:#10b981;--c-red:#ef4444;
+  --c-yellow:#d97706;--c-hover:rgba(22,163,74,.07);--c-even:#f8fafc;
+  --c-input-bg:#fff;--c-summary-bg:#ecfdf5;--c-tooltip:#334155;
+  --radius:12px;--shadow:0 1px 3px rgba(0,0,0,.06),0 1px 2px rgba(0,0,0,.04);
+  --shadow-lg:0 10px 28px rgba(0,0,0,.08);
+}
+[data-theme="dark"]{
+  --c-primary:#34d399;--c-primary-dark:#10b981;--c-primary-light:#047857;
+  --c-bg:#0f172a;--c-card:#1e293b;--c-border:#334155;
+  --c-text:#e2e8f0;--c-sub:#94a3b8;--c-green:#34d399;--c-red:#f87171;
+  --c-yellow:#fbbf24;--c-hover:rgba(52,211,153,.09);--c-even:#172033;
+  --c-input-bg:#0f172a;--c-summary-bg:#052e1b;--c-tooltip:#475569;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Helvetica Neue',Arial,sans-serif;background:var(--c-bg);color:var(--c-text);line-height:1.6;padding:32px 24px;min-height:100vh;transition:background .3s,color .3s}
+a{color:var(--c-primary);text-decoration:none}a:hover{text-decoration:underline}
+.page-header{text-align:center;margin-bottom:22px}.page-header h1{font-size:32px;font-weight:850;letter-spacing:-.6px}.page-header h1 span{background:linear-gradient(135deg,var(--c-primary),#22c55e);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}.subtitle{color:var(--c-sub);font-size:14px;margin-top:6px}.header-toolbar{display:flex;align-items:center;justify-content:center;gap:8px;flex-wrap:wrap;margin-top:12px}
+.badge{display:inline-flex;align-items:center;gap:6px;height:34px;padding:0 14px;border-radius:17px;border:1px solid var(--c-border);background:var(--c-card);box-shadow:var(--shadow);font-size:13px;font-weight:600;color:var(--c-text)}
+.card{max-width:1240px;margin:0 auto 18px;background:var(--c-card);border:1px solid var(--c-border);border-radius:var(--radius);box-shadow:var(--shadow);padding:24px;transition:background .3s,border-color .3s}
+.config-grid{display:grid;grid-template-columns:1fr .78fr .78fr auto;gap:10px;align-items:end}.field label{display:block;font-size:12px;font-weight:700;color:var(--c-sub);margin-bottom:6px}.field input,.field select{width:100%;height:40px;border:1px solid var(--c-border);border-radius:9px;background:var(--c-input-bg);color:var(--c-text);padding:0 12px;font-size:13px;outline:none;transition:all .2s}.field input:focus,.field select:focus,textarea:focus{border-color:var(--c-primary);box-shadow:0 0 0 3px rgba(22,163,74,.13)}
+.help-tip{display:flex;align-items:flex-start;gap:10px;background:rgba(22,163,74,.06);border:1px solid rgba(22,163,74,.2);border-radius:9px;padding:11px 13px;margin-top:14px;color:var(--c-sub);font-size:13px}.help-tip b{color:var(--c-text)}
+textarea{width:100%;min-height:125px;resize:vertical;padding:13px 14px;border:1px solid var(--c-border);border-radius:10px;background:var(--c-input-bg);color:var(--c-text);font-family:inherit;font-size:14px;transition:all .2s}textarea.drag-over{border-color:var(--c-primary);background:var(--c-summary-bg)}
+button{height:40px;padding:0 18px;font-size:14px;font-weight:700;border:none;border-radius:9px;background:var(--c-primary);color:#fff;cursor:pointer;transition:all .18s;letter-spacing:.2px;white-space:nowrap}button:hover:not(:disabled){background:var(--c-primary-dark);transform:translateY(-1px);box-shadow:0 4px 12px rgba(22,163,74,.24)}button:disabled{background:#94a3b8;cursor:not-allowed;opacity:.7}.btn-outline{background:transparent;color:var(--c-primary);border:1px solid var(--c-border)}.btn-outline:hover:not(:disabled){background:var(--c-hover);box-shadow:none;transform:none}.btn-stop{background:var(--c-red)}.btn-stop:hover:not(:disabled){background:#dc2626;box-shadow:0 4px 12px rgba(239,68,68,.24)}.btn-sm{height:30px;padding:0 10px;font-size:12px;border-radius:7px}.btn-icon{width:34px;height:34px;padding:0;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:16px}.btn-ghost{background:transparent;color:var(--c-sub);border:1px solid var(--c-border)}.btn-ghost:hover:not(:disabled){background:var(--c-hover);color:var(--c-primary);box-shadow:none;transform:none}
+.import-tabs{display:flex;gap:0;border-bottom:2px solid var(--c-border);margin-bottom:14px}.import-tab{height:38px;background:transparent;color:var(--c-sub);border:none;border-bottom:2px solid transparent;border-radius:0;margin-bottom:-2px;padding:0 18px;box-shadow:none}.import-tab:hover:not(:disabled){background:var(--c-hover);box-shadow:none;transform:none;color:var(--c-primary)}.import-tab.active{color:var(--c-primary);border-bottom-color:var(--c-primary)}
+.upload-zone{border:2px dashed var(--c-border);border-radius:10px;padding:38px 18px;text-align:center;cursor:pointer;background:var(--c-input-bg);transition:all .2s}.upload-zone:hover,.upload-zone.drag-over{border-color:var(--c-primary);background:var(--c-summary-bg)}.upload-icon{font-size:38px;margin-bottom:8px}.upload-title{font-size:15px;font-weight:750;color:var(--c-text)}.upload-sub{font-size:13px;color:var(--c-sub);margin:5px 0 14px}
+.toolbar{display:flex;justify-content:center;gap:7px;flex-wrap:wrap;margin-top:14px}.offline-banner{display:none;position:fixed;top:0;left:0;right:0;background:var(--c-red);color:#fff;text-align:center;padding:9px;z-index:200;font-size:14px;font-weight:600}
+#loading{display:none;margin-top:16px;text-align:center;color:var(--c-sub);font-size:13px}progress{width:100%;height:7px;border:none;border-radius:4px;background:var(--c-border);overflow:hidden}progress::-webkit-progress-value{background:linear-gradient(90deg,var(--c-primary),#22c55e);border-radius:4px;transition:width .25s}progress::-webkit-progress-bar{background:var(--c-border);border-radius:4px}#barTxt{margin-top:6px}
+#summary{display:none;margin:16px 0 10px;padding:12px 16px;background:var(--c-summary-bg);border-left:4px solid var(--c-primary);border-radius:var(--radius);color:var(--c-primary);font-size:14px;font-weight:700}.stats-cards{display:none;grid-template-columns:repeat(6,1fr);gap:12px;margin:18px 0}.stat-card{background:var(--c-card);border:1px solid var(--c-border);border-radius:var(--radius);padding:16px 14px;text-align:center;position:relative;overflow:hidden;transition:all .2s}.stat-card:hover{transform:translateY(-2px);box-shadow:var(--shadow-lg)}.stat-label{font-size:12px;color:var(--c-sub);text-transform:uppercase;letter-spacing:.45px;font-weight:700}.stat-value{font-size:22px;font-weight:850;color:var(--c-text);margin-top:6px;letter-spacing:-.35px}.stat-value.positive{color:var(--c-green)}.stat-value.negative{color:var(--c-red)}.stat-sub{font-size:11px;color:var(--c-sub);margin-top:4px;opacity:.86}
+.filter-row{display:none;gap:8px;align-items:center;margin:14px 0;flex-wrap:wrap}.filter-row input{flex:1;min-width:220px;height:39px;padding:0 13px;border:1px solid var(--c-border);border-radius:9px;background:var(--c-input-bg);color:var(--c-text);outline:none}
+.history-wrap{display:none;margin-top:10px}.history-wrap details{font-size:13px;color:var(--c-sub)}.history-wrap summary{cursor:pointer;color:var(--c-primary);font-weight:700;user-select:none}.history-list{max-height:156px;overflow-y:auto;margin-top:6px}.history-item{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:7px 0;border-bottom:1px solid var(--c-border)}.history-item span{cursor:pointer;color:var(--c-text);font-size:12px}.history-item span:hover{color:var(--c-primary)}
+.table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:var(--radius);border:1px solid var(--c-border);margin-top:4px}table{width:100%;min-width:1320px;border-collapse:collapse;background:var(--c-card)}th,td{padding:11px 9px;font-size:12.5px;text-align:left;transition:background .2s,border-color .2s}td{border-top:1px solid var(--c-border);vertical-align:middle}th{position:sticky;top:0;background:var(--c-primary);color:#fff;z-index:2;cursor:pointer;user-select:none;font-size:12px;text-transform:uppercase;letter-spacing:.25px;white-space:nowrap}th:hover{background:var(--c-primary-dark)}tbody tr:nth-child(even){background:var(--c-even)}tbody tr:hover{background:var(--c-hover)}td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}.positive{color:var(--c-green);font-weight:800}.negative{color:var(--c-red);font-weight:800}.muted{color:var(--c-sub)}.small{font-size:11px;color:var(--c-sub)}.mono{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace}.nowrap{white-space:nowrap}.copy-btn{margin-left:5px;height:24px;padding:0 7px;font-size:11px;border-radius:5px;background:transparent;color:var(--c-sub);border:1px solid var(--c-border)}.copy-btn:hover:not(:disabled){background:var(--c-hover);color:var(--c-primary);box-shadow:none;transform:none}.note-input{width:88px;height:30px;padding:0 8px;border:1px solid transparent;border-radius:7px;background:transparent;color:var(--c-text);font-size:12px;text-align:center}.note-input:hover,.note-input:focus{border-color:var(--c-border);background:var(--c-input-bg);outline:none}.note-input:focus{width:126px;border-color:var(--c-primary)}.err-badge{display:inline-flex;align-items:center;gap:6px;padding:3px 10px;border-radius:999px;font-size:12px;font-weight:700;background:rgba(239,68,68,.1);color:var(--c-red)}.warn-badge{display:inline-flex;align-items:center;gap:6px;padding:3px 9px;border-radius:999px;font-size:11px;font-weight:700;background:rgba(245,158,11,.12);color:var(--c-yellow);margin-left:6px}.row-placeholder{opacity:.52}.detail-row td{background:var(--c-bg)!important}.detail-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.detail-box{border:1px solid var(--c-border);border-radius:10px;background:var(--c-card);padding:12px;min-width:0}.detail-box h4{font-size:13px;margin-bottom:8px;color:var(--c-text)}.detail-list{display:flex;flex-direction:column;gap:7px}.detail-item{font-size:12px;color:var(--c-sub);border-bottom:1px dashed var(--c-border);padding-bottom:7px}.detail-item:last-child{border-bottom:none;padding-bottom:0}.detail-title{color:var(--c-text);font-weight:700}.pill{display:inline-flex;align-items:center;padding:1px 7px;border-radius:999px;background:var(--c-summary-bg);color:var(--c-primary);font-size:11px;font-weight:800;margin-right:4px}.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(10px);background:var(--c-tooltip);color:#fff;padding:10px 18px;border-radius:9px;font-size:13px;font-weight:700;opacity:0;transition:all .25s;z-index:300;box-shadow:0 4px 14px rgba(0,0,0,.18);pointer-events:none}.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}.footer{text-align:center;font-size:13px;color:var(--c-sub);margin-top:38px;padding-bottom:14px}
+@media(max-width:920px){body{padding:18px 10px}.card{padding:16px}.page-header h1{font-size:25px}.config-grid{grid-template-columns:1fr 1fr}.stats-cards{grid-template-columns:repeat(3,1fr)}.detail-grid{grid-template-columns:1fr}}@media(max-width:560px){.config-grid{grid-template-columns:1fr}.toolbar{justify-content:stretch}.toolbar button{flex:1}.stats-cards{grid-template-columns:1fr 1fr}.stat-value{font-size:18px}th,td{padding:8px 6px;font-size:11px}}
+</style>
+</head>
+<body>
+<div id="offlineBanner" class="offline-banner">网络已断开，请检查连接后重试</div>
+<header class="page-header">
+  <h1><span>Predict.fun</span> 数据批量查询</h1>
+  <p class="subtitle">批量查询 Predict Smart Wallet 可用余额、持仓金额、浮动盈亏与最近成交；支持 CSV/TXT 导入、排序、过滤、导出。</p>
+  <div class="header-toolbar">
+    <a class="badge" href="https://predict.fun/" target="_blank" rel="noopener noreferrer">Predict.fun 官网</a>
+    <a class="badge" href="https://dev.predict.fun/" target="_blank" rel="noopener noreferrer">API 文档</a>
+    <button id="themeBtn" class="btn-icon btn-ghost" title="切换暗色/亮色模式">🌙</button>
+  </div>
+</header>
+
+<section class="card">
+  <div class="config-grid">
+    <div class="field">
+      <label for="apiBase">API 环境</label>
+      <select id="apiBase">
+        <option value="mainnet">主网：Vercel 环境变量代理</option>
+        <option value="testnet">测试网：Vercel 环境变量代理</option>
+      </select>
+    </div>
+    <div class="field">
+      <label for="matchPages">成交页数</label>
+      <select id="matchPages">
+        <option value="1">1 页 · 最近 50 笔</option>
+        <option value="2">2 页 · 最近 100 笔</option>
+        <option value="3">3 页 · 最近 150 笔</option>
+        <option value="5">5 页 · 最近 250 笔</option>
+      </select>
+    </div>
+    <div class="field">
+      <label for="concurrency">并发数</label>
+      <select id="concurrency">
+        <option value="2">2</option>
+        <option value="3" selected>3</option>
+        <option value="4">4</option>
+        <option value="6">6</option>
+      </select>
+    </div>
+    <button id="saveConfig" class="btn-outline">保存配置</button>
+  </div>
+  <div class="field" style="margin-top:12px">
+    <label for="corsProxy">可选 CORS 代理（仅用于链上余额 RPC 如被浏览器拦截；支持 <span class="mono">{url}</span> 占位符）</label>
+    <input id="corsProxy" type="text" placeholder="留空直连；例：https://your-worker.example/?url={url}" />
+  </div>
+  <div class="help-tip">
+    <span>💡</span>
+    <span><b>说明：</b>Predict API 已默认走同域 <span class="mono">/api/predict</span> 代理，Key 从 Vercel 环境变量 <span class="mono">PREDICT_API_KEY</span> 读取，不会出现在前端代码里。可用余额仍通过 BNB Chain USDT 余额实时查询。</span>
+  </div>
+</section>
+
+<section class="card">
+  <div class="import-tabs">
+    <button class="import-tab active" id="tabPaste" type="button">粘贴地址</button>
+    <button class="import-tab" id="tabUpload" type="button">上传文件</button>
+  </div>
+
+  <div id="panePaste">
+    <textarea id="input" placeholder="每行一个 Predict Smart Wallet / 0x 地址；也可以直接粘贴 CSV 或任意文本，页面会自动提取 0x... 地址"></textarea>
+  </div>
+
+  <div id="paneUpload" style="display:none">
+    <div class="upload-zone" id="uploadZone">
+      <div class="upload-icon">📂</div>
+      <div class="upload-title">拖拽 CSV / TXT 文件到这里</div>
+      <div class="upload-sub">页面会自动提取文件里的 0x 地址，并去重</div>
+      <button class="btn-sm" id="uploadBtn" type="button">或点击选择文件</button>
+      <input type="file" id="fileInput" accept=".csv,.txt" style="display:none" />
+    </div>
+  </div>
+
+  <div class="history-wrap" id="historyWrap">
+    <details>
+      <summary>查询历史</summary>
+      <div class="history-list" id="historyList"></div>
+      <div style="text-align:center;margin-top:8px"><button class="btn-sm btn-outline" id="clearHistory">清空历史</button></div>
+    </details>
+  </div>
+
+  <div class="toolbar">
+    <button id="run">开始查询</button>
+    <button id="stop" class="btn-stop" style="display:none">停止</button>
+    <button id="csv" class="btn-outline" disabled>导出 CSV</button>
+    <button id="json" class="btn-outline" disabled>导出 JSON</button>
+  </div>
+
+  <div id="loading"><progress id="bar" value="0" max="100"></progress><div id="barTxt"></div></div>
+  <div id="summary"></div>
+
+  <div class="stats-cards" id="statsCards">
+    <div class="stat-card"><div class="stat-label">可用余额</div><div class="stat-value" id="statAvail">-</div><div class="stat-sub">链上 USDT · 实时</div></div>
+    <div class="stat-card"><div class="stat-label">持仓金额</div><div class="stat-value" id="statValue">-</div><div class="stat-sub">当前持仓 · USD</div></div>
+    <div class="stat-card"><div class="stat-label">净资产</div><div class="stat-value" id="statTotal">-</div><div class="stat-sub">可用 + 持仓</div></div>
+    <div class="stat-card"><div class="stat-label">浮动盈亏</div><div class="stat-value" id="statPnl">-</div><div class="stat-sub">API pnlUsd / 推算</div></div>
+    <div class="stat-card"><div class="stat-label">最近成交额</div><div class="stat-value" id="statVol">-</div><div class="stat-sub">按所选页数汇总</div></div>
+    <div class="stat-card"><div class="stat-label">持仓数</div><div class="stat-value" id="statPos">-</div><div class="stat-sub">全部地址合计</div></div>
+  </div>
+
+  <div class="filter-row" id="filterRow">
+    <input id="filterInput" type="text" placeholder="搜索地址、市场、备注、状态..." />
+    <button class="btn-sm btn-outline" id="restoreOrder">恢复输入顺序</button>
+  </div>
+
+  <div class="table-wrap">
+    <table id="tbl">
+      <thead>
+        <tr>
+          <th data-key="idx">#</th>
+          <th data-key="addr">地址</th>
+          <th data-key="available" class="num">可用余额</th>
+          <th data-key="value" class="num">持仓金额</th>
+          <th data-key="total" class="num">净资产</th>
+          <th data-key="pnl" class="num">浮动盈亏</th>
+          <th data-key="cost" class="num">投入成本</th>
+          <th data-key="posCnt" class="num">持仓数</th>
+          <th data-key="marketCnt" class="num">市场数</th>
+          <th data-key="vol" class="num">最近成交额</th>
+          <th data-key="fillCnt" class="num">成交数</th>
+          <th data-key="last">最后成交</th>
+          <th data-key="note">备注</th>
+          <th data-key="action">操作</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </div>
+</section>
+
+<p class="footer">Predict.fun Batch Query · Predict API 通过 Vercel 环境变量代理访问，结果仅供辅助核对。</p>
+<div id="toast" class="toast"></div>
+
+<script>
+const $ = s => document.querySelector(s);
+const $$ = s => Array.from(document.querySelectorAll(s));
+const ETH_RE = /^0x[0-9a-fA-F]{40}$/;
+const ETH_RE_G = /0x[0-9a-fA-F]{40}/g;
+const STORE = {
+  base:'pf_api_base', proxy:'pf_cors_proxy', theme:'pf_theme',
+  history:'pf_query_history', notes:'pf_notes', pages:'pf_match_pages', concurrency:'pf_concurrency'
+};
+const MATCH_PAGE_SIZE = 50;
+const FETCH_TIMEOUT = 15000;
+const RPC_TIMEOUT = 6500;
+const RATE_LIMIT_MS = 120;
+const USDT_DECIMALS = 18;
+const CHAIN = {
+  mainnet: {
+    usdt: '0x55d398326f99059fF775485246999027B3197955',
+    rpcs: ['https://bsc-dataseed.bnbchain.org/','https://bsc-rpc.publicnode.com','https://binance.llamarpc.com','https://bsc.drpc.org','https://1rpc.io/bnb','https://bsc-dataseed1.defibit.io/','https://bsc-dataseed1.ninicoin.io/']
+  },
+  testnet: {
+    usdt: '0xB32171ecD878607FFc4F8FC0bCcE6852BB3149E0',
+    rpcs: ['https://bsc-testnet-dataseed.bnbchain.org/','https://bsc-testnet.publicnode.com']
+  }
+};
+let resultMeta = [];
+let abortFlag = false;
+let runController = null;
+let sortKey = null;
+let sortAsc = true;
+let toastTimer = null;
+let rateLimitQueue = Promise.resolve();
+
+function toast(msg){ const el=$('#toast'); el.textContent=msg; clearTimeout(toastTimer); el.classList.add('show'); toastTimer=setTimeout(()=>el.classList.remove('show'),1600); }
+function esc(s){ return String(s ?? '').replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;').replaceAll("'",'&#039;'); }
+function toNum(v){ if(v===null || v===undefined || v==='') return NaN; const n=Number(v); return Number.isFinite(n) ? n : NaN; }
+function safeNum(v){ const n=toNum(v); return Number.isFinite(n) ? n : null; }
+function fmtMoney(v){ const n=toNum(v); return Number.isFinite(n) ? n.toLocaleString('zh-CN',{minimumFractionDigits:2,maximumFractionDigits:2}) : '-'; }
+function fmtUsd(v){ const n=toNum(v); return Number.isFinite(n) ? '$'+fmtMoney(n) : '-'; }
+function fmtInt(v){ const n=toNum(v); return Number.isFinite(n) ? Math.round(n).toLocaleString('zh-CN') : '-'; }
+function fmtShort(addr){ return addr && addr.length>12 ? `${addr.slice(0,6)}...${addr.slice(-4)}` : addr; }
+function fmtDate(ts){ if(!ts) return '-'; const d=new Date(ts); if(Number.isNaN(d.getTime())) return '-'; const diff=Date.now()-d.getTime(); if(diff>=0 && diff<86400000){ const h=Math.floor(diff/3600000); if(h<1) return '刚刚'; return `${h}小时前`; } return d.toLocaleDateString('zh-CN',{year:'numeric',month:'2-digit',day:'2-digit'}); }
+function copyText(text){ navigator.clipboard?.writeText(text).then(()=>toast('已复制')).catch(()=>toast('复制失败')); }
+function downloadBlob(name, content, type){ const blob=new Blob([content],{type}); const url=URL.createObjectURL(blob); const a=document.createElement('a'); a.href=url; a.download=name; a.click(); URL.revokeObjectURL(url); }
+function cssClassSigned(n){ const v=toNum(n); return v<0 ? 'negative' : (v>0 ? 'positive' : 'muted'); }
+function signedMoney(v){ const n=toNum(v); if(!Number.isFinite(n)) return '-'; const sign=n>0?'+':(n<0?'−':''); return `${sign}$${fmtMoney(Math.abs(n))}`; }
+function signedPct(v){ const n=toNum(v); if(!Number.isFinite(n)) return ''; const sign=n>0?'+':(n<0?'−':''); return `${sign}${Math.abs(n).toFixed(2)}%`; }
+function rateLimitWait(){ rateLimitQueue = rateLimitQueue.then(()=>new Promise(r=>setTimeout(r,RATE_LIMIT_MS))); return rateLimitQueue; }
+
+function initTheme(){ const saved=localStorage.getItem(STORE.theme); if(saved==='dark' || (!saved && matchMedia('(prefers-color-scheme:dark)').matches)){ document.documentElement.setAttribute('data-theme','dark'); $('#themeBtn').textContent='☀️'; } }
+$('#themeBtn').addEventListener('click',()=>{ const dark=document.documentElement.getAttribute('data-theme')==='dark'; if(dark){ document.documentElement.removeAttribute('data-theme'); localStorage.setItem(STORE.theme,'light'); $('#themeBtn').textContent='🌙'; }else{ document.documentElement.setAttribute('data-theme','dark'); localStorage.setItem(STORE.theme,'dark'); $('#themeBtn').textContent='☀️'; } });
+initTheme();
+
+function loadConfig(){
+  $('#apiBase').value = localStorage.getItem(STORE.base) || 'mainnet';
+  $('#corsProxy').value = localStorage.getItem(STORE.proxy) || '';
+  $('#matchPages').value = localStorage.getItem(STORE.pages) || '1';
+  $('#concurrency').value = localStorage.getItem(STORE.concurrency) || '3';
+}
+function saveConfig(){
+  localStorage.setItem(STORE.base, $('#apiBase').value);
+  localStorage.setItem(STORE.proxy, $('#corsProxy').value.trim());
+  localStorage.setItem(STORE.pages, $('#matchPages').value);
+  localStorage.setItem(STORE.concurrency, $('#concurrency').value);
+  toast('配置已保存');
+}
+$('#saveConfig').addEventListener('click', saveConfig);
+loadConfig();
+
+function updateOnlineStatus(){ $('#offlineBanner').style.display = navigator.onLine ? 'none' : 'block'; }
+window.addEventListener('online',updateOnlineStatus); window.addEventListener('offline',updateOnlineStatus); updateOnlineStatus();
+
+$('#tabPaste').addEventListener('click',()=>{ $('#tabPaste').classList.add('active'); $('#tabUpload').classList.remove('active'); $('#panePaste').style.display=''; $('#paneUpload').style.display='none'; });
+$('#tabUpload').addEventListener('click',()=>{ $('#tabUpload').classList.add('active'); $('#tabPaste').classList.remove('active'); $('#paneUpload').style.display=''; $('#panePaste').style.display='none'; });
+const inputEl=$('#input');
+inputEl.addEventListener('dragover',e=>{ e.preventDefault(); inputEl.classList.add('drag-over'); });
+inputEl.addEventListener('dragleave',()=>inputEl.classList.remove('drag-over'));
+inputEl.addEventListener('drop',e=>{ e.preventDefault(); inputEl.classList.remove('drag-over'); if(e.dataTransfer.files[0]) handleFile(e.dataTransfer.files[0]); });
+const uploadZone=$('#uploadZone'), fileInput=$('#fileInput');
+$('#uploadBtn').addEventListener('click',e=>{ e.stopPropagation(); fileInput.click(); });
+uploadZone.addEventListener('click',()=>fileInput.click());
+uploadZone.addEventListener('dragover',e=>{ e.preventDefault(); uploadZone.classList.add('drag-over'); });
+uploadZone.addEventListener('dragleave',()=>uploadZone.classList.remove('drag-over'));
+uploadZone.addEventListener('drop',e=>{ e.preventDefault(); uploadZone.classList.remove('drag-over'); if(e.dataTransfer.files[0]) handleFile(e.dataTransfer.files[0]); });
+fileInput.addEventListener('change',()=>{ if(fileInput.files[0]) handleFile(fileInput.files[0]); fileInput.value=''; });
+function handleFile(file){ if(!/\.(csv|txt)$/i.test(file.name)) return toast('仅支持 CSV 或 TXT 文件'); const reader=new FileReader(); reader.onload=()=>{ const addrs=parseAddresses(String(reader.result||'')); if(!addrs.length) return toast('文件中未找到 0x 地址'); inputEl.value=addrs.join('\n'); $('#tabPaste').click(); toast(`已导入 ${addrs.length} 个地址`); }; reader.readAsText(file); }
+function parseAddresses(text){ const arr=String(text||'').match(ETH_RE_G) || []; return [...new Map(arr.map(a=>[a.toLowerCase(),a])).values()]; }
+
+function getHistory(){ try{return JSON.parse(localStorage.getItem(STORE.history)||'[]')}catch{return[]} }
+function saveHistory(addrs){ const list=getHistory(); list.unshift({time:Date.now(),addrs:addrs.slice(0,80),count:addrs.length}); list.splice(20); localStorage.setItem(STORE.history,JSON.stringify(list)); renderHistory(); }
+function renderHistory(){ const list=getHistory(); const wrap=$('#historyWrap'), box=$('#historyList'); if(!list.length){wrap.style.display='none';return;} wrap.style.display='block'; box.innerHTML=''; list.forEach((h,i)=>{ const d=new Date(h.time); const div=document.createElement('div'); div.className='history-item'; div.innerHTML=`<span>${d.toLocaleString('zh-CN',{month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit'})} — ${h.count} 个地址</span><button class="btn-sm btn-outline">删</button>`; div.querySelector('span').addEventListener('click',()=>{ inputEl.value=h.addrs.join('\n'); toast('已加载历史'); }); div.querySelector('button').addEventListener('click',()=>{ const arr=getHistory(); arr.splice(i,1); localStorage.setItem(STORE.history,JSON.stringify(arr)); renderHistory(); }); box.appendChild(div); }); }
+$('#clearHistory').addEventListener('click',()=>{ localStorage.removeItem(STORE.history); renderHistory(); toast('历史已清空'); });
+renderHistory();
+function getNotes(){ try{return JSON.parse(localStorage.getItem(STORE.notes)||'{}')}catch{return{}} }
+function getNote(addr){ return getNotes()[addr.toLowerCase()] || ''; }
+function saveNote(addr,text){ const n=getNotes(); if(text) n[addr.toLowerCase()]=text; else delete n[addr.toLowerCase()]; localStorage.setItem(STORE.notes,JSON.stringify(n)); }
+
+function requestHeaders(){ return {'Content-Type':'application/json'}; }
+function apiUrl(path, params={}){
+  const url = new URL('/api/predict', window.location.origin);
+  url.searchParams.set('network', $('#apiBase').value || 'mainnet');
+  url.searchParams.set('path', path);
+  for(const [k,v] of Object.entries(params)){ if(v!==undefined && v!==null && v!=='') url.searchParams.set(k, v); }
+  return url.toString();
+}
+function proxiedUrl(url){
+  if(String(url).startsWith(window.location.origin + '/api/') || String(url).startsWith('/api/')) return url;
+  const p=$('#corsProxy').value.trim();
+  if(!p) return url;
+  return p.includes('{url}') ? p.replaceAll('{url}', encodeURIComponent(url)) : p + encodeURIComponent(url);
+}
+function timeoutSignal(ms){ const c=new AbortController(); const t=setTimeout(()=>c.abort(new Error('timeout')), ms); if(runController){ runController.signal.addEventListener('abort',()=>c.abort(new Error('user abort')),{once:true}); } return {signal:c.signal, cleanup:()=>clearTimeout(t)}; }
+async function fetchJ(url, tries=2){
+  await rateLimitWait();
+  for(let i=0;i<tries;i++){
+    const ctl=timeoutSignal(FETCH_TIMEOUT);
+    try{
+      const res=await fetch(proxiedUrl(url),{method:'GET',headers:requestHeaders(),signal:ctl.signal});
+      const text=await res.text();
+      let json=null; try{ json=text?JSON.parse(text):null; }catch{ json=null; }
+      if(!res.ok){ const msg=json?.message || json?.error || text.slice(0,140) || res.statusText; throw new Error(`HTTP ${res.status}${msg?` · ${msg}`:''}`); }
+      if(json && json.success===false){ throw new Error(json.message || json.error || 'API 返回 success=false'); }
+      return json;
+    }catch(e){
+      if(abortFlag || e?.message==='user abort') throw new Error('已停止');
+      if(i===tries-1) throw e;
+      await new Promise(r=>setTimeout(r, 500*(i+1)));
+    }finally{ ctl.cleanup(); }
+  }
+}
+function activeChain(){ return $('#apiBase').value === 'testnet' ? CHAIN.testnet : CHAIN.mainnet; }
+function weiToNumber(raw, decimals=18){
+  let n=BigInt(raw || 0n); const neg=n<0n; if(neg) n=-n;
+  const scale=10n**BigInt(decimals), whole=n/scale, frac=n%scale;
+  const fracStr=frac.toString().padStart(decimals,'0').slice(0,8).replace(/0+$/,'');
+  const out=Number(`${whole.toString()}${fracStr?'.'+fracStr:''}`);
+  return neg ? -out : out;
+}
+async function rpcEthCall(payload){
+  const {rpcs}=activeChain();
+  for(const url of rpcs){
+    const ctl=timeoutSignal(RPC_TIMEOUT);
+    try{
+      const res=await fetch(proxiedUrl(url),{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload),signal:ctl.signal});
+      if(!res.ok) throw new Error(`RPC HTTP ${res.status}`);
+      const j=await res.json();
+      const result=Array.isArray(j) ? j[0]?.result : j?.result;
+      if(typeof result==='string' && result.startsWith('0x')) return result;
+    }catch(e){ if(abortFlag || e?.message==='user abort') throw e; }
+    finally{ ctl.cleanup(); }
+  }
+  return null;
+}
+async function fetchUsdtBalance(addr){
+  const {usdt}=activeChain();
+  const data='0x70a08231' + addr.slice(2).padStart(64,'0');
+  const hex=await rpcEthCall({jsonrpc:'2.0',id:1,method:'eth_call',params:[{to:usdt,data},'latest']});
+  if(!hex) return null;
+  const raw = hex === '0x' ? 0n : BigInt(hex);
+  return weiToNumber(raw, USDT_DECIMALS);
+}
+async function fetchPositions(addr){ const j=await fetchJ(apiUrl(`/v1/positions/${addr}`)); return Array.isArray(j?.data) ? j.data : (Array.isArray(j) ? j : []); }
+async function fetchMatches(addr){
+  const pages=Math.max(1, Math.min(5, parseInt($('#matchPages').value,10)||1));
+  let after='', out=[];
+  for(let page=0; page<pages && !abortFlag; page++){
+    const j=await fetchJ(apiUrl('/v1/orders/matches',{first:String(MATCH_PAGE_SIZE), after, signerAddress:addr}));
+    const data=Array.isArray(j?.data) ? j.data : [];
+    out.push(...data);
+    after = j?.cursor || j?.nextCursor || j?.next || '';
+    if(!after || data.length < MATCH_PAGE_SIZE) break;
+  }
+  return out;
+}
+
+function normPriceToCents(price){ let p=safeNum(price); if(p===null) return null; if(Math.abs(p)>=1e6) p=p/1e18; if(p>=0 && p<=1) p=p*100; return p; }
+function normAmountToShares(amount){ let a=safeNum(amount); if(a===null) return null; if(Math.abs(a)>1e9) a=a/1e18; return a; }
+function fmtShares(v){ const n=toNum(v); if(!Number.isFinite(n)) return '-'; if(Math.abs(n)>=1000) return n.toLocaleString('zh-CN',{maximumFractionDigits:0}); if(Math.abs(n)>=100) return n.toLocaleString('zh-CN',{maximumFractionDigits:1}); return Number(n.toFixed(4)).toLocaleString('zh-CN'); }
+function marketId(m){ return m?.id ?? m?.marketId ?? m?.market_id ?? ''; }
+function positionMarket(p){ return (p.market && typeof p.market==='object') ? p.market : {}; }
+function positionOutcome(p){ return (p.outcome && typeof p.outcome==='object') ? p.outcome : {}; }
+function positionTitle(p){ const m=positionMarket(p); return p.title || m.title || m.question || p.marketTitle || p.market_title || marketId(m) || '-'; }
+function outcomeName(p){ const o=positionOutcome(p); return p.outcomeName || p.outcome_name || o.name || o.title || (o.indexSet!==undefined ? String(o.indexSet) : '-'); }
+function positionShares(p){ return normAmountToShares(p.shares ?? p.quantity ?? p.amount); }
+function entryPriceCents(p){
+  const avgUsd = safeNum(p.averageBuyPriceUsd ?? p.avgBuyPriceUsd ?? p.average_buy_price_usd);
+  if(avgUsd!==null) return avgUsd * 100;
+  const raw = p.avgPrice ?? p.averagePrice ?? p.entryPrice ?? p.avgEntryPrice ?? p.costBasis;
+  let c = normPriceToCents(raw);
+  if(c!==null) return c;
+  const shares=positionShares(p);
+  const cost=safeNum(p.costUsd ?? p.cost_usd ?? p.totalCost ?? p.totalCostUsd ?? p.initialValue ?? p.initialValueUsd);
+  if(cost!==null && shares && shares>0) return cost/shares*100;
+  const value=safeNum(p.valueUsd ?? p.value_usd);
+  if(value!==null && shares && shares>0) return value/shares*100;
+  return null;
+}
+function markPriceCents(p){
+  const o=positionOutcome(p), m=positionMarket(p);
+  let raw = p.currentPrice ?? o.price ?? o.currentPrice;
+  let idx = p.outcomeIndex ?? o.index ?? o.indexSet;
+  if(raw===undefined && idx!==undefined){ const prices=m.outcomePrices || m.prices || []; const i=parseInt(idx,10); if(Array.isArray(prices) && prices[i]!==undefined) raw=prices[i]; }
+  return normPriceToCents(raw);
+}
+function positionValue(p){ return safeNum(p.valueUsd ?? p.value_usd ?? p.currentValueUsd ?? p.current_value_usd) ?? 0; }
+function positionPnl(p){
+  const direct=safeNum(p.pnlUsd ?? p.pnl_usd ?? p.unrealizedPnlUsd ?? p.unrealized_pnl_usd);
+  if(direct!==null) return direct;
+  const shares=positionShares(p), entry=entryPriceCents(p), mark=markPriceCents(p);
+  if(shares!==null && entry!==null && mark!==null) return shares*(mark-entry)/100;
+  return 0;
+}
+function positionCost(p){
+  const direct=safeNum(p.costUsd ?? p.cost_usd ?? p.totalCost ?? p.totalCostUsd ?? p.initialValue ?? p.initialValueUsd);
+  if(direct!==null) return direct;
+  const value=positionValue(p), pnl=positionPnl(p);
+  if(Number.isFinite(value) && Number.isFinite(pnl)) return value - pnl;
+  const shares=positionShares(p), entry=entryPriceCents(p);
+  if(shares!==null && entry!==null) return shares*entry/100;
+  return 0;
+}
+function marketUrlFrom(m){ if(!m || typeof m!=='object') return ''; const slug=m.slug || m.marketSlug || m.categorySlug || m.category_slug || m.id; return slug ? `https://predict.fun/market/${encodeURIComponent(slug)}` : ''; }
+function pickUserSide(match, addr){ const taker=(match.taker&&typeof match.taker==='object')?match.taker:{}; const makers=Array.isArray(match.makers)?match.makers:[]; const a=addr.toLowerCase(); for(const m of makers){ if(m && String(m.signer||'').toLowerCase()===a) return m; } if(String(taker.signer||'').toLowerCase()===a) return taker; return Object.keys(taker).length ? taker : (makers.find(x=>x&&typeof x==='object') || {}); }
+function sideText(side){ const s=String(side||'').toLowerCase(); if(s==='bid') return '买入'; if(s==='ask') return '卖出'; return side || '-'; }
+function matchValueUsd(match, addr){ const side=pickUserSide(match,addr); let shares=normAmountToShares(match.amountFilled); if(shares===null) shares=normAmountToShares(side.amount); let price=normPriceToCents(side.price); if(price===null) price=normPriceToCents(match.priceExecuted); return (shares!==null && price!==null) ? shares*price/100 : 0; }
+function matchSummary(match, addr){ const side=pickUserSide(match,addr); const m=(match.market&&typeof match.market==='object') ? {...match.market} : {}; if(match.market_id && !m.id) m.id=match.market_id; if(match.market_title) m.title=match.market_title; if(match.category_slug) m.slug=match.category_slug; if(match.categorySlug) m.slug=match.categorySlug; const outcome=(side.outcome&&typeof side.outcome==='object') ? side.outcome : {}; let shares=normAmountToShares(match.amountFilled); if(shares===null) shares=normAmountToShares(side.amount); let price=normPriceToCents(side.price); if(price===null) price=normPriceToCents(match.priceExecuted); return {
+    title:m.title || m.question || String(m.id || '-'), url:marketUrlFrom(m), side:sideText(side.quoteType), outcome:outcome.name || match.outcome_name || match.outcomeName || '-', shares, price, value: matchValueUsd(match, addr), tx:match.transactionHash || '', executedAt:match.executedAt || match.createdAt || ''
+  };
+}
+
+async function queryOne(addr){
+  const [pRes,mRes,bRes]=await Promise.allSettled([fetchPositions(addr), fetchMatches(addr), fetchUsdtBalance(addr)]);
+  const positions = pRes.status==='fulfilled' ? pRes.value : null;
+  const matches = mRes.status==='fulfilled' ? mRes.value : null;
+  const available = bRes.status==='fulfilled' ? bRes.value : null;
+  if(positions===null && matches===null && available===null){ return {addr, err:String(pRes.reason?.message || mRes.reason?.message || bRes.reason?.message || '接口请求失败')}; }
+  const posArr=positions || [];
+  const matchArr=matches || [];
+  const posDetails=posArr.map(p=>{
+    const value=positionValue(p), pnl=positionPnl(p), cost=positionCost(p), shares=positionShares(p), entry=entryPriceCents(p), mark=markPriceCents(p), m=positionMarket(p);
+    return {raw:p,title:positionTitle(p),outcome:outcomeName(p),marketId:marketId(m),url:marketUrlFrom(m),shares,value,pnl,cost,entryCents:entry,markCents:mark,status:m.status||m.tradingStatus||'',pnlPct:cost? pnl/cost*100 : null};
+  }).sort((a,b)=>b.value-a.value);
+  const matchDetails=matchArr.map(x=>matchSummary(x,addr)).sort((a,b)=>new Date(b.executedAt)-new Date(a.executedAt));
+  const value=posDetails.reduce((s,p)=>s+(p.value||0),0);
+  const pnl=posDetails.reduce((s,p)=>s+(p.pnl||0),0);
+  const cost=posDetails.reduce((s,p)=>s+(p.cost||0),0);
+  const vol=matchDetails.reduce((s,m)=>s+(m.value||0),0);
+  const marketCnt=new Set(posDetails.map(p=>String(p.marketId||p.title)).filter(Boolean)).size;
+  const total=Number.isFinite(toNum(available)) ? value + Number(available) : null;
+  const last=matchDetails[0]?.executedAt ? new Date(matchDetails[0].executedAt).getTime() : 0;
+  return {addr,available,value,total,pnl,cost,posCnt:posDetails.length,marketCnt,vol,fillCnt:matchDetails.length,last,positions:posDetails,matches:matchDetails,partial:{positionsFailed:pRes.status!=='fulfilled',matchesFailed:mRes.status!=='fulfilled',balanceFailed:bRes.status!=='fulfilled' || available===null},detailOpen:false};
+}
+async function runPool(tasks, concurrency, onDone){ let i=0; async function worker(){ while(i<tasks.length && !abortFlag){ const idx=i++; try{ const res=await tasks[idx](); onDone(res,idx); }catch(e){ onDone({addr:tasks[idx].addr || '', err:String(e?.message||e)}, idx); } } } await Promise.all(Array.from({length:Math.min(concurrency,tasks.length)},worker)); }
+
+function renderRow(m, visualIdx){
+  const tbody=$('#tbl tbody');
+  const tr=document.createElement('tr');
+  tr.dataset.search=[m.addr,getNote(m.addr),m.err,...(m.positions||[]).slice(0,5).map(p=>p.title),...(m.matches||[]).slice(0,5).map(x=>x.title)].join(' ').toLowerCase();
+  if(m.err){
+    tr.innerHTML=`<td>${visualIdx}</td><td class="mono nowrap">${fmtShort(m.addr)}<button class="copy-btn" data-copy>复制</button></td><td colspan="11"><span class="err-badge">✕ ${esc(m.err)}</span></td><td><button class="btn-sm btn-ghost" data-refresh>↻</button></td>`;
+  }else{
+    const pnlPct=m.cost ? m.pnl/m.cost*100 : NaN;
+    const partial=(m.partial?.positionsFailed||m.partial?.matchesFailed||m.partial?.balanceFailed) ? `<span class="warn-badge">部分接口失败</span>` : '';
+    tr.innerHTML=`
+      <td>${visualIdx}</td>
+      <td class="mono nowrap">${fmtShort(m.addr)}<button class="copy-btn" data-copy>复制</button>${partial}</td>
+      <td class="num">${fmtUsd(m.available)}</td>
+      <td class="num">${fmtUsd(m.value)}</td>
+      <td class="num">${fmtUsd(m.total)}</td>
+      <td class="num ${cssClassSigned(m.pnl)}">${signedMoney(m.pnl)} <div class="small ${cssClassSigned(m.pnl)}">${signedPct(pnlPct)}</div></td>
+      <td class="num">${fmtUsd(m.cost)}</td>
+      <td class="num">${fmtInt(m.posCnt)}</td>
+      <td class="num">${fmtInt(m.marketCnt)}</td>
+      <td class="num">${fmtUsd(m.vol)}</td>
+      <td class="num">${fmtInt(m.fillCnt)}</td>
+      <td>${fmtDate(m.last)}</td>
+      <td><input class="note-input" placeholder="✎ 备注" value="${esc(getNote(m.addr))}"></td>
+      <td class="nowrap"><button class="btn-sm btn-outline" data-detail>${m.detailOpen?'收起':'详情'}</button> <button class="btn-sm btn-ghost" data-refresh title="刷新此行">↻</button></td>`;
+  }
+  const copyBtn=tr.querySelector('[data-copy]'); if(copyBtn) copyBtn.addEventListener('click',()=>copyText(m.addr));
+  const note=tr.querySelector('.note-input'); if(note) note.addEventListener('change',function(){ saveNote(m.addr,this.value.trim()); });
+  const detail=tr.querySelector('[data-detail]'); if(detail) detail.addEventListener('click',()=>{ m.detailOpen=!m.detailOpen; renderAll(); });
+  const refresh=tr.querySelector('[data-refresh]'); if(refresh) refresh.addEventListener('click',()=>refreshRow(m));
+  tbody.appendChild(tr);
+  if(!m.err && m.detailOpen) renderDetailRow(m);
+}
+function renderDetailRow(m){
+  const tbody=$('#tbl tbody'); const tr=document.createElement('tr'); tr.className='detail-row'; tr.dataset.search='';
+  const posHtml=m.positions.length ? m.positions.slice(0,12).map(p=>`<div class="detail-item"><div class="detail-title">${p.url?`<a href="${esc(p.url)}" target="_blank" rel="noopener noreferrer">${esc(p.title)}</a>`:esc(p.title)}</div><span class="pill">${esc(p.outcome)}</span> 份额 ${fmtShares(p.shares)} · 均价 ${p.entryCents!==null?p.entryCents.toFixed(2)+'c':'-'}${p.markCents!==null?' → 现价 '+p.markCents.toFixed(2)+'c':''}<br>价值 $${fmtMoney(p.value)} · <span class="${cssClassSigned(p.pnl)}">${signedMoney(p.pnl)} ${signedPct(p.pnlPct)}</span></div>`).join('') : '<div class="muted">暂无持仓</div>';
+  const matchHtml=m.matches.length ? m.matches.slice(0,12).map(x=>`<div class="detail-item"><div class="detail-title">${x.url?`<a href="${esc(x.url)}" target="_blank" rel="noopener noreferrer">${esc(x.title)}</a>`:esc(x.title)}</div><span class="pill">${esc(x.side)}</span><span class="pill">${esc(x.outcome)}</span> ${fmtShares(x.shares)} @ ${x.price!==null?x.price.toFixed(2)+'c':'-'} = $${fmtMoney(x.value)}<br>${esc(fmtDate(new Date(x.executedAt).getTime()))}${x.tx?` · <a href="https://bscscan.com/tx/${esc(x.tx)}" target="_blank" rel="noopener noreferrer">Tx</a>`:''}</div>`).join('') : '<div class="muted">暂无最近成交</div>';
+  tr.innerHTML=`<td colspan="14"><div class="detail-grid"><div class="detail-box"><h4>持仓明细（最多 12 条）</h4><div class="detail-list">${posHtml}</div></div><div class="detail-box"><h4>最近成交（最多 12 条）</h4><div class="detail-list">${matchHtml}</div></div></div></td>`;
+  tbody.appendChild(tr);
+}
+function getSorted(){
+  const arr=[...resultMeta];
+  if(!sortKey) return arr.sort((a,b)=>(a._origIdx??0)-(b._origIdx??0));
+  if(sortKey==='action') return arr;
+  const val=m=>{
+    if(sortKey==='idx') return m._origIdx;
+    if(sortKey==='addr') return m.addr;
+    if(sortKey==='note') return getNote(m.addr);
+    if(sortKey==='last') return m.last || 0;
+    return m[sortKey] ?? 0;
+  };
+  return arr.sort((a,b)=>{
+    if(a.err && !b.err) return 1; if(!a.err && b.err) return -1;
+    const va=val(a), vb=val(b);
+    if(typeof va==='string' || typeof vb==='string') return sortAsc ? String(va).localeCompare(String(vb)) : String(vb).localeCompare(String(va));
+    return sortAsc ? (va-vb) : (vb-va);
+  });
+}
+function renderAll(){
+  const tbody=$('#tbl tbody'); tbody.innerHTML='';
+  getSorted().forEach((m,i)=>renderRow(m,i+1));
+  updateStats(); applyFilter();
+}
+function updateStats(){
+  const valid=resultMeta.filter(m=>!m.err);
+  if(!valid.length){ $('#statsCards').style.display='none'; return; }
+  const totalAvail=valid.reduce((s,m)=>s+(toNum(m.available)||0),0);
+  const totalValue=valid.reduce((s,m)=>s+(m.value||0),0);
+  const totalNet=totalAvail+totalValue;
+  const totalPnl=valid.reduce((s,m)=>s+(m.pnl||0),0);
+  const totalVol=valid.reduce((s,m)=>s+(m.vol||0),0);
+  const totalPos=valid.reduce((s,m)=>s+(m.posCnt||0),0);
+  $('#statAvail').textContent=fmtUsd(totalAvail);
+  $('#statValue').textContent=fmtUsd(totalValue);
+  $('#statTotal').textContent=fmtUsd(totalNet);
+  $('#statPnl').textContent=signedMoney(totalPnl); $('#statPnl').className='stat-value '+cssClassSigned(totalPnl);
+  $('#statVol').textContent=fmtUsd(totalVol);
+  $('#statPos').textContent=fmtInt(totalPos);
+  $('#statsCards').style.display='grid';
+}
+function applyFilter(){ const q=$('#filterInput').value.trim().toLowerCase(); $$('#tbl tbody tr').forEach(tr=>{ if(tr.classList.contains('detail-row')){ tr.style.display=q?'none':''; return; } const hit=!q || (tr.dataset.search||tr.textContent).toLowerCase().includes(q); tr.style.display=hit?'':'none'; }); }
+$('#filterInput').addEventListener('input',applyFilter);
+$('#restoreOrder').addEventListener('click',()=>{ sortKey=null; sortAsc=true; renderAll(); toast('已恢复输入顺序'); });
+$$('#tbl thead th').forEach(th=>{ const key=th.dataset.key; if(!key || key==='action') return; th.addEventListener('click',()=>{ if(sortKey===key) sortAsc=!sortAsc; else{ sortKey=key; sortAsc=true; } renderAll(); }); });
+
+async function refreshRow(m){
+  const btns=$$('[data-refresh]'); btns.forEach(b=>b.disabled=true);
+  try{ const fresh=await queryOne(m.addr); Object.assign(m,fresh,{_origIdx:m._origIdx,detailOpen:m.detailOpen}); renderAll(); toast('刷新完成'); }
+  catch(e){ toast('刷新失败：'+String(e.message||e)); }
+  finally{ $$('[data-refresh]').forEach(b=>b.disabled=false); }
+}
+
+$('#run').addEventListener('click',async()=>{
+  saveConfig();
+  const list=parseAddresses(inputEl.value);
+  if(!list.length) return toast('请输入或导入至少一个 0x 地址');
+  const invalid=list.filter(a=>!ETH_RE.test(a)); if(invalid.length) return toast(`${invalid.length} 个地址格式无效`);
+  saveHistory(list);
+  abortFlag=false; runController=new AbortController(); resultMeta=[]; sortKey=null; sortAsc=true; rateLimitQueue=Promise.resolve();
+  $('#tbl tbody').innerHTML=''; $('#summary').style.display='none'; $('#statsCards').style.display='none'; $('#filterRow').style.display='flex'; $('#filterInput').value='';
+  $('#loading').style.display='block'; $('#bar').value=0; $('#barTxt').textContent='准备查询...';
+  $('#run').disabled=$('#csv').disabled=$('#json').disabled=true; $('#stop').style.display=''; $('#stop').disabled=false; $('#stop').textContent='停止';
+  const tbody=$('#tbl tbody');
+  const placeholders=list.map((addr,i)=>{ const tr=document.createElement('tr'); tr.className='row-placeholder'; tr.innerHTML=`<td>${i+1}</td><td class="mono">${fmtShort(addr)}<button class="copy-btn">复制</button></td><td colspan="12">查询中...</td>`; tr.querySelector('button').addEventListener('click',()=>copyText(addr)); tbody.appendChild(tr); return tr; });
+  let done=0, fail=0;
+  const tasks=list.map((addr,idx)=>{ const f=()=>queryOne(addr); f.addr=addr; f.idx=idx; return f; });
+  await runPool(tasks, parseInt($('#concurrency').value,10)||3, (res,idx)=>{
+    done++; if(placeholders[idx]) placeholders[idx].remove();
+    res.addr = res.addr || list[idx]; res._origIdx=idx; if(res.err) fail++;
+    resultMeta.push(res);
+    $('#bar').value=(done/list.length)*100; $('#barTxt').textContent=`${done}/${list.length} 地址`;
+    renderAll();
+  });
+  placeholders.forEach(p=>p.remove());
+  $('#loading').style.display='none'; $('#stop').style.display='none'; $('#run').disabled=false; $('#csv').disabled=$('#json').disabled=!resultMeta.length;
+  const ok=resultMeta.length-fail; $('#summary').textContent=`已查询 ${list.length} 个地址，成功 ${ok} 个，失败 ${fail} 个${abortFlag?'（已中断）':''}`; $('#summary').style.display='block';
+});
+$('#stop').addEventListener('click',()=>{ abortFlag=true; runController?.abort(); $('#stop').disabled=true; $('#stop').textContent='正在停止...'; toast('正在取消进行中的请求'); });
+
+$('#csv').addEventListener('click',()=>{
+  if(!resultMeta.length) return toast('暂无数据');
+  const header=['#','地址','可用余额USDT','持仓金额USD','净资产USD','浮动盈亏USD','投入成本USD','持仓数','市场数','最近成交额USD','最近成交数','最后成交','备注','状态'];
+  const rows=getSorted().map((m,i)=>[i+1,m.addr,m.err?'':m.available,m.err?'':m.value,m.err?'':m.total,m.err?'':m.pnl,m.err?'':m.cost,m.err?'':m.posCnt,m.err?'':m.marketCnt,m.err?'':m.vol,m.err?'':m.fillCnt,m.err?'':(m.last?new Date(m.last).toISOString():''),getNote(m.addr),m.err||'OK']);
+  const escCsv=v=>{ const s=String(v??''); return /[,"\n]/.test(s)?`"${s.replaceAll('"','""')}"`:s; };
+  downloadBlob(`predict_fun_${Date.now()}.csv`, '\uFEFF'+[header,...rows].map(r=>r.map(escCsv).join(',')).join('\n'), 'text/csv;charset=utf-8');
+});
+$('#json').addEventListener('click',()=>{
+  if(!resultMeta.length) return toast('暂无数据');
+  const data=resultMeta.map(m=>({address:m.addr,note:getNote(m.addr),error:m.err||null,summary:m.err?null:{availableUsdt:m.available,holdingValueUsd:m.value,netValueUsd:m.total,pnlUsd:m.pnl,costUsd:m.cost,positions:m.posCnt,markets:m.marketCnt,recentVolumeUsd:m.vol,recentFills:m.fillCnt,lastFillAt:m.last?new Date(m.last).toISOString():null},positions:m.positions||[],matches:m.matches||[]}));
+  downloadBlob(`predict_fun_${Date.now()}.json`, JSON.stringify(data,null,2), 'application/json;charset=utf-8');
+});
+</script>
+</body>
+</html>
