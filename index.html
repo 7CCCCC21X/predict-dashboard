@@ -46,7 +46,7 @@ button{height:40px;padding:0 18px;font-size:14px;font-weight:700;border:none;bor
 <div id="offlineBanner" class="offline-banner">网络已断开，请检查连接后重试</div>
 <header class="page-header">
   <h1><span>Predict.fun</span> 数据批量查询</h1>
-  <p class="subtitle">批量查询 Predict Smart Wallet 可用余额、持仓金额、浮动盈亏与成交记录；成交会自动翻页直到没有下一页。</p>
+  <p class="subtitle">批量查询 Predict Smart Wallet 可用余额、持仓金额、浮动盈亏与最近成交；成交次数最多统计近 1000 条。</p>
   <div class="header-toolbar">
     <a class="badge" href="https://predict.fun/" target="_blank" rel="noopener noreferrer">Predict.fun 官网</a>
     <a class="badge" href="https://dev.predict.fun/" target="_blank" rel="noopener noreferrer">API 文档</a>
@@ -64,8 +64,8 @@ button{height:40px;padding:0 18px;font-size:14px;font-weight:700;border:none;bor
       </select>
     </div>
     <div class="field">
-      <label for="matchMode">成交翻页</label>
-      <input id="matchMode" value="自动翻页直到没有下一页" disabled />
+      <label for="matchMode">成交查询范围</label>
+      <input id="matchMode" value="自动翻页，最多近 1000 条" disabled />
     </div>
     <div class="field">
       <label for="concurrency">并发数</label>
@@ -84,7 +84,7 @@ button{height:40px;padding:0 18px;font-size:14px;font-weight:700;border:none;bor
   </div>
   <div class="help-tip">
     <span>💡</span>
-    <span><b>说明：</b>Predict API 已默认走同域 <span class="mono">/api/predict</span> 代理，Key 从 Vercel 环境变量 <span class="mono">PREDICT_API_KEY</span> 读取，不会出现在前端代码里。成交接口会按 <span class="mono">first/after/cursor</span> 自动翻页，直到没有下一页或返回空数据。可用余额仍通过 BNB Chain USDT 余额实时查询。</span>
+    <span><b>说明：</b>Predict API 已默认走同域 <span class="mono">/api/predict</span> 代理，Key 从 Vercel 环境变量 <span class="mono">PREDICT_API_KEY</span> 读取，不会出现在前端代码里。成交接口会按 <span class="mono">first/after/cursor</span> 自动翻页，但每个地址最多只统计最近 <span class="mono">1000</span> 条成交。可用余额仍通过 BNB Chain USDT 余额实时查询。</span>
   </div>
 </section>
 
@@ -131,7 +131,7 @@ button{height:40px;padding:0 18px;font-size:14px;font-weight:700;border:none;bor
     <div class="stat-card"><div class="stat-label">持仓金额</div><div class="stat-value" id="statValue">-</div><div class="stat-sub">当前持仓 · USD</div></div>
     <div class="stat-card"><div class="stat-label">净资产</div><div class="stat-value" id="statTotal">-</div><div class="stat-sub">可用 + 持仓</div></div>
     <div class="stat-card"><div class="stat-label">浮动盈亏</div><div class="stat-value" id="statPnl">-</div><div class="stat-sub">API pnlUsd / 推算</div></div>
-    <div class="stat-card"><div class="stat-label">成交额</div><div class="stat-value" id="statVol">-</div><div class="stat-sub">自动翻页汇总全部成交</div></div>
+    <div class="stat-card"><div class="stat-label">近 1000 成交额</div><div class="stat-value" id="statVol">-</div><div class="stat-sub">最多统计最近 1000 条</div></div>
     <div class="stat-card"><div class="stat-label">持仓数</div><div class="stat-value" id="statPos">-</div><div class="stat-sub">全部地址合计</div></div>
   </div>
 
@@ -153,8 +153,8 @@ button{height:40px;padding:0 18px;font-size:14px;font-weight:700;border:none;bor
           <th data-key="cost" class="num">投入成本</th>
           <th data-key="posCnt" class="num">持仓数</th>
           <th data-key="marketCnt" class="num">市场数</th>
-          <th data-key="vol" class="num">成交额</th>
-          <th data-key="fillCnt" class="num">成交数</th>
+          <th data-key="vol" class="num">近 1000 成交额</th>
+          <th data-key="fillCnt" class="num">近 1000 成交数</th>
           <th data-key="last">最后成交</th>
           <th data-key="note">备注</th>
           <th data-key="action">操作</th>
@@ -178,6 +178,7 @@ const STORE = {
   history:'pf_query_history', notes:'pf_notes', concurrency:'pf_concurrency'
 };
 const MATCH_PAGE_SIZE = 50;
+const MAX_MATCHES = 1000;
 const FETCH_TIMEOUT = 15000;
 const RPC_TIMEOUT = 6500;
 const RATE_LIMIT_MS = 120;
@@ -353,15 +354,16 @@ async function fetchMatches(addr){
   const out = [];
   const seenCursors = new Set();
 
-  while(!abortFlag){
-    const params = { first:String(MATCH_PAGE_SIZE), signerAddress:addr };
+  while(!abortFlag && out.length < MAX_MATCHES){
+    const first = Math.min(MATCH_PAGE_SIZE, MAX_MATCHES - out.length);
+    const params = { first:String(first), signerAddress:addr };
     if(after) params.after = after;
 
     const j = await fetchJ(apiUrl('/v1/orders/matches', params));
     const data = readMatchesPage(j);
     if(!data.length) break;
 
-    out.push(...data);
+    out.push(...data.slice(0, MAX_MATCHES - out.length));
 
     const next = readNextCursor(j);
     if(!next || next === after || seenCursors.has(next)) break;
@@ -369,8 +371,7 @@ async function fetchMatches(addr){
     seenCursors.add(next);
     after = next;
 
-    // 如果本页不足一整页，通常说明已经到最后一页。
-    if(data.length < MATCH_PAGE_SIZE) break;
+    if(data.length < first) break;
   }
 
   return out;
@@ -490,8 +491,8 @@ function renderRow(m, visualIdx){
 function renderDetailRow(m){
   const tbody=$('#tbl tbody'); const tr=document.createElement('tr'); tr.className='detail-row'; tr.dataset.search='';
   const posHtml=m.positions.length ? m.positions.slice(0,12).map(p=>`<div class="detail-item"><div class="detail-title">${p.url?`<a href="${esc(p.url)}" target="_blank" rel="noopener noreferrer">${esc(p.title)}</a>`:esc(p.title)}</div><span class="pill">${esc(p.outcome)}</span> 份额 ${fmtShares(p.shares)} · 均价 ${p.entryCents!==null?p.entryCents.toFixed(2)+'c':'-'}${p.markCents!==null?' → 现价 '+p.markCents.toFixed(2)+'c':''}<br>价值 $${fmtMoney(p.value)} · <span class="${cssClassSigned(p.pnl)}">${signedMoney(p.pnl)} ${signedPct(p.pnlPct)}</span></div>`).join('') : '<div class="muted">暂无持仓</div>';
-  const matchHtml=m.matches.length ? m.matches.slice(0,12).map(x=>`<div class="detail-item"><div class="detail-title">${x.url?`<a href="${esc(x.url)}" target="_blank" rel="noopener noreferrer">${esc(x.title)}</a>`:esc(x.title)}</div><span class="pill">${esc(x.side)}</span><span class="pill">${esc(x.outcome)}</span> ${fmtShares(x.shares)} @ ${x.price!==null?x.price.toFixed(2)+'c':'-'} = $${fmtMoney(x.value)}<br>${esc(fmtDate(new Date(x.executedAt).getTime()))}${x.tx?` · <a href="https://bscscan.com/tx/${esc(x.tx)}" target="_blank" rel="noopener noreferrer">Tx</a>`:''}</div>`).join('') : '<div class="muted">暂无成交</div>';
-  tr.innerHTML=`<td colspan="14"><div class="detail-grid"><div class="detail-box"><h4>持仓明细（最多 12 条）</h4><div class="detail-list">${posHtml}</div></div><div class="detail-box"><h4>成交明细（最多显示 12 条）</h4><div class="detail-list">${matchHtml}</div></div></div></td>`;
+  const matchHtml=m.matches.length ? m.matches.slice(0,12).map(x=>`<div class="detail-item"><div class="detail-title">${x.url?`<a href="${esc(x.url)}" target="_blank" rel="noopener noreferrer">${esc(x.title)}</a>`:esc(x.title)}</div><span class="pill">${esc(x.side)}</span><span class="pill">${esc(x.outcome)}</span> ${fmtShares(x.shares)} @ ${x.price!==null?x.price.toFixed(2)+'c':'-'} = $${fmtMoney(x.value)}<br>${esc(fmtDate(new Date(x.executedAt).getTime()))}${x.tx?` · <a href="https://bscscan.com/tx/${esc(x.tx)}" target="_blank" rel="noopener noreferrer">Tx</a>`:''}</div>`).join('') : '<div class="muted">暂无最近成交</div>';
+  tr.innerHTML=`<td colspan="14"><div class="detail-grid"><div class="detail-box"><h4>持仓明细（最多 12 条）</h4><div class="detail-list">${posHtml}</div></div><div class="detail-box"><h4>最近成交（最多显示 12 条，统计上限近 1000 条）</h4><div class="detail-list">${matchHtml}</div></div></div></td>`;
   tbody.appendChild(tr);
 }
 function getSorted(){
@@ -575,14 +576,14 @@ $('#stop').addEventListener('click',()=>{ abortFlag=true; runController?.abort()
 
 $('#csv').addEventListener('click',()=>{
   if(!resultMeta.length) return toast('暂无数据');
-  const header=['#','地址','可用余额USDT','持仓金额USD','净资产USD','浮动盈亏USD','投入成本USD','持仓数','市场数','成交额USD','成交数','最后成交','备注','状态'];
+  const header=['#','地址','可用余额USDT','持仓金额USD','净资产USD','浮动盈亏USD','投入成本USD','持仓数','市场数','近1000成交额USD','近1000成交数','最后成交','备注','状态'];
   const rows=getSorted().map((m,i)=>[i+1,m.addr,m.err?'':m.available,m.err?'':m.value,m.err?'':m.total,m.err?'':m.pnl,m.err?'':m.cost,m.err?'':m.posCnt,m.err?'':m.marketCnt,m.err?'':m.vol,m.err?'':m.fillCnt,m.err?'':(m.last?new Date(m.last).toISOString():''),getNote(m.addr),m.err||'OK']);
   const escCsv=v=>{ const s=String(v??''); return /[,"\n]/.test(s)?`"${s.replaceAll('"','""')}"`:s; };
   downloadBlob(`predict_fun_${Date.now()}.csv`, '\uFEFF'+[header,...rows].map(r=>r.map(escCsv).join(',')).join('\n'), 'text/csv;charset=utf-8');
 });
 $('#json').addEventListener('click',()=>{
   if(!resultMeta.length) return toast('暂无数据');
-  const data=resultMeta.map(m=>({address:m.addr,note:getNote(m.addr),error:m.err||null,summary:m.err?null:{availableUsdt:m.available,holdingValueUsd:m.value,netValueUsd:m.total,pnlUsd:m.pnl,costUsd:m.cost,positions:m.posCnt,markets:m.marketCnt,volumeUsd:m.vol,fills:m.fillCnt,lastFillAt:m.last?new Date(m.last).toISOString():null},positions:m.positions||[],matches:m.matches||[]}));
+  const data=resultMeta.map(m=>({address:m.addr,note:getNote(m.addr),error:m.err||null,summary:m.err?null:{availableUsdt:m.available,holdingValueUsd:m.value,netValueUsd:m.total,pnlUsd:m.pnl,costUsd:m.cost,positions:m.posCnt,markets:m.marketCnt,recent1000VolumeUsd:m.vol,recent1000Fills:m.fillCnt,lastFillAt:m.last?new Date(m.last).toISOString():null},positions:m.positions||[],matches:m.matches||[]}));
   downloadBlob(`predict_fun_${Date.now()}.json`, JSON.stringify(data,null,2), 'application/json;charset=utf-8');
 });
 </script>
