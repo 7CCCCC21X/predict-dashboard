@@ -35,10 +35,10 @@ button{height:40px;padding:0 18px;font-size:14px;font-weight:700;border:none;bor
 .upload-zone{border:2px dashed var(--c-border);border-radius:10px;padding:38px 18px;text-align:center;cursor:pointer;background:var(--c-input-bg);transition:all .2s}.upload-zone:hover,.upload-zone.drag-over{border-color:var(--c-primary);background:var(--c-summary-bg)}.upload-icon{font-size:38px;margin-bottom:8px}.upload-title{font-size:15px;font-weight:750;color:var(--c-text)}.upload-sub{font-size:13px;color:var(--c-sub);margin:5px 0 14px}
 .toolbar{display:flex;justify-content:center;gap:7px;flex-wrap:wrap;margin-top:14px}.offline-banner{display:none;position:fixed;top:0;left:0;right:0;background:var(--c-red);color:#fff;text-align:center;padding:9px;z-index:200;font-size:14px;font-weight:600}
 #loading{display:none;margin-top:16px;text-align:center;color:var(--c-sub);font-size:13px}progress{width:100%;height:7px;border:none;border-radius:4px;background:var(--c-border);overflow:hidden}progress::-webkit-progress-value{background:linear-gradient(90deg,var(--c-primary),#22c55e);border-radius:4px;transition:width .25s}progress::-webkit-progress-bar{background:var(--c-border);border-radius:4px}#barTxt{margin-top:6px}
-#summary{display:none;margin:16px 0 10px;padding:12px 16px;background:var(--c-summary-bg);border-left:4px solid var(--c-primary);border-radius:var(--radius);color:var(--c-primary);font-size:14px;font-weight:700}.stats-cards{display:none;grid-template-columns:repeat(6,1fr);gap:12px;margin:18px 0}.stat-card{background:var(--c-card);border:1px solid var(--c-border);border-radius:var(--radius);padding:16px 14px;text-align:center;position:relative;overflow:hidden;transition:all .2s}.stat-card:hover{transform:translateY(-2px);box-shadow:var(--shadow-lg)}.stat-label{font-size:12px;color:var(--c-sub);text-transform:uppercase;letter-spacing:.45px;font-weight:700}.stat-value{font-size:22px;font-weight:850;color:var(--c-text);margin-top:6px;letter-spacing:-.35px}.stat-value.positive{color:var(--c-green)}.stat-value.negative{color:var(--c-red)}.stat-sub{font-size:11px;color:var(--c-sub);margin-top:4px;opacity:.86}
+#summary{display:none;margin:16px 0 10px;padding:12px 16px;background:var(--c-summary-bg);border-left:4px solid var(--c-primary);border-radius:var(--radius);color:var(--c-primary);font-size:14px;font-weight:700}.stats-cards{display:none;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:12px;margin:18px 0}.stat-card{background:var(--c-card);border:1px solid var(--c-border);border-radius:var(--radius);padding:16px 14px;text-align:center;position:relative;overflow:hidden;transition:all .2s}.stat-card:hover{transform:translateY(-2px);box-shadow:var(--shadow-lg)}.stat-label{font-size:12px;color:var(--c-sub);text-transform:uppercase;letter-spacing:.45px;font-weight:700}.stat-value{font-size:22px;font-weight:850;color:var(--c-text);margin-top:6px;letter-spacing:-.35px}.stat-value.positive{color:var(--c-green)}.stat-value.negative{color:var(--c-red)}.stat-sub{font-size:11px;color:var(--c-sub);margin-top:4px;opacity:.86}
 .filter-row{display:none;gap:8px;align-items:center;margin:14px 0;flex-wrap:wrap}.filter-row input{flex:1;min-width:220px;height:39px;padding:0 13px;border:1px solid var(--c-border);border-radius:9px;background:var(--c-input-bg);color:var(--c-text);outline:none}
 .history-wrap{display:none;margin-top:10px}.history-wrap details{font-size:13px;color:var(--c-sub)}.history-wrap summary{cursor:pointer;color:var(--c-primary);font-weight:700;user-select:none}.history-list{max-height:156px;overflow-y:auto;margin-top:6px}.history-item{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:7px 0;border-bottom:1px solid var(--c-border)}.history-item span{cursor:pointer;color:var(--c-text);font-size:12px}.history-item span:hover{color:var(--c-primary)}
-.table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:var(--radius);border:1px solid var(--c-border);margin-top:4px}table{width:100%;min-width:1320px;border-collapse:collapse;background:var(--c-card)}th,td{padding:11px 9px;font-size:12.5px;text-align:left;transition:background .2s,border-color .2s}td{border-top:1px solid var(--c-border);vertical-align:middle}th{position:sticky;top:0;background:var(--c-primary);color:#fff;z-index:2;cursor:pointer;user-select:none;font-size:12px;text-transform:uppercase;letter-spacing:.25px;white-space:nowrap}th:hover{background:var(--c-primary-dark)}tbody tr:nth-child(even){background:var(--c-even)}tbody tr:hover{background:var(--c-hover)}td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}.positive{color:var(--c-green);font-weight:800}.negative{color:var(--c-red);font-weight:800}.muted{color:var(--c-sub)}.small{font-size:11px;color:var(--c-sub)}.mono{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace}.nowrap{white-space:nowrap}.copy-btn{margin-left:5px;height:24px;padding:0 7px;font-size:11px;border-radius:5px;background:transparent;color:var(--c-sub);border:1px solid var(--c-border)}.copy-btn:hover:not(:disabled){background:var(--c-hover);color:var(--c-primary);box-shadow:none;transform:none}.note-input{width:88px;height:30px;padding:0 8px;border:1px solid transparent;border-radius:7px;background:transparent;color:var(--c-text);font-size:12px;text-align:center}.note-input:hover,.note-input:focus{border-color:var(--c-border);background:var(--c-input-bg);outline:none}.note-input:focus{width:126px;border-color:var(--c-primary)}.err-badge{display:inline-flex;align-items:center;gap:6px;padding:3px 10px;border-radius:999px;font-size:12px;font-weight:700;background:rgba(239,68,68,.1);color:var(--c-red)}.warn-badge{display:inline-flex;align-items:center;gap:6px;padding:3px 9px;border-radius:999px;font-size:11px;font-weight:700;background:rgba(245,158,11,.12);color:var(--c-yellow);margin-left:6px}.row-placeholder{opacity:.52}.detail-row td{background:var(--c-bg)!important}.detail-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.detail-box{border:1px solid var(--c-border);border-radius:10px;background:var(--c-card);padding:12px;min-width:0}.detail-box h4{font-size:13px;margin-bottom:8px;color:var(--c-text)}.detail-list{display:flex;flex-direction:column;gap:7px}.detail-item{font-size:12px;color:var(--c-sub);border-bottom:1px dashed var(--c-border);padding-bottom:7px}.detail-item:last-child{border-bottom:none;padding-bottom:0}.detail-title{color:var(--c-text);font-weight:700}.pill{display:inline-flex;align-items:center;padding:1px 7px;border-radius:999px;background:var(--c-summary-bg);color:var(--c-primary);font-size:11px;font-weight:800;margin-right:4px}.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(10px);background:var(--c-tooltip);color:#fff;padding:10px 18px;border-radius:9px;font-size:13px;font-weight:700;opacity:0;transition:all .25s;z-index:300;box-shadow:0 4px 14px rgba(0,0,0,.18);pointer-events:none}.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}.footer{text-align:center;font-size:13px;color:var(--c-sub);margin-top:38px;padding-bottom:14px}
+.table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:var(--radius);border:1px solid var(--c-border);margin-top:4px}table{width:100%;min-width:1520px;border-collapse:collapse;background:var(--c-card)}th,td{padding:11px 9px;font-size:12.5px;text-align:left;transition:background .2s,border-color .2s}td{border-top:1px solid var(--c-border);vertical-align:middle}th{position:sticky;top:0;background:var(--c-primary);color:#fff;z-index:2;cursor:pointer;user-select:none;font-size:12px;text-transform:uppercase;letter-spacing:.25px;white-space:nowrap}th:hover{background:var(--c-primary-dark)}tbody tr:nth-child(even){background:var(--c-even)}tbody tr:hover{background:var(--c-hover)}td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}.positive{color:var(--c-green);font-weight:800}.negative{color:var(--c-red);font-weight:800}.muted{color:var(--c-sub)}.small{font-size:11px;color:var(--c-sub)}.mono{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace}.nowrap{white-space:nowrap}.copy-btn{margin-left:5px;height:24px;padding:0 7px;font-size:11px;border-radius:5px;background:transparent;color:var(--c-sub);border:1px solid var(--c-border)}.copy-btn:hover:not(:disabled){background:var(--c-hover);color:var(--c-primary);box-shadow:none;transform:none}.note-input{width:88px;height:30px;padding:0 8px;border:1px solid transparent;border-radius:7px;background:transparent;color:var(--c-text);font-size:12px;text-align:center}.note-input:hover,.note-input:focus{border-color:var(--c-border);background:var(--c-input-bg);outline:none}.note-input:focus{width:126px;border-color:var(--c-primary)}.err-badge{display:inline-flex;align-items:center;gap:6px;padding:3px 10px;border-radius:999px;font-size:12px;font-weight:700;background:rgba(239,68,68,.1);color:var(--c-red)}.warn-badge{display:inline-flex;align-items:center;gap:6px;padding:3px 9px;border-radius:999px;font-size:11px;font-weight:700;background:rgba(245,158,11,.12);color:var(--c-yellow);margin-left:6px}.row-placeholder{opacity:.52}.detail-row td{background:var(--c-bg)!important}.detail-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.detail-box{border:1px solid var(--c-border);border-radius:10px;background:var(--c-card);padding:12px;min-width:0}.detail-box h4{font-size:13px;margin-bottom:8px;color:var(--c-text)}.detail-list{display:flex;flex-direction:column;gap:7px}.detail-item{font-size:12px;color:var(--c-sub);border-bottom:1px dashed var(--c-border);padding-bottom:7px}.detail-item:last-child{border-bottom:none;padding-bottom:0}.detail-title{color:var(--c-text);font-weight:700}.pill{display:inline-flex;align-items:center;padding:1px 7px;border-radius:999px;background:var(--c-summary-bg);color:var(--c-primary);font-size:11px;font-weight:800;margin-right:4px}.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(10px);background:var(--c-tooltip);color:#fff;padding:10px 18px;border-radius:9px;font-size:13px;font-weight:700;opacity:0;transition:all .25s;z-index:300;box-shadow:0 4px 14px rgba(0,0,0,.18);pointer-events:none}.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}.footer{text-align:center;font-size:13px;color:var(--c-sub);margin-top:38px;padding-bottom:14px}
 @media(max-width:920px){body{padding:18px 10px}.card{padding:16px}.page-header h1{font-size:25px}.config-grid{grid-template-columns:1fr 1fr}.stats-cards{grid-template-columns:repeat(3,1fr)}.detail-grid{grid-template-columns:1fr}}@media(max-width:560px){.config-grid{grid-template-columns:1fr}.toolbar{justify-content:stretch}.toolbar button{flex:1}.stats-cards{grid-template-columns:1fr 1fr}.stat-value{font-size:18px}th,td{padding:8px 6px;font-size:11px}}
 </style>
 </head>
@@ -89,6 +89,33 @@ button{height:40px;padding:0 18px;font-size:14px;font-weight:700;border:none;bor
 </section>
 
 <section class="card">
+  <div class="config-grid">
+    <div class="field">
+      <label for="pointsStatus">总积分榜状态</label>
+      <input id="pointsStatus" value="未上传总积分榜；点击下方上传 JSON/CSV" disabled />
+    </div>
+    <div class="field">
+      <label for="pointLookup">按地址查询总积分</label>
+      <input id="pointLookup" type="text" placeholder="输入 0x 地址" />
+    </div>
+    <div class="field">
+      <label for="pointTotalView">总积分</label>
+      <input id="pointTotalView" value="-" disabled />
+    </div>
+    <button id="lookupPoints" class="btn-outline" type="button">查询总积分</button>
+  </div>
+  <div class="toolbar" style="justify-content:flex-start;margin-top:12px">
+    <button id="loadPointsFile" class="btn-outline" type="button">上传总积分榜 JSON/CSV</button>
+    <input type="file" id="pointsFileInput" accept=".csv,.json,.txt" style="display:none" />
+    <button id="clearPointsData" class="btn-outline" type="button">清空已上传总榜</button>
+  </div>
+  <div class="help-tip">
+    <span>⭐</span>
+    <span><b>总积分榜：</b>直接上传你贴的这种 JSON 数组即可，页面会按 <span class="mono">address</span> 匹配地址，并读取 <span class="mono">totalPoints</span> 作为总积分；<span class="mono">weeklyPoints</span>、<span class="mono">rank</span>、<span class="mono">ppRank</span>、<span class="mono">name</span>、<span class="mono">grade</span> 会作为附加信息显示。上传后数据会保存在当前浏览器的 <span class="mono">localStorage</span>，同一浏览器下刷新页面也还在；换设备或清缓存后需要重新上传。</span>
+  </div>
+</section>
+
+<section class="card">
   <div class="import-tabs">
     <button class="import-tab active" id="tabPaste" type="button">粘贴地址</button>
     <button class="import-tab" id="tabUpload" type="button">上传文件</button>
@@ -133,6 +160,7 @@ button{height:40px;padding:0 18px;font-size:14px;font-weight:700;border:none;bor
     <div class="stat-card"><div class="stat-label">浮动盈亏</div><div class="stat-value" id="statPnl">-</div><div class="stat-sub">API pnlUsd / 推算</div></div>
     <div class="stat-card"><div class="stat-label">近 1000 成交额</div><div class="stat-value" id="statVol">-</div><div class="stat-sub">最多统计最近 1000 条</div></div>
     <div class="stat-card"><div class="stat-label">持仓数</div><div class="stat-value" id="statPos">-</div><div class="stat-sub">全部地址合计</div></div>
+    <div class="stat-card"><div class="stat-label">总积分</div><div class="stat-value" id="statPoints">-</div><div class="stat-sub">按上传总榜</div></div>
   </div>
 
   <div class="filter-row" id="filterRow">
@@ -146,6 +174,8 @@ button{height:40px;padding:0 18px;font-size:14px;font-weight:700;border:none;bor
         <tr>
           <th data-key="idx">#</th>
           <th data-key="addr">地址</th>
+          <th data-key="points" class="num">总积分</th>
+          <th data-key="pointCnt" class="num">总榜记录</th>
           <th data-key="available" class="num">可用余额</th>
           <th data-key="value" class="num">持仓金额</th>
           <th data-key="total" class="num">净资产</th>
@@ -175,7 +205,7 @@ const ETH_RE = /^0x[0-9a-fA-F]{40}$/;
 const ETH_RE_G = /0x[0-9a-fA-F]{40}/g;
 const STORE = {
   base:'pf_api_base', proxy:'pf_cors_proxy', theme:'pf_theme',
-  history:'pf_query_history', notes:'pf_notes', concurrency:'pf_concurrency'
+  history:'pf_query_history', notes:'pf_notes', concurrency:'pf_concurrency', points:'pf_points_records'
 };
 const MATCH_PAGE_SIZE = 50;
 const MAX_MATCHES = 1000;
@@ -194,6 +224,9 @@ const CHAIN = {
   }
 };
 let resultMeta = [];
+let pointsRecords = [];
+let staticPointCount = 0;
+let localPointCount = 0;
 let abortFlag = false;
 let runController = null;
 let sortKey = null;
@@ -253,6 +286,257 @@ uploadZone.addEventListener('drop',e=>{ e.preventDefault(); uploadZone.classList
 fileInput.addEventListener('change',()=>{ if(fileInput.files[0]) handleFile(fileInput.files[0]); fileInput.value=''; });
 function handleFile(file){ if(!/\.(csv|txt)$/i.test(file.name)) return toast('仅支持 CSV 或 TXT 文件'); const reader=new FileReader(); reader.onload=()=>{ const addrs=parseAddresses(String(reader.result||'')); if(!addrs.length) return toast('文件中未找到 0x 地址'); inputEl.value=addrs.join('\n'); $('#tabPaste').click(); toast(`已导入 ${addrs.length} 个地址`); }; reader.readAsText(file); }
 function parseAddresses(text){ const arr=String(text||'').match(ETH_RE_G) || []; return [...new Map(arr.map(a=>[a.toLowerCase(),a])).values()]; }
+
+function splitCsvLine(line){
+  const out=[]; let cur='', q=false;
+  for(let i=0;i<String(line).length;i++){
+    const ch=line[i];
+    if(ch==='"'){
+      if(q && line[i+1]==='"'){ cur+='"'; i++; }
+      else q=!q;
+    }else if(ch===',' && !q){ out.push(cur.trim()); cur=''; }
+    else cur+=ch;
+  }
+  out.push(cur.trim());
+  return out;
+}
+function pickField(obj, keys){
+  for(const k of keys){
+    if(obj && obj[k] !== undefined && obj[k] !== null && obj[k] !== '') return obj[k];
+  }
+  return undefined;
+}
+function parseLooseNumber(v){
+  if(v===undefined || v===null || v==='') return null;
+  const n=Number(String(v).replaceAll(',','').trim());
+  return Number.isFinite(n) ? n : null;
+}
+function normalizePointRecords(rows, context={}){
+  if(!Array.isArray(rows)) return [];
+  const list=[];
+  rows.forEach((row, idx)=>{
+    const r0 = row && typeof row === 'object' ? row : {};
+    const r = {...context, ...r0};
+    const addr = String(pickField(r, ['address','addr','wallet','smartWallet','smart_wallet','predictAccount','account','用户地址','地址']) || '').trim();
+    if(!ETH_RE.test(addr)) return;
+
+    // 兼容两种数据：
+    // 1) 总积分榜/排行榜快照：totalPoints 是累计总积分，weeklyPoints 是本周或当期积分。
+    // 2) 旧版积分流水：points 是一条可相加的积分流水。
+    const totalPoints = parseLooseNumber(pickField(r, ['totalPoints','total_points','totalPoint','total_point','latestTotalPoints','latest_total_points','total','总积分','累计积分']));
+    let weeklyPoints = parseLooseNumber(pickField(r, ['weeklyPoints','weekly_points','weekPoints','week_points','points','point','score','amount','value','积分','本周积分','周积分','weekly']));
+    if(totalPoints===null && weeklyPoints===null) return;
+
+    const week = parseLooseNumber(pickField(r, ['week','Week','周','weekNo','week_no']));
+    const roundId = parseLooseNumber(pickField(r, ['roundId','round_id','round','Round','轮次']));
+    const rank = parseLooseNumber(pickField(r, ['rank','Rank','排名']));
+    const ppRank = parseLooseNumber(pickField(r, ['ppRank','pp_rank','总榜排名','累计排名']));
+    const volumeUsd = parseLooseNumber(pickField(r, ['volumeUsd','volume_usd','volume','交易额','成交额']));
+    const source = String(pickField(r, ['source','type','reason','event','category','来源','类型']) || (totalPoints!==null ? 'leaderboard' : '')).trim();
+    const createdAtRaw = pickField(r, ['createdAt','time','date','timestamp','created_at','updatedAt','updated_at','时间','日期']);
+    const createdAt = String(createdAtRaw || ((roundId!==null || week!==null) ? `Round ${roundId ?? '-'} · Week ${week ?? '-'}` : '')).trim();
+    const note = String(pickField(r, ['note','remark','memo','description','备注','说明']) || '').trim();
+
+    list.push({
+      address: addr,
+      points: weeklyPoints ?? 0,
+      weeklyPoints,
+      totalPoints,
+      rank,
+      ppRank,
+      name: String(pickField(r, ['name','username','nickName','nickname','昵称','名称']) || '').trim(),
+      imageUrl: String(pickField(r, ['imageUrl','image_url','avatar','avatarUrl','头像']) || '').trim(),
+      volumeUsd,
+      grade: String(pickField(r, ['grade','Grade','等级']) || '').trim(),
+      week,
+      roundId,
+      source,
+      createdAt,
+      note,
+      kind: totalPoints!==null ? 'leaderboard' : 'delta',
+      _seq: Number.isFinite(context._seqStart) ? context._seqStart + idx : idx,
+    });
+  });
+  return list;
+}
+function pointRowsFromPayload(payload, context={}){
+  if(Array.isArray(payload)) return normalizePointRecords(payload, context);
+  if(!payload || typeof payload !== 'object') return [];
+
+  const meta={
+    week: payload.week ?? payload.weekNo ?? payload.week_no,
+    roundId: payload.roundId ?? payload.round_id ?? payload.round,
+    source: payload.source,
+    createdAt: payload.createdAt ?? payload.date ?? payload.time,
+  };
+  const base={...context};
+  Object.keys(meta).forEach(k=>{ if(meta[k]!==undefined && meta[k]!==null && meta[k]!=='') base[k]=meta[k]; });
+
+  const out=[];
+  if(Array.isArray(payload.snapshots)){
+    payload.snapshots.forEach((snap,i)=>{
+      if(Array.isArray(snap)) out.push(...normalizePointRecords(snap, {...base, _seqStart:i*100000}));
+      else if(snap && typeof snap==='object'){
+        const snapMeta={...base};
+        ['week','weekNo','week_no','roundId','round_id','round','source','createdAt','date','time'].forEach(k=>{
+          if(snap[k]!==undefined && snap[k]!==null && snap[k]!==''){
+            if(k==='weekNo' || k==='week_no') snapMeta.week=snap[k];
+            else if(k==='round_id' || k==='round') snapMeta.roundId=snap[k];
+            else if(k==='date' || k==='time') snapMeta.createdAt=snap[k];
+            else snapMeta[k]=snap[k];
+          }
+        });
+        const inner = snap.records || snap.data || snap.items || snap.leaderboard || snap.rows || snap.users;
+        if(Array.isArray(inner)) out.push(...normalizePointRecords(inner, {...snapMeta, _seqStart:i*100000}));
+        else out.push(...normalizePointRecords([snap], {...base, _seqStart:i*100000}));
+      }
+    });
+    return out;
+  }
+
+  for(const key of ['data','records','items','leaderboard','rows','users']){
+    if(Array.isArray(payload[key])) return normalizePointRecords(payload[key], base);
+  }
+  return normalizePointRecords([payload], base);
+}
+function parsePointText(text){
+  const s=String(text||'').trim();
+  if(!s) return [];
+  try{
+    return pointRowsFromPayload(JSON.parse(s));
+  }catch{}
+  const lines=s.split(/\r?\n/).map(x=>x.trim()).filter(Boolean);
+  if(!lines.length) return [];
+  const first=splitCsvLine(lines[0]).map(x=>x.trim());
+  const hasHeader=first.some(x=>/^(address|addr|wallet|smartWallet|smart_wallet|predictAccount|account|totalPoints|total_points|weeklyPoints|weekly_points|weekPoints|points|point|score|amount|value|total|rank|ppRank|volumeUsd|grade|week|roundId|source|type|reason|createdAt|time|date|note|remark|name|imageUrl|地址|总积分|累计积分|本周积分|周积分|排名|周|轮次|来源|类型|时间|日期|备注|昵称)$/i.test(x));
+  const headers=hasHeader ? first : ['address','weeklyPoints','source','createdAt','note'];
+  const dataLines=hasHeader ? lines.slice(1) : lines;
+  const rows=dataLines.map(line=>{
+    const vals=splitCsvLine(line);
+    const obj={}; headers.forEach((h,i)=>obj[h]=vals[i] ?? '');
+    return obj;
+  });
+  return normalizePointRecords(rows);
+}
+function dedupePointRecords(records){
+  const map=new Map();
+  for(const r of records){
+    const key=[String(r.address||'').toLowerCase(), r.kind||'', r.roundId??'', r.week??'', r.rank??'', r.totalPoints??'', r.weeklyPoints??'', r.source||'', r.createdAt||'', r.note||''].join('|');
+    if(!map.has(key)) map.set(key,r);
+  }
+  return Array.from(map.values()).map((r,i)=>({...r,_seq:i}));
+}
+function pointRecordsFor(addr){
+  const a=String(addr||'').toLowerCase();
+  return pointsRecords.filter(r=>String(r.address).toLowerCase()===a).sort((x,y)=>pointSortValue(y)-pointSortValue(x));
+}
+function pointSortValue(r){
+  const round=Number(r.roundId), week=Number(r.week), seq=Number(r._seq)||0;
+  if(Number.isFinite(round) || Number.isFinite(week)) return (Number.isFinite(round)?round:0)*1000000 + (Number.isFinite(week)?week:0)*1000 + seq/100000;
+  const ts=Date.parse(r.createdAt||'');
+  if(Number.isFinite(ts)) return ts/1000 + seq/100000;
+  return seq;
+}
+function pointSummaryFor(addr){
+  const recs=pointRecordsFor(addr);
+  const cumulative=recs.filter(r=>Number.isFinite(Number(r.totalPoints)));
+  const latest=cumulative.length ? cumulative[0] : null;
+  const weeklyPointsSum=recs.reduce((s,r)=>s+(Number(r.weeklyPoints ?? r.points)||0),0);
+  const totalPoints=latest ? Number(latest.totalPoints) : weeklyPointsSum;
+  return {records:recs, latest, totalPoints, weeklyPointsSum, recordCount:recs.length};
+}
+function totalPointsFor(addr){ return pointSummaryFor(addr).totalPoints; }
+function fmtPoints(v){ const n=toNum(v); return Number.isFinite(n) ? n.toLocaleString('zh-CN',{maximumFractionDigits:2}) : '-'; }
+function updatePointsStatus(){
+  const el=$('#pointsStatus'); if(!el) return;
+  const total=pointsRecords.length;
+  const addrCnt=new Set(pointsRecords.map(r=>String(r.address).toLowerCase())).size;
+  const weeks=new Set(pointsRecords.map(r=>`${r.roundId ?? ''}:${r.week ?? ''}`).filter(x=>x!==':')).size;
+  el.value = total ? `已加载 ${total.toLocaleString('zh-CN')} 条总榜记录，${addrCnt.toLocaleString('zh-CN')} 个地址${weeks ? `，含 ${weeks.toLocaleString('zh-CN')} 个周/轮次` : ''}` : '未上传总积分榜；点击“上传总积分榜 JSON/CSV”导入';
+}
+function runPointLookup(){
+  const raw=$('#pointLookup')?.value.trim() || '';
+  const addr=(raw.match(ETH_RE_G)||[])[0] || raw;
+  if(!ETH_RE.test(addr)){ $('#pointTotalView').value='地址格式不正确'; return; }
+  const sum=pointSummaryFor(addr);
+  if(!sum.recordCount){ $('#pointTotalView').value='未找到该地址'; return; }
+  const latest=sum.latest;
+  const bits=[`总积分 ${fmtPoints(sum.totalPoints)}`];
+  if(latest){
+    if(latest.roundId!==null || latest.week!==null) bits.push(`Round ${latest.roundId ?? '-'} / Week ${latest.week ?? '-'}`);
+    if(latest.weeklyPoints!==null) bits.push(`周积分 ${fmtPoints(latest.weeklyPoints)}`);
+    if(latest.rank!==null) bits.push(`排名 #${fmtInt(latest.rank)}`);
+    if(latest.ppRank!==null) bits.push(`PP #${fmtInt(latest.ppRank)}`);
+  }
+  bits.push(`${sum.recordCount} 条总榜记录`);
+  bits.push(`已导入 weeklyPoints 合计 ${fmtPoints(sum.weeklyPointsSum)}`);
+  $('#pointTotalView').value = bits.join(' · ');
+}
+function saveLocalPoints(records){ localStorage.setItem(STORE.points, JSON.stringify(dedupePointRecords(records))); }
+function getLocalPoints(){ try{return pointRowsFromPayload(JSON.parse(localStorage.getItem(STORE.points)||'[]'))}catch{return[]} }
+function pointContextFromUrl(url){
+  const mWeek=String(url).match(/week[-_ ]?(\d+)/i);
+  const mRound=String(url).match(/round[-_ ]?(\d+)/i);
+  const ctx={source:url};
+  if(mWeek) ctx.week=mWeek[1];
+  if(mRound) ctx.roundId=mRound[1];
+  return ctx;
+}
+async function loadStaticPointFile(url){
+  try{
+    const res=await fetch(url,{cache:'no-store'});
+    if(!res.ok) return [];
+    return pointRowsFromPayload(await res.json(), pointContextFromUrl(url));
+  }catch{ return []; }
+}
+async function loadPointsData(){
+  let staticRows=[];
+  staticRows.push(...await loadStaticPointFile('/data/points.json'));
+  staticRows.push(...await loadStaticPointFile('/data/leaderboard.json'));
+  try{
+    const res=await fetch('/data/leaderboard/index.json',{cache:'no-store'});
+    if(res.ok){
+      const manifest=await res.json();
+      const files=Array.isArray(manifest) ? manifest : (manifest.files || manifest.weeks || manifest.items || []);
+      for(const item of files){
+        const file=typeof item==='string' ? item : (item.file || item.path || item.url);
+        if(!file) continue;
+        const url=file.startsWith('/') ? file : `/data/leaderboard/${file}`;
+        staticRows.push(...await loadStaticPointFile(url));
+      }
+    }
+  }catch{}
+  const localRows=getLocalPoints();
+  staticPointCount=staticRows.length; localPointCount=localRows.length;
+  pointsRecords=dedupePointRecords([...staticRows, ...localRows]);
+  updatePointsStatus();
+  if(resultMeta.length) renderAll();
+}
+function bindPointsImport(){
+  const btn=$('#loadPointsFile'), inp=$('#pointsFileInput');
+  if(!btn || !inp) return;
+  btn.addEventListener('click',()=>inp.click());
+  inp.addEventListener('change',()=>{
+    const file=inp.files[0]; inp.value='';
+    if(!file) return;
+    const reader=new FileReader();
+    reader.onload=()=>{
+      const imported=parsePointText(String(reader.result||''));
+      if(!imported.length) return toast('未识别到总积分榜记录');
+      const merged=dedupePointRecords([...getLocalPoints(), ...imported]);
+      saveLocalPoints(merged);
+      loadPointsData();
+      toast(`已导入 ${imported.length} 条总积分榜记录`);
+    };
+    reader.readAsText(file);
+  });
+  $('#clearPointsData')?.addEventListener('click',()=>{ localStorage.removeItem(STORE.points); loadPointsData(); $('#pointTotalView').value='-'; toast('已清空已上传总榜记录'); });
+  $('#lookupPoints')?.addEventListener('click',runPointLookup);
+  $('#pointLookup')?.addEventListener('keydown',e=>{ if(e.key==='Enter') runPointLookup(); });
+}
+bindPointsImport();
+loadPointsData();
+
 
 function getHistory(){ try{return JSON.parse(localStorage.getItem(STORE.history)||'[]')}catch{return[]} }
 function saveHistory(addrs){ const list=getHistory(); list.unshift({time:Date.now(),addrs:addrs.slice(0,80),count:addrs.length}); list.splice(20); localStorage.setItem(STORE.history,JSON.stringify(list)); renderHistory(); }
@@ -452,22 +736,27 @@ async function queryOne(addr){
   const marketCnt=new Set(posDetails.map(p=>String(p.marketId||p.title)).filter(Boolean)).size;
   const total=Number.isFinite(toNum(available)) ? value + Number(available) : null;
   const last=matchDetails[0]?.executedAt ? new Date(matchDetails[0].executedAt).getTime() : 0;
-  return {addr,available,value,total,pnl,cost,posCnt:posDetails.length,marketCnt,vol,fillCnt:matchDetails.length,last,positions:posDetails,matches:matchDetails,partial:{positionsFailed:pRes.status!=='fulfilled',matchesFailed:mRes.status!=='fulfilled',balanceFailed:bRes.status!=='fulfilled' || available===null},detailOpen:false};
+  const pointRecords=pointRecordsFor(addr);
+  const pointSummary=pointSummaryFor(addr);
+  const points=pointSummary.totalPoints;
+  return {addr,points,weeklyPointsSum:pointSummary.weeklyPointsSum,pointCnt:pointSummary.recordCount,pointRecords,pointSummary,pointLatest:pointSummary.latest,available,value,total,pnl,cost,posCnt:posDetails.length,marketCnt,vol,fillCnt:matchDetails.length,last,positions:posDetails,matches:matchDetails,partial:{positionsFailed:pRes.status!=='fulfilled',matchesFailed:mRes.status!=='fulfilled',balanceFailed:bRes.status!=='fulfilled' || available===null},detailOpen:false};
 }
 async function runPool(tasks, concurrency, onDone){ let i=0; async function worker(){ while(i<tasks.length && !abortFlag){ const idx=i++; try{ const res=await tasks[idx](); onDone(res,idx); }catch(e){ onDone({addr:tasks[idx].addr || '', err:String(e?.message||e)}, idx); } } } await Promise.all(Array.from({length:Math.min(concurrency,tasks.length)},worker)); }
 
 function renderRow(m, visualIdx){
   const tbody=$('#tbl tbody');
   const tr=document.createElement('tr');
-  tr.dataset.search=[m.addr,getNote(m.addr),m.err,...(m.positions||[]).slice(0,5).map(p=>p.title),...(m.matches||[]).slice(0,5).map(x=>x.title)].join(' ').toLowerCase();
+  tr.dataset.search=[m.addr,getNote(m.addr),m.err,m.points,m.weeklyPointsSum,m.pointLatest?.name,...(m.pointRecords||[]).slice(0,5).map(p=>[p.name,p.source,p.note,p.week,p.roundId,p.grade].join(' ')),...(m.positions||[]).slice(0,5).map(p=>p.title),...(m.matches||[]).slice(0,5).map(x=>x.title)].join(' ').toLowerCase();
   if(m.err){
-    tr.innerHTML=`<td>${visualIdx}</td><td class="mono nowrap">${fmtShort(m.addr)}<button class="copy-btn" data-copy>复制</button></td><td colspan="11"><span class="err-badge">✕ ${esc(m.err)}</span></td><td><button class="btn-sm btn-ghost" data-refresh>↻</button></td>`;
+    tr.innerHTML=`<td>${visualIdx}</td><td class="mono nowrap">${fmtShort(m.addr)}<button class="copy-btn" data-copy>复制</button></td><td colspan="13"><span class="err-badge">✕ ${esc(m.err)}</span></td><td><button class="btn-sm btn-ghost" data-refresh>↻</button></td>`;
   }else{
     const pnlPct=m.cost ? m.pnl/m.cost*100 : NaN;
     const partial=(m.partial?.positionsFailed||m.partial?.matchesFailed||m.partial?.balanceFailed) ? `<span class="warn-badge">部分接口失败</span>` : '';
     tr.innerHTML=`
       <td>${visualIdx}</td>
       <td class="mono nowrap">${fmtShort(m.addr)}<button class="copy-btn" data-copy>复制</button>${partial}</td>
+      <td class="num">${fmtPoints(m.points)}</td>
+      <td class="num">${fmtInt(m.pointCnt)}</td>
       <td class="num">${fmtUsd(m.available)}</td>
       <td class="num">${fmtUsd(m.value)}</td>
       <td class="num">${fmtUsd(m.total)}</td>
@@ -492,7 +781,8 @@ function renderDetailRow(m){
   const tbody=$('#tbl tbody'); const tr=document.createElement('tr'); tr.className='detail-row'; tr.dataset.search='';
   const posHtml=m.positions.length ? m.positions.slice(0,12).map(p=>`<div class="detail-item"><div class="detail-title">${p.url?`<a href="${esc(p.url)}" target="_blank" rel="noopener noreferrer">${esc(p.title)}</a>`:esc(p.title)}</div><span class="pill">${esc(p.outcome)}</span> 份额 ${fmtShares(p.shares)} · 均价 ${p.entryCents!==null?p.entryCents.toFixed(2)+'c':'-'}${p.markCents!==null?' → 现价 '+p.markCents.toFixed(2)+'c':''}<br>价值 $${fmtMoney(p.value)} · <span class="${cssClassSigned(p.pnl)}">${signedMoney(p.pnl)} ${signedPct(p.pnlPct)}</span></div>`).join('') : '<div class="muted">暂无持仓</div>';
   const matchHtml=m.matches.length ? m.matches.slice(0,12).map(x=>`<div class="detail-item"><div class="detail-title">${x.url?`<a href="${esc(x.url)}" target="_blank" rel="noopener noreferrer">${esc(x.title)}</a>`:esc(x.title)}</div><span class="pill">${esc(x.side)}</span><span class="pill">${esc(x.outcome)}</span> ${fmtShares(x.shares)} @ ${x.price!==null?x.price.toFixed(2)+'c':'-'} = $${fmtMoney(x.value)}<br>${esc(fmtDate(new Date(x.executedAt).getTime()))}${x.tx?` · <a href="https://bscscan.com/tx/${esc(x.tx)}" target="_blank" rel="noopener noreferrer">Tx</a>`:''}</div>`).join('') : '<div class="muted">暂无最近成交</div>';
-  tr.innerHTML=`<td colspan="14"><div class="detail-grid"><div class="detail-box"><h4>持仓明细（最多 12 条）</h4><div class="detail-list">${posHtml}</div></div><div class="detail-box"><h4>最近成交（最多显示 12 条，统计上限近 1000 条）</h4><div class="detail-list">${matchHtml}</div></div></div></td>`;
+  const pointHtml=(m.pointRecords||[]).length ? m.pointRecords.slice(0,12).map(r=>`<div class="detail-item"><div class="detail-title">${r.totalPoints!==null?`总积分 ${fmtPoints(r.totalPoints)}`:'积分 '+fmtPoints(r.points)}${r.name?` · ${esc(r.name)}`:''}</div>${r.week!==null?`<span class="pill">Week ${fmtInt(r.week)}</span>`:''}${r.roundId!==null?`<span class="pill">Round ${fmtInt(r.roundId)}</span>`:''}${r.weeklyPoints!==null?`<span class="pill">周积分 ${fmtPoints(r.weeklyPoints)}</span>`:''}${r.rank!==null?`<span class="pill">排名 #${fmtInt(r.rank)}</span>`:''}${r.ppRank!==null?`<span class="pill">PP #${fmtInt(r.ppRank)}</span>`:''}${r.grade?`<span class="pill">${esc(r.grade)}</span>`:''}<br>${esc(r.createdAt||r.source||'-')}${r.volumeUsd!==null?` · 成交额 $${fmtMoney(r.volumeUsd)}`:''}${r.note?` · ${esc(r.note)}`:''}</div>`).join('') : '<div class="muted">暂无总积分榜记录</div>';
+  tr.innerHTML=`<td colspan="16"><div class="detail-grid"><div class="detail-box"><h4>持仓明细（最多 12 条）</h4><div class="detail-list">${posHtml}</div></div><div class="detail-box"><h4>最近成交（最多显示 12 条，统计上限近 1000 条）</h4><div class="detail-list">${matchHtml}</div></div><div class="detail-box"><h4>总积分榜记录（最多 12 条）</h4><div class="detail-list">${pointHtml}</div></div></div></td>`;
   tbody.appendChild(tr);
 }
 function getSorted(){
@@ -527,12 +817,14 @@ function updateStats(){
   const totalPnl=valid.reduce((s,m)=>s+(m.pnl||0),0);
   const totalVol=valid.reduce((s,m)=>s+(m.vol||0),0);
   const totalPos=valid.reduce((s,m)=>s+(m.posCnt||0),0);
+  const totalPoints=valid.reduce((s,m)=>s+(toNum(m.points)||0),0);
   $('#statAvail').textContent=fmtUsd(totalAvail);
   $('#statValue').textContent=fmtUsd(totalValue);
   $('#statTotal').textContent=fmtUsd(totalNet);
   $('#statPnl').textContent=signedMoney(totalPnl); $('#statPnl').className='stat-value '+cssClassSigned(totalPnl);
   $('#statVol').textContent=fmtUsd(totalVol);
   $('#statPos').textContent=fmtInt(totalPos);
+  $('#statPoints').textContent=fmtPoints(totalPoints);
   $('#statsCards').style.display='grid';
 }
 function applyFilter(){ const q=$('#filterInput').value.trim().toLowerCase(); $$('#tbl tbody tr').forEach(tr=>{ if(tr.classList.contains('detail-row')){ tr.style.display=q?'none':''; return; } const hit=!q || (tr.dataset.search||tr.textContent).toLowerCase().includes(q); tr.style.display=hit?'':'none'; }); }
@@ -558,7 +850,7 @@ $('#run').addEventListener('click',async()=>{
   $('#loading').style.display='block'; $('#bar').value=0; $('#barTxt').textContent='准备查询...';
   $('#run').disabled=$('#csv').disabled=$('#json').disabled=true; $('#stop').style.display=''; $('#stop').disabled=false; $('#stop').textContent='停止';
   const tbody=$('#tbl tbody');
-  const placeholders=list.map((addr,i)=>{ const tr=document.createElement('tr'); tr.className='row-placeholder'; tr.innerHTML=`<td>${i+1}</td><td class="mono">${fmtShort(addr)}<button class="copy-btn">复制</button></td><td colspan="12">查询中...</td>`; tr.querySelector('button').addEventListener('click',()=>copyText(addr)); tbody.appendChild(tr); return tr; });
+  const placeholders=list.map((addr,i)=>{ const tr=document.createElement('tr'); tr.className='row-placeholder'; tr.innerHTML=`<td>${i+1}</td><td class="mono">${fmtShort(addr)}<button class="copy-btn">复制</button></td><td colspan="14">查询中...</td>`; tr.querySelector('button').addEventListener('click',()=>copyText(addr)); tbody.appendChild(tr); return tr; });
   let done=0, fail=0;
   const tasks=list.map((addr,idx)=>{ const f=()=>queryOne(addr); f.addr=addr; f.idx=idx; return f; });
   await runPool(tasks, parseInt($('#concurrency').value,10)||3, (res,idx)=>{
@@ -576,14 +868,14 @@ $('#stop').addEventListener('click',()=>{ abortFlag=true; runController?.abort()
 
 $('#csv').addEventListener('click',()=>{
   if(!resultMeta.length) return toast('暂无数据');
-  const header=['#','地址','可用余额USDT','持仓金额USD','净资产USD','浮动盈亏USD','投入成本USD','持仓数','市场数','近1000成交额USD','近1000成交数','最后成交','备注','状态'];
-  const rows=getSorted().map((m,i)=>[i+1,m.addr,m.err?'':m.available,m.err?'':m.value,m.err?'':m.total,m.err?'':m.pnl,m.err?'':m.cost,m.err?'':m.posCnt,m.err?'':m.marketCnt,m.err?'':m.vol,m.err?'':m.fillCnt,m.err?'':(m.last?new Date(m.last).toISOString():''),getNote(m.addr),m.err||'OK']);
+  const header=['#','地址','总积分','总榜记录数','可用余额USDT','持仓金额USD','净资产USD','浮动盈亏USD','投入成本USD','持仓数','市场数','近1000成交额USD','近1000成交数','最后成交','备注','状态'];
+  const rows=getSorted().map((m,i)=>[i+1,m.addr,m.err?'':m.points,m.err?'':m.pointCnt,m.err?'':m.available,m.err?'':m.value,m.err?'':m.total,m.err?'':m.pnl,m.err?'':m.cost,m.err?'':m.posCnt,m.err?'':m.marketCnt,m.err?'':m.vol,m.err?'':m.fillCnt,m.err?'':(m.last?new Date(m.last).toISOString():''),getNote(m.addr),m.err||'OK']);
   const escCsv=v=>{ const s=String(v??''); return /[,"\n]/.test(s)?`"${s.replaceAll('"','""')}"`:s; };
   downloadBlob(`predict_fun_${Date.now()}.csv`, '\uFEFF'+[header,...rows].map(r=>r.map(escCsv).join(',')).join('\n'), 'text/csv;charset=utf-8');
 });
 $('#json').addEventListener('click',()=>{
   if(!resultMeta.length) return toast('暂无数据');
-  const data=resultMeta.map(m=>({address:m.addr,note:getNote(m.addr),error:m.err||null,summary:m.err?null:{availableUsdt:m.available,holdingValueUsd:m.value,netValueUsd:m.total,pnlUsd:m.pnl,costUsd:m.cost,positions:m.posCnt,markets:m.marketCnt,recent1000VolumeUsd:m.vol,recent1000Fills:m.fillCnt,lastFillAt:m.last?new Date(m.last).toISOString():null},positions:m.positions||[],matches:m.matches||[]}));
+  const data=resultMeta.map(m=>({address:m.addr,note:getNote(m.addr),error:m.err||null,summary:m.err?null:{latestTotalPoints:m.points,importedWeeklyPointsSum:m.weeklyPointsSum,pointRecordCount:m.pointCnt,latestPointSnapshot:m.pointLatest||null,availableUsdt:m.available,holdingValueUsd:m.value,netValueUsd:m.total,pnlUsd:m.pnl,costUsd:m.cost,positions:m.posCnt,markets:m.marketCnt,recent1000VolumeUsd:m.vol,recent1000Fills:m.fillCnt,lastFillAt:m.last?new Date(m.last).toISOString():null},pointRecords:m.pointRecords||[],positions:m.positions||[],matches:m.matches||[]}));
   downloadBlob(`predict_fun_${Date.now()}.json`, JSON.stringify(data,null,2), 'application/json;charset=utf-8');
 });
 </script>
