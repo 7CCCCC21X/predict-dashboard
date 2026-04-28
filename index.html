@@ -39,8 +39,13 @@ button{height:40px;padding:0 18px;font-size:14px;font-weight:700;border:none;bor
 #summary{display:none;margin:16px 0 10px;padding:12px 16px;background:var(--c-summary-bg);border-left:4px solid var(--c-primary);border-radius:var(--radius);color:var(--c-primary);font-size:14px;font-weight:700}.stats-cards{display:none;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:12px;margin:18px 0}.stat-card{background:var(--c-card);border:1px solid var(--c-border);border-radius:var(--radius);padding:16px 14px;text-align:center;position:relative;overflow:hidden;transition:all .2s}.stat-card:hover{transform:translateY(-2px);box-shadow:var(--shadow-lg)}.stat-label{font-size:12px;color:var(--c-sub);text-transform:uppercase;letter-spacing:.45px;font-weight:700}.stat-value{font-size:22px;font-weight:850;color:var(--c-text);margin-top:6px;letter-spacing:-.35px}.stat-value.positive{color:var(--c-green)}.stat-value.negative{color:var(--c-red)}.stat-sub{font-size:11px;color:var(--c-sub);margin-top:4px;opacity:.86}
 .filter-row{display:none;gap:8px;align-items:center;margin:14px 0;flex-wrap:wrap}.filter-row input{flex:1;min-width:220px;height:39px;padding:0 13px;border:1px solid var(--c-border);border-radius:9px;background:var(--c-input-bg);color:var(--c-text);outline:none}
 .history-wrap{display:none;margin-top:10px}.history-wrap details{font-size:13px;color:var(--c-sub)}.history-wrap summary{cursor:pointer;color:var(--c-primary);font-weight:700;user-select:none}.history-list{max-height:156px;overflow-y:auto;margin-top:6px}.history-item{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:7px 0;border-bottom:1px solid var(--c-border)}.history-item span{cursor:pointer;color:var(--c-text);font-size:12px}.history-item span:hover{color:var(--c-primary)}
-.table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:var(--radius);border:1px solid var(--c-border);margin-top:4px}table{width:100%;min-width:1280px;border-collapse:collapse;background:var(--c-card)}th,td{padding:11px 9px;font-size:12.5px;text-align:left;transition:background .2s,border-color .2s}td{border-top:1px solid var(--c-border);vertical-align:middle}th{position:sticky;top:0;background:var(--c-primary);color:#fff;z-index:2;cursor:pointer;user-select:none;font-size:12px;text-transform:uppercase;letter-spacing:.25px;white-space:nowrap}th:hover{background:var(--c-primary-dark)}tbody tr:nth-child(even){background:var(--c-even)}tbody tr:hover{background:var(--c-hover)}td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}.positive{color:var(--c-green);font-weight:800}.negative{color:var(--c-red);font-weight:800}.muted{color:var(--c-sub)}.small{font-size:11px;color:var(--c-sub)}.mono{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace}.nowrap{white-space:nowrap}.copy-btn{margin-left:5px;height:24px;padding:0 7px;font-size:11px;border-radius:5px;background:transparent;color:var(--c-sub);border:1px solid var(--c-border)}.copy-btn:hover:not(:disabled){background:var(--c-hover);color:var(--c-primary);box-shadow:none;transform:none}.note-input{width:88px;height:30px;padding:0 8px;border:1px solid transparent;border-radius:7px;background:transparent;color:var(--c-text);font-size:12px;text-align:center}.note-input:hover,.note-input:focus{border-color:var(--c-border);background:var(--c-input-bg);outline:none}.note-input:focus{width:126px;border-color:var(--c-primary)}.err-badge{display:inline-flex;align-items:center;gap:6px;padding:3px 10px;border-radius:999px;font-size:12px;font-weight:700;background:rgba(239,68,68,.1);color:var(--c-red)}.warn-badge{display:inline-flex;align-items:center;gap:6px;padding:3px 9px;border-radius:999px;font-size:11px;font-weight:700;background:rgba(245,158,11,.12);color:var(--c-yellow);margin-left:6px}.row-placeholder{opacity:.52}.detail-row td{background:var(--c-bg)!important}.detail-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.detail-box{border:1px solid var(--c-border);border-radius:10px;background:var(--c-card);padding:12px;min-width:0}.detail-box h4{font-size:13px;margin-bottom:8px;color:var(--c-text)}.detail-list{display:flex;flex-direction:column;gap:7px}.detail-item{font-size:12px;color:var(--c-sub);border-bottom:1px dashed var(--c-border);padding-bottom:7px}.detail-item:last-child{border-bottom:none;padding-bottom:0}.detail-title{color:var(--c-text);font-weight:700}.pill{display:inline-flex;align-items:center;padding:1px 7px;border-radius:999px;background:var(--c-summary-bg);color:var(--c-primary);font-size:11px;font-weight:800;margin-right:4px}.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(10px);background:var(--c-tooltip);color:#fff;padding:10px 18px;border-radius:9px;font-size:13px;font-weight:700;opacity:0;transition:all .25s;z-index:300;box-shadow:0 4px 14px rgba(0,0,0,.18);pointer-events:none}.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}.footer{text-align:center;font-size:13px;color:var(--c-sub);margin-top:38px;padding-bottom:14px}
-@media(max-width:920px){body{padding:18px 10px}.card{padding:16px}.page-header h1{font-size:25px}.config-grid{grid-template-columns:1fr 1fr}.stats-cards{grid-template-columns:repeat(3,1fr)}.detail-grid{grid-template-columns:1fr}}@media(max-width:560px){.config-grid{grid-template-columns:1fr}.toolbar{justify-content:stretch}.toolbar button{flex:1}.stats-cards{grid-template-columns:1fr 1fr}.stat-value{font-size:18px}th,td{padding:8px 6px;font-size:11px}}
+.table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:var(--radius);border:1px solid var(--c-border);margin-top:4px}table{width:100%;min-width:1280px;border-collapse:collapse;background:var(--c-card)}th,td{padding:11px 9px;font-size:12.5px;text-align:left;transition:background .2s,border-color .2s}td{border-top:1px solid var(--c-border);vertical-align:middle}th{position:sticky;top:0;background:var(--c-primary);color:#fff;z-index:2;cursor:pointer;user-select:none;font-size:12px;text-transform:uppercase;letter-spacing:.25px;white-space:nowrap}th:hover{background:var(--c-primary-dark)}th[aria-sort="ascending"]::after{content:" ▲";font-size:9px;opacity:.85}th[aria-sort="descending"]::after{content:" ▼";font-size:9px;opacity:.85}tbody tr:nth-child(even){background:var(--c-even)}tbody tr:hover{background:var(--c-hover)}td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}.positive{color:var(--c-green);font-weight:800}.negative{color:var(--c-red);font-weight:800}.muted{color:var(--c-sub)}.small{font-size:11px;color:var(--c-sub)}.mono{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace}.nowrap{white-space:nowrap}.copy-btn{margin-left:5px;height:24px;padding:0 7px;font-size:11px;border-radius:5px;background:transparent;color:var(--c-sub);border:1px solid var(--c-border)}.copy-btn:hover:not(:disabled){background:var(--c-hover);color:var(--c-primary);box-shadow:none;transform:none}.note-input{width:88px;height:30px;padding:0 8px;border:1px solid transparent;border-radius:7px;background:transparent;color:var(--c-text);font-size:12px;text-align:center}.note-input:hover,.note-input:focus{border-color:var(--c-border);background:var(--c-input-bg);outline:none}.note-input:focus{width:126px;border-color:var(--c-primary)}.err-badge{display:inline-flex;align-items:center;gap:6px;padding:3px 10px;border-radius:999px;font-size:12px;font-weight:700;background:rgba(239,68,68,.1);color:var(--c-red)}.warn-badge{display:inline-flex;align-items:center;gap:6px;padding:3px 9px;border-radius:999px;font-size:11px;font-weight:700;background:rgba(245,158,11,.12);color:var(--c-yellow);margin-left:6px}.row-placeholder{opacity:.52}.detail-row td{background:var(--c-bg)!important}.detail-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.detail-box{border:1px solid var(--c-border);border-radius:10px;background:var(--c-card);padding:12px;min-width:0}.detail-box h4{font-size:13px;margin-bottom:8px;color:var(--c-text)}.detail-list{display:flex;flex-direction:column;gap:7px}.detail-item{font-size:12px;color:var(--c-sub);border-bottom:1px dashed var(--c-border);padding-bottom:7px}.detail-item:last-child{border-bottom:none;padding-bottom:0}.detail-title{color:var(--c-text);font-weight:700}.pill{display:inline-flex;align-items:center;padding:1px 7px;border-radius:999px;background:var(--c-summary-bg);color:var(--c-primary);font-size:11px;font-weight:800;margin-right:4px}.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(10px);background:var(--c-tooltip);color:#fff;padding:10px 18px;border-radius:9px;font-size:13px;font-weight:700;opacity:0;transition:all .25s;z-index:300;box-shadow:0 4px 14px rgba(0,0,0,.18);pointer-events:none}.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}.footer{text-align:center;font-size:13px;color:var(--c-sub);margin-top:38px;padding-bottom:14px}
+.input-meta{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-top:8px;font-size:12px;color:var(--c-sub);flex-wrap:wrap}.input-meta b{color:var(--c-text);font-weight:800}.input-actions{display:flex;gap:6px;flex-wrap:wrap}.input-pill{display:inline-flex;align-items:center;gap:6px;padding:4px 10px;border-radius:999px;background:var(--c-summary-bg);color:var(--c-primary);font-weight:700}.input-pill.warn{background:rgba(245,158,11,.12);color:var(--c-yellow)}
+.medal{display:inline-flex;align-items:center;justify-content:center;width:18px;height:18px;border-radius:50%;font-size:11px;font-weight:900;margin-right:6px;color:#fff}.medal.gold{background:linear-gradient(135deg,#f59e0b,#fbbf24)}.medal.silver{background:linear-gradient(135deg,#94a3b8,#cbd5e1);color:#1e293b}.medal.bronze{background:linear-gradient(135deg,#b45309,#d97706)}
+.drawer-backdrop{position:fixed;inset:0;background:rgba(15,23,42,.5);opacity:0;pointer-events:none;transition:opacity .25s;z-index:400}.drawer-backdrop.open{opacity:1;pointer-events:auto}
+.drawer{position:fixed;top:0;right:0;bottom:0;width:min(420px,92vw);background:var(--c-card);border-left:1px solid var(--c-border);box-shadow:-12px 0 32px rgba(0,0,0,.18);transform:translateX(100%);transition:transform .28s ease;z-index:401;display:flex;flex-direction:column;overflow:hidden}.drawer.open{transform:translateX(0)}.drawer-head{display:flex;align-items:center;justify-content:space-between;padding:16px 18px;border-bottom:1px solid var(--c-border)}.drawer-head h3{font-size:16px;font-weight:800}.drawer-body{padding:18px;overflow-y:auto;flex:1;display:flex;flex-direction:column;gap:18px}.drawer-section h4{font-size:12px;font-weight:800;color:var(--c-sub);text-transform:uppercase;letter-spacing:.45px;margin-bottom:10px}.drawer-section .field+.field{margin-top:10px}.drawer-section .toolbar{justify-content:flex-start;margin-top:10px}.kbd{display:inline-block;padding:1px 6px;border-radius:4px;border:1px solid var(--c-border);background:var(--c-bg);font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:11px;color:var(--c-sub);margin:0 2px}
+@keyframes pulse-dot{0%,100%{opacity:.4}50%{opacity:1}}.live-dot{display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--c-primary);margin-right:6px;animation:pulse-dot 1.2s infinite}
+@media(max-width:920px){body{padding:18px 10px}.card{padding:16px}.page-header h1{font-size:25px}.config-grid{grid-template-columns:1fr 1fr}.stats-cards{grid-template-columns:repeat(3,1fr)}.detail-grid{grid-template-columns:1fr}}@media(max-width:560px){.config-grid{grid-template-columns:1fr}.toolbar{justify-content:stretch}.toolbar button{flex:1}.stats-cards{grid-template-columns:repeat(2,1fr);gap:8px}.stat-card{padding:12px 10px}.stat-value{font-size:17px}.stat-label{font-size:11px}.stat-sub{font-size:10px}th,td{padding:8px 6px;font-size:11px}.drawer{width:100vw}}
 </style>
 </head>
 <body>
@@ -51,71 +56,80 @@ button{height:40px;padding:0 18px;font-size:14px;font-weight:700;border:none;bor
   <div class="header-toolbar">
     <a class="badge" href="https://predict.fun/" target="_blank" rel="noopener noreferrer">Predict.fun 官网</a>
     <a class="badge" href="https://dev.predict.fun/" target="_blank" rel="noopener noreferrer">API 文档</a>
+    <button id="settingsBtn" class="btn-icon btn-ghost" title="设置 / Settings" aria-label="Settings">⚙️</button>
     <button id="langBtn" class="btn-icon btn-ghost btn-lang" title="English / 中文">EN</button>
     <button id="themeBtn" class="btn-icon btn-ghost" title="切换暗色/亮色模式">🌙</button>
   </div>
 </header>
 
-<section class="card hidden-panel" hidden aria-hidden="true">
-  <div class="config-grid">
-    <div class="field">
-      <label for="apiBase">API 环境</label>
-      <select id="apiBase">
-        <option value="mainnet">主网：Vercel 环境变量代理</option>
-        <option value="testnet">测试网：Vercel 环境变量代理</option>
-      </select>
-    </div>
-    <div class="field">
-      <label for="matchMode">成交查询范围</label>
-      <input id="matchMode" value="自动翻页，最多近 3000 条" disabled />
-    </div>
-    <div class="field">
-      <label for="concurrency">并发数</label>
-      <select id="concurrency">
-        <option value="2">2</option>
-        <option value="3" selected>3</option>
-        <option value="4">4</option>
-        <option value="6">6</option>
-      </select>
-    </div>
-    <button id="saveConfig" class="btn-outline">保存配置</button>
+<div id="drawerBackdrop" class="drawer-backdrop" hidden></div>
+<aside id="settingsDrawer" class="drawer" role="dialog" aria-modal="true" aria-labelledby="drawerTitle" hidden>
+  <div class="drawer-head">
+    <h3 id="drawerTitle">设置</h3>
+    <button id="closeDrawer" class="btn-icon btn-ghost" aria-label="Close">✕</button>
   </div>
-  <div class="field" style="margin-top:12px">
-    <label for="corsProxy">可选 CORS 代理（仅用于链上余额 RPC 如被浏览器拦截；支持 <span class="mono">{url}</span> 占位符）</label>
-    <input id="corsProxy" type="text" placeholder="留空直连；例：https://your-worker.example/?url={url}" />
-  </div>
-  <div class="help-tip">
-    <span>💡</span>
-    <span><b>说明：</b>Predict API 已默认走同域 <span class="mono">/api/predict</span> 代理，Key 从 Vercel 环境变量 <span class="mono">PREDICT_API_KEY</span> 读取，不会出现在前端代码里。成交接口会按 <span class="mono">first/after/cursor</span> 自动翻页，但每个地址最多只统计最近 <span class="mono">3000</span> 条成交。可用余额仍通过 BNB Chain USDT 余额实时查询。</span>
-  </div>
-</section>
-
-<section class="card hidden-panel" hidden aria-hidden="true">
-  <div class="config-grid">
-    <div class="field">
-      <label for="pointsStatus">总积分榜状态</label>
-      <input id="pointsStatus" value="未上传总积分榜；点击下方上传 JSON/CSV" disabled />
+  <div class="drawer-body">
+    <div class="drawer-section">
+      <h4 id="secApi">API & 查询</h4>
+      <div class="field">
+        <label for="apiBase">API 环境</label>
+        <select id="apiBase">
+          <option value="mainnet">主网：Vercel 环境变量代理</option>
+          <option value="testnet">测试网：Vercel 环境变量代理</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="matchMode">成交查询范围</label>
+        <input id="matchMode" value="自动翻页，最多近 3000 条" disabled />
+      </div>
+      <div class="field">
+        <label for="concurrency">并发数</label>
+        <select id="concurrency">
+          <option value="2">2</option>
+          <option value="3" selected>3</option>
+          <option value="4">4</option>
+          <option value="6">6</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="corsProxy">可选 CORS 代理（仅用于链上 RPC，支持 <span class="mono">{url}</span> 占位符）</label>
+        <input id="corsProxy" type="text" placeholder="留空直连；例：https://your-worker.example/?url={url}" />
+      </div>
+      <div class="toolbar"><button id="saveConfig" class="btn-outline">保存配置</button></div>
+      <div class="help-tip"><span>💡</span><span id="apiHelp"><b>说明：</b>Predict API 走同域 <span class="mono">/api/predict</span> 代理，Key 从 Vercel 环境变量读取。成交接口会自动翻页，每地址最多近 3000 条。可用余额通过 BNB Chain USDT 实时查询。</span></div>
     </div>
-    <div class="field">
-      <label for="pointLookup">按地址查询总积分</label>
-      <input id="pointLookup" type="text" placeholder="输入 0x 地址" />
+    <div class="drawer-section">
+      <h4 id="secPoints">总积分榜</h4>
+      <div class="field">
+        <label for="pointsStatus">状态</label>
+        <input id="pointsStatus" value="未上传总积分榜" disabled />
+      </div>
+      <div class="field">
+        <label for="pointLookup">按地址查询总积分</label>
+        <input id="pointLookup" type="text" placeholder="输入 0x 地址" />
+      </div>
+      <div class="field">
+        <label for="pointTotalView">总积分</label>
+        <input id="pointTotalView" value="-" disabled />
+      </div>
+      <div class="toolbar">
+        <button id="lookupPoints" class="btn-outline btn-sm" type="button">查询</button>
+        <button id="loadPointsFile" class="btn-outline btn-sm" type="button">上传 JSON/CSV</button>
+        <input type="file" id="pointsFileInput" accept=".csv,.json,.txt" style="display:none" />
+        <button id="clearPointsData" class="btn-outline btn-sm" type="button">清空</button>
+      </div>
+      <div class="help-tip"><span>⭐</span><span id="pointsHelp"><b>总积分榜：</b>上传 JSON 数组，按 <span class="mono">address</span> 匹配地址、读取 <span class="mono">totalPoints</span> 作为总积分。数据保存在浏览器 localStorage。</span></div>
     </div>
-    <div class="field">
-      <label for="pointTotalView">总积分</label>
-      <input id="pointTotalView" value="-" disabled />
+    <div class="drawer-section">
+      <h4 id="secShortcuts">快捷键</h4>
+      <div class="help-tip" style="background:transparent;border:none;padding:0"><span>⌨️</span>
+        <span id="shortcutsHelp"><b>开始查询：</b><span class="kbd">Ctrl</span>/<span class="kbd">⌘</span>+<span class="kbd">Enter</span><br/>
+        <b>停止查询：</b><span class="kbd">Esc</span><br/>
+        <b>关闭设置：</b><span class="kbd">Esc</span></span>
+      </div>
     </div>
-    <button id="lookupPoints" class="btn-outline" type="button">查询总积分</button>
   </div>
-  <div class="toolbar" style="justify-content:flex-start;margin-top:12px">
-    <button id="loadPointsFile" class="btn-outline" type="button">上传总积分榜 JSON/CSV</button>
-    <input type="file" id="pointsFileInput" accept=".csv,.json,.txt" style="display:none" />
-    <button id="clearPointsData" class="btn-outline" type="button">清空已上传总榜</button>
-  </div>
-  <div class="help-tip">
-    <span>⭐</span>
-    <span><b>总积分榜：</b>直接上传你贴的这种 JSON 数组即可，页面会按 <span class="mono">address</span> 匹配地址，并读取 <span class="mono">totalPoints</span> 作为总积分；<span class="mono">weeklyPoints</span>、<span class="mono">rank</span>、<span class="mono">ppRank</span>、<span class="mono">name</span>、<span class="mono">grade</span> 会作为附加信息显示。上传后数据会保存在当前浏览器的 <span class="mono">localStorage</span>，同一浏览器下刷新页面也还在；换设备或清缓存后需要重新上传。</span>
-  </div>
-</section>
+</aside>
 
 <section class="card">
   <div class="import-tabs">
@@ -125,6 +139,13 @@ button{height:40px;padding:0 18px;font-size:14px;font-weight:700;border:none;bor
 
   <div id="panePaste">
     <textarea id="input" placeholder="每行一个 Predict Smart Wallet / 0x 地址；也可以直接粘贴 CSV 或任意文本，页面会自动提取 0x... 地址"></textarea>
+    <div class="input-meta">
+      <div><span id="addrCountPill" class="input-pill" hidden><span id="addrCountVal">0</span> <span id="addrCountLabel">地址</span></span> <span id="addrDupePill" class="input-pill warn" hidden><span id="addrDupeVal">0</span> <span id="addrDupeLabel">重复</span></span></div>
+      <div class="input-actions">
+        <button id="dedupeBtn" class="btn-sm btn-ghost" type="button" hidden>去重 & 规范化</button>
+        <button id="clearInput" class="btn-sm btn-ghost" type="button" hidden>清空</button>
+      </div>
+    </div>
   </div>
 
   <div id="paneUpload" style="display:none">
@@ -258,7 +279,17 @@ const I18N = {
     queryRequired:'请输入或导入至少一个 0x 地址', invalidAddrCount:'{count} 个地址格式无效', preparingQuery:'准备查询...', queryProgress:'{done}/{total} 地址', querying:'查询中...', queryDone:'已查询 {total} 个地址，成功 {ok} 个，失败 {fail} 个{interrupted}', interrupted:'（已中断）', stopping:'正在停止...', stoppingToast:'正在取消进行中的请求',
     pointsStatusLoaded:'已加载 {total} 条数据，{addrCnt} 个地址{weeks}', pointsStatusWeeks:'，含 {weeks} 个周/轮次', pointsStatusNotLoaded:'未上传总积分榜；点击上传文件导入',
     importedLeaderboardUnrecognized:'未识别到总积分榜记录', importedLeaderboard:'已导入 {count} 条总积分榜记录', clearedLeaderboard:'已清空已上传总榜', badAddress:'地址格式不正确', addressNotFound:'未找到该地址', importedWeeklySum:'已导入 weeklyPoints 合计',
-    csvAddress:'地址', csvTotalPoints:'总积分', csvAvailable:'可用余额USDT', csvHolding:'持仓金额USD', csvNet:'净资产USD', csvPnl:'浮动盈亏USD', csvPositions:'持仓数', csvVolume:'近3000成交额USD', csvLast:'最后成交', csvNote:'备注', csvStatus:'状态'
+    csvAddress:'地址', csvTotalPoints:'总积分', csvAvailable:'可用余额USDT', csvHolding:'持仓金额USD', csvNet:'净资产USD', csvPnl:'浮动盈亏USD', csvPositions:'持仓数', csvVolume:'近3000成交额USD', csvLast:'最后成交', csvNote:'备注', csvStatus:'状态',
+    settingsTitle:'设置', settingsBtn:'设置 / Settings',
+    secApi:'API & 查询', secPoints:'总积分榜', secShortcuts:'快捷键',
+    apiHelp:'<b>说明：</b>Predict API 走同域 <span class="mono">/api/predict</span> 代理，Key 从 Vercel 环境变量读取。成交接口会自动翻页，每地址最多近 3000 条。可用余额通过 BNB Chain USDT 实时查询。',
+    pointsHelp:'<b>总积分榜：</b>上传 JSON 数组，按 <span class="mono">address</span> 匹配地址、读取 <span class="mono">totalPoints</span> 作为总积分。数据保存在浏览器 localStorage。',
+    shortcutsHelp:'<b>开始查询：</b><span class="kbd">Ctrl</span>/<span class="kbd">⌘</span>+<span class="kbd">Enter</span><br/><b>停止查询：</b><span class="kbd">Esc</span><br/><b>关闭设置：</b><span class="kbd">Esc</span>',
+    addrCountLabel:'地址', addrDupeLabel:'重复', dedupeBtn:'去重 & 规范化', clearInput:'清空', dedupeDone:'已去重并规范化', inputCleared:'已清空输入',
+    apiLabel:'API 环境', matchModeLabel:'成交查询范围', concurrencyLabel:'并发数', corsProxyLabel:'可选 CORS 代理（仅用于链上 RPC，支持 <span class="mono">{url}</span> 占位符）',
+    saveConfig:'保存配置', pointsStatusLabel:'状态', pointLookupLabel:'按地址查询总积分', pointTotalViewLabel:'总积分',
+    lookupBtn:'查询', uploadPointsBtn:'上传 JSON/CSV', clearPointsBtn:'清空',
+    matchModeValue:'自动翻页，最多近 3000 条', pointsLookupPh:'输入 0x 地址', corsProxyPh:'留空直连；例：https://your-worker.example/?url={url}'
   },
   en: {
     offline:'You are offline. Check your connection and try again.',
@@ -284,7 +315,17 @@ const I18N = {
     queryRequired:'Enter or import at least one 0x address', invalidAddrCount:'{count} invalid address(es)', preparingQuery:'Preparing query...', queryProgress:'{done}/{total} addresses', querying:'Querying...', queryDone:'Queried {total} addresses, success {ok}, failed {fail}{interrupted}', interrupted:' (stopped)', stopping:'Stopping...', stoppingToast:'Canceling in-flight requests',
     pointsStatusLoaded:'Loaded {total} rows, {addrCnt} addresses{weeks}', pointsStatusWeeks:', across {weeks} week/round group(s)', pointsStatusNotLoaded:'No leaderboard uploaded; use Upload File to import',
     importedLeaderboardUnrecognized:'No leaderboard records recognized', importedLeaderboard:'Imported {count} leaderboard records', clearedLeaderboard:'Uploaded leaderboard cleared', badAddress:'Invalid address format', addressNotFound:'Address not found', importedWeeklySum:'Imported weeklyPoints total',
-    csvAddress:'Address', csvTotalPoints:'Total Points', csvAvailable:'Available USDT', csvHolding:'Holding Value USD', csvNet:'Net Value USD', csvPnl:'Floating PnL USD', csvPositions:'Positions', csvVolume:'Recent 3000 Volume USD', csvLast:'Last Fill', csvNote:'Note', csvStatus:'Status'
+    csvAddress:'Address', csvTotalPoints:'Total Points', csvAvailable:'Available USDT', csvHolding:'Holding Value USD', csvNet:'Net Value USD', csvPnl:'Floating PnL USD', csvPositions:'Positions', csvVolume:'Recent 3000 Volume USD', csvLast:'Last Fill', csvNote:'Note', csvStatus:'Status',
+    settingsTitle:'Settings', settingsBtn:'Settings',
+    secApi:'API & Query', secPoints:'Leaderboard', secShortcuts:'Shortcuts',
+    apiHelp:'<b>Note:</b> Predict API uses the same-origin <span class="mono">/api/predict</span> proxy. The key is read from Vercel env vars. Match endpoint auto-paginates, capped at 3000 per address. Available balance is queried live via BNB Chain USDT.',
+    pointsHelp:'<b>Leaderboard:</b> Upload a JSON array. Rows are matched by <span class="mono">address</span>, with <span class="mono">totalPoints</span> as total. Data is saved in browser localStorage.',
+    shortcutsHelp:'<b>Start query:</b> <span class="kbd">Ctrl</span>/<span class="kbd">⌘</span>+<span class="kbd">Enter</span><br/><b>Stop query:</b> <span class="kbd">Esc</span><br/><b>Close settings:</b> <span class="kbd">Esc</span>',
+    addrCountLabel:'addresses', addrDupeLabel:'duplicates', dedupeBtn:'Dedupe & normalize', clearInput:'Clear', dedupeDone:'Deduplicated and normalized', inputCleared:'Input cleared',
+    apiLabel:'API environment', matchModeLabel:'Match query range', concurrencyLabel:'Concurrency', corsProxyLabel:'Optional CORS proxy (for on-chain RPC, supports <span class="mono">{url}</span>)',
+    saveConfig:'Save', pointsStatusLabel:'Status', pointLookupLabel:'Lookup total points by address', pointTotalViewLabel:'Total points',
+    lookupBtn:'Lookup', uploadPointsBtn:'Upload JSON/CSV', clearPointsBtn:'Clear',
+    matchModeValue:'Auto pagination, up to 3000', pointsLookupPh:'Enter 0x address', corsProxyPh:'Leave blank for direct; e.g. https://your-worker.example/?url={url}'
   }
 };
 function t(key, params={}){
@@ -314,8 +355,23 @@ function applyLanguage(rerender=false){
   const thMap={idx:'thIdx',addr:'thAddress',points:'thPoints',available:'thAvailable',value:'thHolding',total:'thNet',pnl:'thPnl',posCnt:'thPositions',vol:'thVolume',last:'thLast',note:'thNote',action:'thAction'};
   Object.entries(thMap).forEach(([k,key])=>setText($(`#tbl thead th[data-key="${k}"]`),key));
   setText($('.footer'),'footer');
+  setText($('#drawerTitle'),'settingsTitle');
+  const sbtn=$('#settingsBtn'); if(sbtn) sbtn.title=t('settingsBtn');
+  setText($('#secApi'),'secApi'); setText($('#secPoints'),'secPoints'); setText($('#secShortcuts'),'secShortcuts');
+  const setHTML=(sel,key)=>{ const el=$(sel); if(el) el.innerHTML=t(key); };
+  setHTML('#apiHelp','apiHelp'); setHTML('#pointsHelp','pointsHelp'); setHTML('#shortcutsHelp','shortcutsHelp');
+  const setLabel=(sel,key)=>{ const el=document.querySelector(`label[for="${sel}"]`); if(el) el.innerHTML=t(key); };
+  setLabel('apiBase','apiLabel'); setLabel('matchMode','matchModeLabel'); setLabel('concurrency','concurrencyLabel'); setLabel('corsProxy','corsProxyLabel');
+  setLabel('pointsStatus','pointsStatusLabel'); setLabel('pointLookup','pointLookupLabel'); setLabel('pointTotalView','pointTotalViewLabel');
+  setText($('#saveConfig'),'saveConfig'); setText($('#lookupPoints'),'lookupBtn'); setText($('#loadPointsFile'),'uploadPointsBtn'); setText($('#clearPointsData'),'clearPointsBtn');
+  const mm=$('#matchMode'); if(mm) mm.value=t('matchModeValue');
+  const pl=$('#pointLookup'); if(pl) pl.placeholder=t('pointsLookupPh');
+  const cp=$('#corsProxy'); if(cp) cp.placeholder=t('corsProxyPh');
+  setText($('#addrCountLabel'),'addrCountLabel'); setText($('#addrDupeLabel'),'addrDupeLabel');
+  setText($('#dedupeBtn'),'dedupeBtn'); setText($('#clearInput'),'clearInput');
   updatePointsStatus?.();
   renderHistory?.();
+  updateAddressMeta?.();
   if(rerender && resultMeta.length) renderAll();
 }
 
@@ -340,6 +396,25 @@ $('#themeBtn').addEventListener('click',()=>{ const dark=document.documentElemen
 initTheme();
 $('#langBtn')?.addEventListener('click',()=>{ currentLang = currentLang === 'zh' ? 'en' : 'zh'; localStorage.setItem(STORE.lang,currentLang); applyLanguage(true); });
 applyLanguage(false);
+
+// Settings drawer
+const drawer=$('#settingsDrawer'), backdrop=$('#drawerBackdrop');
+function openDrawer(){ drawer.hidden=false; backdrop.hidden=false; requestAnimationFrame(()=>{ drawer.classList.add('open'); backdrop.classList.add('open'); }); }
+function closeDrawer(){ drawer.classList.remove('open'); backdrop.classList.remove('open'); setTimeout(()=>{ drawer.hidden=true; backdrop.hidden=true; },280); }
+$('#settingsBtn')?.addEventListener('click',openDrawer);
+$('#closeDrawer')?.addEventListener('click',closeDrawer);
+backdrop?.addEventListener('click',closeDrawer);
+
+// Global keyboard shortcuts
+document.addEventListener('keydown',e=>{
+  if(e.key==='Escape'){
+    if(drawer && !drawer.hidden){ closeDrawer(); return; }
+    if($('#stop') && $('#stop').style.display!=='none' && !$('#stop').disabled){ $('#stop').click(); return; }
+  }
+  if((e.metaKey||e.ctrlKey) && e.key==='Enter'){
+    const runBtn=$('#run'); if(runBtn && !runBtn.disabled){ e.preventDefault(); runBtn.click(); }
+  }
+});
 
 function loadConfig(){
   $('#apiBase').value = localStorage.getItem(STORE.base) || 'mainnet';
@@ -386,6 +461,7 @@ function handleFile(file){
         inputEl.value=addrs.join('\n');
         $('#tabPaste').click();
       }
+      updateAddressMeta?.();
       toast(addrs.length ? t('importedPointsAndAddresses',{points:pointRows.length,addresses:addrs.length}) : t('importedPoints',{points:pointRows.length}));
       return;
     }
@@ -393,11 +469,33 @@ function handleFile(file){
     if(!addrs.length) return toast(t('noAddressOrPoints'));
     inputEl.value=addrs.join('\n');
     $('#tabPaste').click();
+    updateAddressMeta?.();
     toast(t('importedAddresses',{count:addrs.length}));
   };
   reader.readAsText(file);
 }
 function parseAddresses(text){ const arr=String(text||'').match(ETH_RE_G) || []; return [...new Map(arr.map(a=>[a.toLowerCase(),a])).values()]; }
+
+function updateAddressMeta(){
+  const text=inputEl.value || '';
+  const all=String(text).match(ETH_RE_G) || [];
+  const unique=new Set(all.map(a=>a.toLowerCase()));
+  const dupes=all.length-unique.size;
+  const hasInput=text.trim().length>0;
+  const pill=$('#addrCountPill'); const pillVal=$('#addrCountVal');
+  const dupePill=$('#addrDupePill'); const dupeVal=$('#addrDupeVal');
+  const dedupeBtn=$('#dedupeBtn'); const clearBtn=$('#clearInput');
+  if(unique.size>0){ pill.hidden=false; pillVal.textContent=unique.size.toLocaleString(locale()); }
+  else pill.hidden=true;
+  if(dupes>0){ dupePill.hidden=false; dupeVal.textContent=dupes.toLocaleString(locale()); }
+  else dupePill.hidden=true;
+  if(dedupeBtn) dedupeBtn.hidden = !(dupes>0 || (all.length>0 && text.trim()!==[...unique].join('\n')));
+  if(clearBtn) clearBtn.hidden = !hasInput;
+}
+inputEl.addEventListener('input',updateAddressMeta);
+$('#clearInput')?.addEventListener('click',()=>{ inputEl.value=''; updateAddressMeta(); inputEl.focus(); toast(t('inputCleared')); });
+$('#dedupeBtn')?.addEventListener('click',()=>{ const addrs=parseAddresses(inputEl.value); inputEl.value=addrs.join('\n'); updateAddressMeta(); toast(t('dedupeDone')); });
+updateAddressMeta();
 
 function splitCsvLine(line){
   const out=[]; let cur='', q=false;
@@ -658,7 +756,7 @@ function renderHistory(){
     const d=new Date(h.time);
     const div=document.createElement('div'); div.className='history-item';
     div.innerHTML=`<span>${d.toLocaleString(locale(),{month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit'})} — ${h.count} ${t('addressesUnit')}</span><button class="btn-sm btn-outline">${t('delete')}</button>`;
-    div.querySelector('span').addEventListener('click',()=>{ inputEl.value=h.addrs.join('\n'); toast(t('loadedHistory')); });
+    div.querySelector('span').addEventListener('click',()=>{ inputEl.value=h.addrs.join('\n'); updateAddressMeta?.(); toast(t('loadedHistory')); });
     div.querySelector('button').addEventListener('click',()=>{ const arr=getHistory(); arr.splice(i,1); localStorage.setItem(STORE.history,JSON.stringify(arr)); renderHistory(); });
     box.appendChild(div);
   });
@@ -865,17 +963,19 @@ async function queryOne(addr){
 }
 async function runPool(tasks, concurrency, onDone){ let i=0; async function worker(){ while(i<tasks.length && !abortFlag){ const idx=i++; try{ const res=await tasks[idx](); onDone(res,idx); }catch(e){ onDone({addr:tasks[idx].addr || '', err:String(e?.message||e)}, idx); } } } await Promise.all(Array.from({length:Math.min(concurrency,tasks.length)},worker)); }
 
-function renderRow(m, visualIdx){
-  const tbody=$('#tbl tbody');
+function medalFor(rank){ if(rank===1) return '<span class="medal gold" title="#1">1</span>'; if(rank===2) return '<span class="medal silver" title="#2">2</span>'; if(rank===3) return '<span class="medal bronze" title="#3">3</span>'; return ''; }
+function renderRow(m, visualIdx, frag, notesCache, netRankMap){
   const tr=document.createElement('tr');
-  tr.dataset.search=[m.addr,getNote(m.addr),m.err,m.points,m.weeklyPointsSum,m.pointLatest?.name,...(m.pointRecords||[]).slice(0,5).map(p=>[p.name,p.source,p.note,p.week,p.roundId,p.grade].join(' ')),...(m.positions||[]).slice(0,5).map(p=>p.title),...(m.matches||[]).slice(0,5).map(x=>x.title)].join(' ').toLowerCase();
+  tr.dataset.search=[m.addr,notesCache[m.addr.toLowerCase()]||'',m.err,m.points,m.weeklyPointsSum,m.pointLatest?.name,...(m.pointRecords||[]).slice(0,5).map(p=>[p.name,p.source,p.note,p.week,p.roundId,p.grade].join(' ')),...(m.positions||[]).slice(0,5).map(p=>p.title),...(m.matches||[]).slice(0,5).map(x=>x.title)].join(' ').toLowerCase();
   if(m.err){
     tr.innerHTML=`<td>${visualIdx}</td><td class="mono nowrap">${fmtShort(m.addr)}<button class="copy-btn" data-copy>${t('copy')}</button></td><td colspan="9"><span class="err-badge">✕ ${esc(m.err)}</span></td><td><button class="btn-sm btn-ghost" data-refresh>↻</button></td>`;
   }else{
     const pnlPct=m.cost ? m.pnl/m.cost*100 : NaN;
     const partial=(m.partial?.positionsFailed||m.partial?.matchesFailed||m.partial?.balanceFailed) ? `<span class="warn-badge">${t('partialFailed')}</span>` : '';
+    const medal = netRankMap ? medalFor(netRankMap.get(m.addr)) : '';
+    const note = notesCache[m.addr.toLowerCase()] || '';
     tr.innerHTML=`
-      <td>${visualIdx}</td>
+      <td>${medal}${visualIdx}</td>
       <td class="mono nowrap">${fmtShort(m.addr)}<button class="copy-btn" data-copy>${t('copy')}</button>${partial}</td>
       <td class="num">${fmtPoints(m.points)}</td>
       <td class="num">${fmtUsd(m.available)}</td>
@@ -885,32 +985,33 @@ function renderRow(m, visualIdx){
       <td class="num">${fmtInt(m.posCnt)}</td>
       <td class="num">${fmtUsd(m.vol)}</td>
       <td>${fmtDate(m.last)}</td>
-      <td><input class="note-input" placeholder="${t('notePlaceholder')}" value="${esc(getNote(m.addr))}"></td>
+      <td><input class="note-input" placeholder="${t('notePlaceholder')}" value="${esc(note)}"></td>
       <td class="nowrap"><button class="btn-sm btn-outline" data-detail>${m.detailOpen?t('collapse'):t('details')}</button> <button class="btn-sm btn-ghost" data-refresh title="${t('refreshTitle')}">↻</button></td>`;
   }
   const copyBtn=tr.querySelector('[data-copy]'); if(copyBtn) copyBtn.addEventListener('click',()=>copyText(m.addr));
-  const note=tr.querySelector('.note-input'); if(note) note.addEventListener('change',function(){ saveNote(m.addr,this.value.trim()); });
-  const detail=tr.querySelector('[data-detail]'); if(detail) detail.addEventListener('click',()=>{ m.detailOpen=!m.detailOpen; renderAll(); });
+  const noteInput=tr.querySelector('.note-input'); if(noteInput) noteInput.addEventListener('change',function(){ saveNote(m.addr,this.value.trim()); });
+  const detail=tr.querySelector('[data-detail]'); if(detail) detail.addEventListener('click',()=>{ m.detailOpen=!m.detailOpen; scheduleRender(); });
   const refresh=tr.querySelector('[data-refresh]'); if(refresh) refresh.addEventListener('click',()=>refreshRow(m));
-  tbody.appendChild(tr);
-  if(!m.err && m.detailOpen) renderDetailRow(m);
+  frag.appendChild(tr);
+  if(!m.err && m.detailOpen) renderDetailRow(m, frag);
 }
-function renderDetailRow(m){
-  const tbody=$('#tbl tbody'); const tr=document.createElement('tr'); tr.className='detail-row'; tr.dataset.search='';
+function renderDetailRow(m, frag){
+  const tr=document.createElement('tr'); tr.className='detail-row'; tr.dataset.search='';
   const posHtml=m.positions.length ? m.positions.slice(0,12).map(p=>`<div class="detail-item"><div class="detail-title">${p.url?`<a href="${esc(p.url)}" target="_blank" rel="noopener noreferrer">${esc(p.title)}</a>`:esc(p.title)}</div><span class="pill">${esc(p.outcome)}</span> ${t('shares')} ${fmtShares(p.shares)} · ${t('avgPrice')} ${p.entryCents!==null?p.entryCents.toFixed(2)+'c':'-'}${p.markCents!==null?' → '+t('currentPrice')+' '+p.markCents.toFixed(2)+'c':''}<br>${t('value')} $${fmtMoney(p.value)} · <span class="${cssClassSigned(p.pnl)}">${signedMoney(p.pnl)} ${signedPct(p.pnlPct)}</span></div>`).join('') : `<div class="muted">${t('noHoldings')}</div>`;
   const matchHtml=m.matches.length ? m.matches.slice(0,12).map(x=>`<div class="detail-item"><div class="detail-title">${x.url?`<a href="${esc(x.url)}" target="_blank" rel="noopener noreferrer">${esc(x.title)}</a>`:esc(x.title)}</div><span class="pill">${esc(x.side)}</span><span class="pill">${esc(x.outcome)}</span> ${fmtShares(x.shares)} @ ${x.price!==null?x.price.toFixed(2)+'c':'-'} = $${fmtMoney(x.value)}<br>${esc(fmtDate(new Date(x.executedAt).getTime()))}${x.tx?` · <a href="https://bscscan.com/tx/${esc(x.tx)}" target="_blank" rel="noopener noreferrer">Tx</a>`:''}</div>`).join('') : `<div class="muted">${t('noRecentFills')}</div>`;
   const pointHtml=(m.pointRecords||[]).length ? m.pointRecords.slice(0,12).map(r=>`<div class="detail-item"><div class="detail-title">${r.totalPoints!==null?`${t('totalPoints')} ${fmtPoints(r.totalPoints)}`:t('points')+' '+fmtPoints(r.points)}${r.name?` · ${esc(r.name)}`:''}</div>${r.week!==null?`<span class="pill">Week ${fmtInt(r.week)}</span>`:''}${r.roundId!==null?`<span class="pill">Round ${fmtInt(r.roundId)}</span>`:''}${r.weeklyPoints!==null?`<span class="pill">${t('weekPoints')} ${fmtPoints(r.weeklyPoints)}</span>`:''}${r.rank!==null?`<span class="pill">${t('rank')} #${fmtInt(r.rank)}</span>`:''}${r.ppRank!==null?`<span class="pill">PP #${fmtInt(r.ppRank)}</span>`:''}${r.grade?`<span class="pill">${esc(r.grade)}</span>`:''}<br>${esc(r.createdAt||r.source||'-')}${r.volumeUsd!==null?` · ${t('fillVolume')} $${fmtMoney(r.volumeUsd)}`:''}${r.note?` · ${esc(r.note)}`:''}</div>`).join('') : `<div class="muted">${t('noPointRecord')}</div>`;
   tr.innerHTML=`<td colspan="12"><div class="detail-grid"><div class="detail-box"><h4>${t('holdingsTitle')}</h4><div class="detail-list">${posHtml}</div></div><div class="detail-box"><h4>${t('recentFillsTitle')}</h4><div class="detail-list">${matchHtml}</div></div><div class="detail-box"><h4>${t('pointsRecordsTitle')}</h4><div class="detail-list">${pointHtml}</div></div></div></td>`;
-  tbody.appendChild(tr);
+  frag.appendChild(tr);
 }
 function getSorted(){
   const arr=[...resultMeta];
   if(!sortKey) return arr.sort((a,b)=>(a._origIdx??0)-(b._origIdx??0));
   if(sortKey==='action') return arr;
+  const notes = sortKey==='note' ? getNotes() : null;
   const val=m=>{
     if(sortKey==='idx') return m._origIdx;
     if(sortKey==='addr') return m.addr;
-    if(sortKey==='note') return getNote(m.addr);
+    if(sortKey==='note') return notes[m.addr.toLowerCase()] || '';
     if(sortKey==='last') return m.last || 0;
     return m[sortKey] ?? 0;
   };
@@ -921,10 +1022,34 @@ function getSorted(){
     return sortAsc ? (va-vb) : (vb-va);
   });
 }
+let _renderScheduled=false;
+function scheduleRender(){
+  if(_renderScheduled) return;
+  _renderScheduled=true;
+  requestAnimationFrame(()=>{ _renderScheduled=false; renderAll(); });
+}
 function renderAll(){
-  const tbody=$('#tbl tbody'); tbody.innerHTML='';
-  getSorted().forEach((m,i)=>renderRow(m,i+1));
-  updateStats(); applyFilter();
+  const tbody=$('#tbl tbody');
+  const frag=document.createDocumentFragment();
+  const notesCache=getNotes();
+  // Pre-compute net-value rank for top-3 medals (only when at least 3 valid rows).
+  const valid=resultMeta.filter(m=>!m.err && Number.isFinite(toNum(m.total)));
+  const netRankMap=new Map();
+  if(valid.length>=3){
+    [...valid].sort((a,b)=>(toNum(b.total)||0)-(toNum(a.total)||0)).slice(0,3).forEach((m,i)=>netRankMap.set(m.addr,i+1));
+  }
+  getSorted().forEach((m,i)=>renderRow(m,i+1,frag,notesCache,netRankMap));
+  tbody.replaceChildren(frag);
+  updateSortIndicators();
+  updateStats();
+  applyFilter();
+}
+function updateSortIndicators(){
+  $$('#tbl thead th').forEach(th=>{
+    if(!th.dataset.key) return;
+    if(th.dataset.key===sortKey) th.setAttribute('aria-sort', sortAsc ? 'ascending' : 'descending');
+    else th.removeAttribute('aria-sort');
+  });
 }
 function updateStats(){
   const valid=resultMeta.filter(m=>!m.err);
@@ -945,14 +1070,24 @@ function updateStats(){
   $('#statPoints').textContent=fmtPoints(totalPoints);
   $('#statsCards').style.display='grid';
 }
-function applyFilter(){ const q=$('#filterInput').value.trim().toLowerCase(); $$('#tbl tbody tr').forEach(tr=>{ if(tr.classList.contains('detail-row')){ tr.style.display=q?'none':''; return; } const hit=!q || (tr.dataset.search||tr.textContent).toLowerCase().includes(q); tr.style.display=hit?'':'none'; }); }
-$('#filterInput').addEventListener('input',applyFilter);
+function applyFilter(){
+  const q=$('#filterInput').value.trim().toLowerCase();
+  const rows=$('#tbl tbody').children;
+  for(let i=0;i<rows.length;i++){
+    const tr=rows[i];
+    if(tr.classList.contains('detail-row')){ tr.style.display=q?'none':''; continue; }
+    const hit=!q || (tr.dataset.search||'').includes(q);
+    tr.style.display=hit?'':'none';
+  }
+}
+let _filterTimer=null;
+$('#filterInput').addEventListener('input',()=>{ clearTimeout(_filterTimer); _filterTimer=setTimeout(applyFilter,80); });
 $('#restoreOrder').addEventListener('click',()=>{ sortKey=null; sortAsc=true; renderAll(); toast(t('restoreToast')); });
 $$('#tbl thead th').forEach(th=>{ const key=th.dataset.key; if(!key || key==='action') return; th.addEventListener('click',()=>{ if(sortKey===key) sortAsc=!sortAsc; else{ sortKey=key; sortAsc=true; } renderAll(); }); });
 
 async function refreshRow(m){
   const btns=$$('[data-refresh]'); btns.forEach(b=>b.disabled=true);
-  try{ const fresh=await queryOne(m.addr); Object.assign(m,fresh,{_origIdx:m._origIdx,detailOpen:m.detailOpen}); renderAll(); toast(t('refreshDone')); }
+  try{ const fresh=await queryOne(m.addr); Object.assign(m,fresh,{_origIdx:m._origIdx,detailOpen:m.detailOpen}); scheduleRender(); toast(t('refreshDone')); }
   catch(e){ toast(t('refreshFailed',{msg:String(e.message||e)})); }
   finally{ $$('[data-refresh]').forEach(b=>b.disabled=false); }
 }
@@ -976,8 +1111,9 @@ $('#run').addEventListener('click',async()=>{
     res.addr = res.addr || list[idx]; res._origIdx=idx; if(res.err) fail++;
     resultMeta.push(res);
     $('#bar').value=(done/list.length)*100; $('#barTxt').textContent=t('queryProgress',{done,total:list.length});
-    renderAll();
+    scheduleRender();
   });
+  renderAll();
   placeholders.forEach(p=>p.remove());
   $('#loading').style.display='none'; $('#stop').style.display='none'; $('#run').disabled=false; $('#csv').disabled=$('#json').disabled=!resultMeta.length;
   const ok=resultMeta.length-fail; $('#summary').textContent=t('queryDone',{total:list.length,ok,fail,interrupted:abortFlag?t('interrupted'):''}); $('#summary').style.display='block';
