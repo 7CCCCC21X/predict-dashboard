@@ -34,7 +34,7 @@ textarea{width:100%;min-height:125px;resize:vertical;padding:13px 14px;border:1p
 button{height:40px;padding:0 18px;font-size:14px;font-weight:700;border:none;border-radius:9px;background:var(--c-primary);color:#fff;cursor:pointer;transition:all .18s;letter-spacing:.2px;white-space:nowrap}button:hover:not(:disabled){background:var(--c-primary-dark);transform:translateY(-1px);box-shadow:0 4px 12px rgba(22,163,74,.24)}button:disabled{background:#94a3b8;cursor:not-allowed;opacity:.7}.btn-outline{background:transparent;color:var(--c-primary);border:1px solid var(--c-border)}.btn-outline:hover:not(:disabled){background:var(--c-hover);box-shadow:none;transform:none}.btn-stop{background:var(--c-red)}.btn-stop:hover:not(:disabled){background:#dc2626;box-shadow:0 4px 12px rgba(239,68,68,.24)}.btn-sm{height:30px;padding:0 10px;font-size:12px;border-radius:7px}.btn-icon{width:34px;height:34px;padding:0;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:16px}.btn-lang{width:auto;min-width:46px;border-radius:17px;padding:0 12px;font-size:12px}.btn-ghost{background:transparent;color:var(--c-sub);border:1px solid var(--c-border)}.btn-ghost:hover:not(:disabled){background:var(--c-hover);color:var(--c-primary);box-shadow:none;transform:none}
 .import-tabs{display:flex;gap:0;border-bottom:2px solid var(--c-border);margin-bottom:14px}.import-tab{height:38px;background:transparent;color:var(--c-sub);border:none;border-bottom:2px solid transparent;border-radius:0;margin-bottom:-2px;padding:0 18px;box-shadow:none}.import-tab:hover:not(:disabled){background:var(--c-hover);box-shadow:none;transform:none;color:var(--c-primary)}.import-tab.active{color:var(--c-primary);border-bottom-color:var(--c-primary)}
 .upload-zone{border:2px dashed var(--c-border);border-radius:10px;padding:38px 18px;text-align:center;cursor:pointer;background:var(--c-input-bg);transition:all .2s}.upload-zone:hover,.upload-zone.drag-over{border-color:var(--c-primary);background:var(--c-summary-bg)}.upload-icon{font-size:38px;margin-bottom:8px}.upload-title{font-size:15px;font-weight:750;color:var(--c-text)}.upload-sub{font-size:13px;color:var(--c-sub);margin:5px 0 14px}
-.toolbar{display:flex;justify-content:center;gap:7px;flex-wrap:wrap;margin-top:14px}.offline-banner{display:none;position:fixed;top:0;left:0;right:0;background:var(--c-red);color:#fff;text-align:center;padding:9px;z-index:200;font-size:14px;font-weight:600}
+.toolbar{display:flex;justify-content:center;align-items:center;gap:7px;flex-wrap:wrap;margin-top:14px}.toolbar .depth-wrap{display:inline-flex;align-items:center;gap:6px;height:40px;padding:0 12px;border:1px solid var(--c-border);border-radius:9px;background:var(--c-input-bg)}.toolbar .depth-wrap label{font-size:12px;font-weight:700;color:var(--c-sub);white-space:nowrap}.toolbar .depth-wrap select{height:30px;border:none;background:transparent;color:var(--c-text);font-size:13px;outline:none;cursor:pointer;font-weight:600}.offline-banner{display:none;position:fixed;top:0;left:0;right:0;background:var(--c-red);color:#fff;text-align:center;padding:9px;z-index:200;font-size:14px;font-weight:600}
 #loading{display:none;margin-top:16px;text-align:center;color:var(--c-sub);font-size:13px}progress{width:100%;height:7px;border:none;border-radius:4px;background:var(--c-border);overflow:hidden}progress::-webkit-progress-value{background:linear-gradient(90deg,var(--c-primary),#22c55e);border-radius:4px;transition:width .25s}progress::-webkit-progress-bar{background:var(--c-border);border-radius:4px}#barTxt{margin-top:6px}
 #summary{display:none;margin:16px 0 10px;padding:12px 16px;background:var(--c-summary-bg);border-left:4px solid var(--c-primary);border-radius:var(--radius);color:var(--c-primary);font-size:14px;font-weight:700}.stats-cards{display:none;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:12px;margin:18px 0}.stat-card{background:var(--c-card);border:1px solid var(--c-border);border-radius:var(--radius);padding:16px 14px;text-align:center;position:relative;overflow:hidden;transition:all .2s}.stat-card:hover{transform:translateY(-2px);box-shadow:var(--shadow-lg)}.stat-label{font-size:12px;color:var(--c-sub);text-transform:uppercase;letter-spacing:.45px;font-weight:700}.stat-value{font-size:22px;font-weight:850;color:var(--c-text);margin-top:6px;letter-spacing:-.35px}.stat-value.positive{color:var(--c-green)}.stat-value.negative{color:var(--c-red)}.stat-sub{font-size:11px;color:var(--c-sub);margin-top:4px;opacity:.86}
 .filter-row{display:none;gap:8px;align-items:center;margin:14px 0;flex-wrap:wrap}.filter-row input{flex:1;min-width:220px;height:39px;padding:0 13px;border:1px solid var(--c-border);border-radius:9px;background:var(--c-input-bg);color:var(--c-text);outline:none}
@@ -47,7 +47,7 @@ button{height:40px;padding:0 18px;font-size:14px;font-weight:700;border:none;bor
 <div id="offlineBanner" class="offline-banner">网络已断开，请检查连接后重试</div>
 <header class="page-header">
   <h1><span>Predict.fun</span> 数据批量查询</h1>
-  <p class="subtitle">批量查询 Predict Smart Wallet 可用余额、持仓金额、浮动盈亏与最近成交；交易记录最多查到近 3000 条。</p>
+  <p class="subtitle">批量查询 Predict Smart Wallet 可用余额、持仓金额、浮动盈亏与最近成交；成交查询范围可选，默认最近 500 条。</p>
   <div class="header-toolbar">
     <a class="badge" href="https://predict.fun/" target="_blank" rel="noopener noreferrer">Predict.fun 官网</a>
     <a class="badge" href="https://dev.predict.fun/" target="_blank" rel="noopener noreferrer">API 文档</a>
@@ -146,6 +146,15 @@ button{height:40px;padding:0 18px;font-size:14px;font-weight:700;border:none;bor
   </div>
 
   <div class="toolbar">
+    <div class="depth-wrap">
+      <label for="matchDepth">成交</label>
+      <select id="matchDepth" title="成交查询范围">
+        <option value="0">跳过</option>
+        <option value="500" selected>最近 500</option>
+        <option value="1000">最近 1000</option>
+        <option value="3000">最近 3000</option>
+      </select>
+    </div>
     <button id="run">开始查询</button>
     <button id="stop" class="btn-stop" style="display:none">停止</button>
     <button id="csv" class="btn-outline" disabled>导出 CSV</button>
@@ -156,11 +165,11 @@ button{height:40px;padding:0 18px;font-size:14px;font-weight:700;border:none;bor
   <div id="summary"></div>
 
   <div class="stats-cards" id="statsCards">
-    <div class="stat-card"><div class="stat-label">可用余额</div><div class="stat-value" id="statAvail">-</div><div class="stat-sub">链上 USDT · 实时</div></div>
+    <div class="stat-card"><div class="stat-label">可用余额</div><div class="stat-value" id="statAvail">-</div><div class="stat-sub" id="statAvailSub">链上 USDT · 实时</div></div>
     <div class="stat-card"><div class="stat-label">持仓金额</div><div class="stat-value" id="statValue">-</div><div class="stat-sub">当前持仓 · USD</div></div>
     <div class="stat-card"><div class="stat-label">净资产</div><div class="stat-value" id="statTotal">-</div><div class="stat-sub">可用 + 持仓</div></div>
     <div class="stat-card"><div class="stat-label">浮动盈亏</div><div class="stat-value" id="statPnl">-</div><div class="stat-sub">API pnlUsd / 推算</div></div>
-    <div class="stat-card"><div class="stat-label">近 3000 成交额</div><div class="stat-value" id="statVol">-</div><div class="stat-sub">最多统计最近 3000 条</div></div>
+    <div class="stat-card"><div class="stat-label" id="statVolLabel">近期成交额</div><div class="stat-value" id="statVol">-</div><div class="stat-sub" id="statVolSub">最近 500 条统计</div></div>
     <div class="stat-card"><div class="stat-label">持仓数</div><div class="stat-value" id="statPos">-</div><div class="stat-sub">全部地址合计</div></div>
     <div class="stat-card"><div class="stat-label">总积分</div><div class="stat-value" id="statPoints">-</div><div class="stat-sub">总榜数据</div></div>
   </div>
@@ -182,7 +191,7 @@ button{height:40px;padding:0 18px;font-size:14px;font-weight:700;border:none;bor
           <th data-key="total" class="num">净资产</th>
           <th data-key="pnl" class="num">浮动盈亏</th>
           <th data-key="posCnt" class="num">持仓数</th>
-          <th data-key="vol" class="num">近 3000 成交额</th>
+          <th data-key="vol" class="num">近期成交额</th>
           <th data-key="last">最后成交</th>
           <th data-key="note">备注</th>
           <th data-key="action">操作</th>
@@ -203,10 +212,11 @@ const ETH_RE = /^0x[0-9a-fA-F]{40}$/;
 const ETH_RE_G = /0x[0-9a-fA-F]{40}/g;
 const STORE = {
   base:'pf_api_base', proxy:'pf_cors_proxy', theme:'pf_theme',
-  history:'pf_query_history', notes:'pf_notes', concurrency:'pf_concurrency', points:'pf_points_records', lang:'pf_lang'
+  history:'pf_query_history', notes:'pf_notes', concurrency:'pf_concurrency', points:'pf_points_records', lang:'pf_lang', matchDepth:'pf_match_depth'
 };
 const MATCH_PAGE_SIZE = 50;
 const MAX_MATCHES = 3000;
+const MATCH_DEPTH_DEFAULT = 500;
 const FETCH_TIMEOUT = 15000;
 const RPC_TIMEOUT = 6500;
 const RATE_LIMIT_MS = 120;
@@ -237,54 +247,56 @@ const I18N = {
   zh: {
     offline:'网络已断开，请检查连接后重试',
     appTitle:'数据批量查询',
-    subtitle:'批量查询 Predict Smart Wallet 可用余额、持仓金额、浮动盈亏与最近成交；交易记录最多查到近 3000 条。',
+    subtitle:'批量查询 Predict Smart Wallet 可用余额、持仓金额、浮动盈亏与最近成交；成交查询范围可选，默认最近 500 条。',
     officialSite:'Predict.fun 官网', apiDocs:'API 文档', themeToggle:'切换暗色/亮色模式',
+    matchDepthLabel:'成交', matchDepthSkip:'跳过', matchDepthLatest:'最近 {n}',
     tabPaste:'粘贴地址', tabUpload:'上传文件', inputPlaceholder:'每行一个 Predict Smart Wallet / 0x 地址；也可以直接粘贴 CSV 或任意文本，页面会自动提取 0x... 地址',
     uploadTitle:'拖拽地址文件或总积分榜 JSON/CSV 到这里', uploadSub:'普通地址文件会自动提取 0x 地址；总积分榜会自动导入 totalPoints 并提取地址', uploadButton:'或点击选择文件',
     queryHistory:'查询历史', clearHistory:'清空历史', startQuery:'开始查询', stopQuery:'停止', exportCsv:'导出 CSV', exportJson:'导出 JSON',
     statAvailable:'可用余额', statAvailableSub:'链上 USDT · 实时', statHolding:'持仓金额', statHoldingSub:'当前持仓 · USD', statNet:'净资产', statNetSub:'可用 + 持仓',
-    statPnlLabel:'浮动盈亏', statPnlSub:'API pnlUsd / 推算', statVolLabel:'近 3000 成交额', statVolSub:'最多统计最近 3000 条', statPosLabel:'持仓数', statPosSub:'全部地址合计', statPointsLabel:'总积分', statPointsSub:'按上传总榜',
+    statPnlLabel:'浮动盈亏', statPnlSub:'API pnlUsd / 推算', statVolLabel:'近期成交额', statVolSub:'最近 {n} 条统计', statVolSubSkipped:'已跳过成交统计', statAvailSub:'链上 USDT · 实时', statAvailSubMissing:'链上 USDT · {n} 个地址未取到', statPosLabel:'持仓数', statPosSub:'全部地址合计', statPointsLabel:'总积分', statPointsSub:'按上传总榜',
     filterPlaceholder:'搜索地址、备注、状态...', restoreOrder:'恢复输入顺序',
-    thIdx:'#', thAddress:'地址', thPoints:'总积分', thAvailable:'可用余额', thHolding:'持仓金额', thNet:'净资产', thPnl:'浮动盈亏', thPositions:'持仓数', thVolume:'近 3000 成交额', thLast:'最后成交', thNote:'备注', thAction:'操作',
+    thIdx:'#', thAddress:'地址', thPoints:'总积分', thAvailable:'可用余额', thHolding:'持仓金额', thNet:'净资产', thPnl:'浮动盈亏', thPositions:'持仓数', thVolume:'近期成交额', thLast:'最后成交', thNote:'备注', thAction:'操作',
     footer:'Predict.fun Batch Query · Predict API 通过 Vercel 环境变量代理访问，结果仅供辅助核对。',
     copied:'已复制', copyFailed:'复制失败', configSaved:'配置已保存', onlyFiles:'仅支持 CSV、TXT 或 JSON 文件', noAddressOrPoints:'文件中未找到 0x 地址或 totalPoints 总积分数据',
     importedPointsAndAddresses:'已导入 {points} 条总积分榜数据，并提取 {addresses} 个地址', importedPoints:'已导入 {points} 条总积分榜数据', importedAddresses:'已导入 {count} 个地址',
     loadedHistory:'已加载历史', historyCleared:'历史已清空', delete:'删', addressesUnit:'个地址', restoreToast:'已恢复输入顺序',
-    noHoldings:'暂无持仓', noRecentFills:'暂无最近成交', holdingsTitle:'持仓明细（最多 12 条）', recentFillsTitle:'最近成交（最多显示 12 条，统计上限近 3000 条）', pointsRecordsTitle:'总积分榜记录（最多 12 条）', noPointRecord:'暂无总积分榜记录',
+    noHoldings:'暂无持仓', noRecentFills:'暂无最近成交', matchSkippedDetail:'已跳过成交查询', holdingsTitle:'持仓明细（最多 12 条）', recentFillsTitle:'最近成交（最多显示 12 条，统计上限 {n} 条）', recentFillsTitleSkipped:'最近成交（已跳过查询）', pointsRecordsTitle:'总积分榜记录（最多 12 条）', noPointRecord:'暂无总积分榜记录',
     copy:'复制', partialFailed:'部分接口失败', notePlaceholder:'✎ 备注', details:'详情', collapse:'收起', refreshTitle:'刷新此行',
     shares:'份额', avgPrice:'均价', currentPrice:'现价', value:'价值', totalPoints:'总积分', points:'积分', weekPoints:'周积分', rank:'排名', fillVolume:'成交额',
     buy:'买入', sell:'卖出', justNow:'刚刚', hoursAgo:'{n}小时前',
     refreshDone:'刷新完成', refreshFailed:'刷新失败：{msg}', noData:'暂无数据',
-    queryRequired:'请输入或导入至少一个 0x 地址', invalidAddrCount:'{count} 个地址格式无效', preparingQuery:'准备查询...', queryProgress:'{done}/{total} 地址', querying:'查询中...', queryDone:'已查询 {total} 个地址，成功 {ok} 个，失败 {fail} 个{interrupted}', interrupted:'（已中断）', stopping:'正在停止...', stoppingToast:'正在取消进行中的请求',
+    queryRequired:'请输入或导入至少一个 0x 地址', invalidAddrCount:'{count} 个地址格式无效', extractedWithIgnored:'已提取 {valid} 个地址，忽略 {invalid} 行无效内容', preparingQuery:'准备查询...', queryProgress:'{done}/{total} 地址', querying:'查询中...', queryDone:'已查询 {total} 个地址，成功 {ok} 个，失败 {fail} 个{interrupted}', interrupted:'（已中断）', stopping:'正在停止...', stoppingToast:'正在取消进行中的请求',
     pointsStatusLoaded:'已加载 {total} 条数据，{addrCnt} 个地址{weeks}', pointsStatusWeeks:'，含 {weeks} 个周/轮次', pointsStatusNotLoaded:'未上传总积分榜；点击上传文件导入',
     importedLeaderboardUnrecognized:'未识别到总积分榜记录', importedLeaderboard:'已导入 {count} 条总积分榜记录', clearedLeaderboard:'已清空已上传总榜', badAddress:'地址格式不正确', addressNotFound:'未找到该地址', importedWeeklySum:'已导入 weeklyPoints 合计',
-    csvAddress:'地址', csvTotalPoints:'总积分', csvAvailable:'可用余额USDT', csvHolding:'持仓金额USD', csvNet:'净资产USD', csvPnl:'浮动盈亏USD', csvPositions:'持仓数', csvVolume:'近3000成交额USD', csvLast:'最后成交', csvNote:'备注', csvStatus:'状态'
+    csvAddress:'地址', csvTotalPoints:'总积分', csvAvailable:'可用余额USDT', csvHolding:'持仓金额USD', csvNet:'净资产USD', csvPnl:'浮动盈亏USD', csvPositions:'持仓数', csvVolume:'近期成交额USD', csvLast:'最后成交', csvNote:'备注', csvStatus:'状态'
   },
   en: {
     offline:'You are offline. Check your connection and try again.',
     appTitle:'Batch Data Query',
-    subtitle:'Batch query Predict Smart Wallet available balance, holding value, floating PnL, and recent fills; up to the latest 3,000 fills per address.',
+    subtitle:'Batch query Predict Smart Wallet available balance, holding value, floating PnL, and recent fills; fill depth is configurable, default 500.',
     officialSite:'Predict.fun', apiDocs:'API Docs', themeToggle:'Toggle dark/light mode',
+    matchDepthLabel:'Fills', matchDepthSkip:'Skip', matchDepthLatest:'Latest {n}',
     tabPaste:'Paste Addresses', tabUpload:'Upload File', inputPlaceholder:'One Predict Smart Wallet / 0x address per line. You can also paste CSV or any text; 0x... addresses will be extracted automatically.',
     uploadTitle:'Drop an address file or total leaderboard JSON/CSV here', uploadSub:'Address files extract 0x addresses; leaderboard files import totalPoints and extract addresses automatically.', uploadButton:'Choose file',
     queryHistory:'Query History', clearHistory:'Clear History', startQuery:'Start Query', stopQuery:'Stop', exportCsv:'Export CSV', exportJson:'Export JSON',
     statAvailable:'Available', statAvailableSub:'On-chain USDT · live', statHolding:'Holding Value', statHoldingSub:'Current holdings · USD', statNet:'Net Value', statNetSub:'Available + holdings',
-    statPnlLabel:'Floating PnL', statPnlSub:'API pnlUsd / estimated', statVolLabel:'Recent 3000 Volume', statVolSub:'Latest 3,000 fills max', statPosLabel:'Positions', statPosSub:'All addresses total', statPointsLabel:'Total Points', statPointsSub:'Uploaded leaderboard',
+    statPnlLabel:'Floating PnL', statPnlSub:'API pnlUsd / estimated', statVolLabel:'Recent Volume', statVolSub:'Latest {n} fills', statVolSubSkipped:'Fill query skipped', statAvailSub:'On-chain USDT · live', statAvailSubMissing:'On-chain USDT · {n} address(es) failed', statPosLabel:'Positions', statPosSub:'All addresses total', statPointsLabel:'Total Points', statPointsSub:'Uploaded leaderboard',
     filterPlaceholder:'Search address, note, or status...', restoreOrder:'Restore Input Order',
-    thIdx:'#', thAddress:'Address', thPoints:'Total Points', thAvailable:'Available', thHolding:'Holding Value', thNet:'Net Value', thPnl:'Floating PnL', thPositions:'Positions', thVolume:'Recent 3000 Volume', thLast:'Last Fill', thNote:'Note', thAction:'Action',
+    thIdx:'#', thAddress:'Address', thPoints:'Total Points', thAvailable:'Available', thHolding:'Holding Value', thNet:'Net Value', thPnl:'Floating PnL', thPositions:'Positions', thVolume:'Recent Volume', thLast:'Last Fill', thNote:'Note', thAction:'Action',
     footer:'Predict.fun Batch Query · Predict API is accessed through the Vercel environment-variable proxy. Results are for reference only.',
     copied:'Copied', copyFailed:'Copy failed', configSaved:'Configuration saved', onlyFiles:'Only CSV, TXT, or JSON files are supported', noAddressOrPoints:'No 0x address or totalPoints leaderboard data found in the file',
     importedPointsAndAddresses:'Imported {points} leaderboard rows and extracted {addresses} addresses', importedPoints:'Imported {points} leaderboard rows', importedAddresses:'Imported {count} addresses',
     loadedHistory:'History loaded', historyCleared:'History cleared', delete:'Delete', addressesUnit:'addresses', restoreToast:'Input order restored',
-    noHoldings:'No holdings', noRecentFills:'No recent fills', holdingsTitle:'Holding Details (up to 12)', recentFillsTitle:'Recent Fills (showing up to 12, counting up to latest 3,000)', pointsRecordsTitle:'Total Points Records (up to 12)', noPointRecord:'No total-points record',
+    noHoldings:'No holdings', noRecentFills:'No recent fills', matchSkippedDetail:'Fill query skipped', holdingsTitle:'Holding Details (up to 12)', recentFillsTitle:'Recent Fills (showing up to 12, counting up to latest {n})', recentFillsTitleSkipped:'Recent Fills (skipped)', pointsRecordsTitle:'Total Points Records (up to 12)', noPointRecord:'No total-points record',
     copy:'Copy', partialFailed:'Partial API failure', notePlaceholder:'✎ Note', details:'Details', collapse:'Collapse', refreshTitle:'Refresh this row',
     shares:'shares', avgPrice:'avg', currentPrice:'current', value:'value', totalPoints:'Total points', points:'Points', weekPoints:'Weekly points', rank:'Rank', fillVolume:'Volume',
     buy:'Buy', sell:'Sell', justNow:'just now', hoursAgo:'{n}h ago',
     refreshDone:'Refresh complete', refreshFailed:'Refresh failed: {msg}', noData:'No data',
-    queryRequired:'Enter or import at least one 0x address', invalidAddrCount:'{count} invalid address(es)', preparingQuery:'Preparing query...', queryProgress:'{done}/{total} addresses', querying:'Querying...', queryDone:'Queried {total} addresses, success {ok}, failed {fail}{interrupted}', interrupted:' (stopped)', stopping:'Stopping...', stoppingToast:'Canceling in-flight requests',
+    queryRequired:'Enter or import at least one 0x address', invalidAddrCount:'{count} invalid address(es)', extractedWithIgnored:'Extracted {valid} addresses, ignored {invalid} invalid line(s)', preparingQuery:'Preparing query...', queryProgress:'{done}/{total} addresses', querying:'Querying...', queryDone:'Queried {total} addresses, success {ok}, failed {fail}{interrupted}', interrupted:' (stopped)', stopping:'Stopping...', stoppingToast:'Canceling in-flight requests',
     pointsStatusLoaded:'Loaded {total} rows, {addrCnt} addresses{weeks}', pointsStatusWeeks:', across {weeks} week/round group(s)', pointsStatusNotLoaded:'No leaderboard uploaded; use Upload File to import',
     importedLeaderboardUnrecognized:'No leaderboard records recognized', importedLeaderboard:'Imported {count} leaderboard records', clearedLeaderboard:'Uploaded leaderboard cleared', badAddress:'Invalid address format', addressNotFound:'Address not found', importedWeeklySum:'Imported weeklyPoints total',
-    csvAddress:'Address', csvTotalPoints:'Total Points', csvAvailable:'Available USDT', csvHolding:'Holding Value USD', csvNet:'Net Value USD', csvPnl:'Floating PnL USD', csvPositions:'Positions', csvVolume:'Recent 3000 Volume USD', csvLast:'Last Fill', csvNote:'Note', csvStatus:'Status'
+    csvAddress:'Address', csvTotalPoints:'Total Points', csvAvailable:'Available USDT', csvHolding:'Holding Value USD', csvNet:'Net Value USD', csvPnl:'Floating PnL USD', csvPositions:'Positions', csvVolume:'Recent Volume USD', csvLast:'Last Fill', csvNote:'Note', csvStatus:'Status'
   }
 };
 function t(key, params={}){
@@ -308,8 +320,17 @@ function applyLanguage(rerender=false){
   setText($('.upload-title'),'uploadTitle'); setText($('.upload-sub'),'uploadSub'); setText($('#uploadBtn'),'uploadButton');
   const hist=$('#historyWrap summary'); setText(hist,'queryHistory'); setText($('#clearHistory'),'clearHistory');
   setText($('#run'),'startQuery'); if($('#stop') && !$('#stop').disabled) setText($('#stop'),'stopQuery'); setText($('#csv'),'exportCsv'); setText($('#json'),'exportJson');
-  const mapStats=[['#statAvail','statAvailable','statAvailableSub'],['#statValue','statHolding','statHoldingSub'],['#statTotal','statNet','statNetSub'],['#statPnl','statPnlLabel','statPnlSub'],['#statVol','statVolLabel','statVolSub'],['#statPos','statPosLabel','statPosSub'],['#statPoints','statPointsLabel','statPointsSub']];
-  mapStats.forEach(([sel,lab,sub])=>{ const card=$(sel)?.closest('.stat-card'); if(card){ setText(card.querySelector('.stat-label'),lab); setText(card.querySelector('.stat-sub'),sub); } });
+  const depthLabel=document.querySelector('label[for="matchDepth"]'); if(depthLabel) depthLabel.textContent=t('matchDepthLabel');
+  const depthSel=$('#matchDepth');
+  if(depthSel){
+    Array.from(depthSel.options).forEach(opt=>{
+      const v=parseInt(opt.value,10);
+      opt.textContent = v<=0 ? t('matchDepthSkip') : t('matchDepthLatest',{n:v.toLocaleString(locale())});
+    });
+  }
+  const mapStats=[['#statAvail','statAvailable','statAvailableSub'],['#statValue','statHolding','statHoldingSub'],['#statTotal','statNet','statNetSub'],['#statPnl','statPnlLabel','statPnlSub'],['#statVol','statVolLabel',null],['#statPos','statPosLabel','statPosSub'],['#statPoints','statPointsLabel','statPointsSub']];
+  mapStats.forEach(([sel,lab,sub])=>{ const card=$(sel)?.closest('.stat-card'); if(card){ setText(card.querySelector('.stat-label'),lab); if(sub) setText(card.querySelector('.stat-sub'),sub); } });
+  refreshDynamicStatLabels?.();
   const filter=$('#filterInput'); if(filter) filter.placeholder=t('filterPlaceholder'); setText($('#restoreOrder'),'restoreOrder');
   const thMap={idx:'thIdx',addr:'thAddress',points:'thPoints',available:'thAvailable',value:'thHolding',total:'thNet',pnl:'thPnl',posCnt:'thPositions',vol:'thVolume',last:'thLast',note:'thNote',action:'thAction'};
   Object.entries(thMap).forEach(([k,key])=>setText($(`#tbl thead th[data-key="${k}"]`),key));
@@ -345,15 +366,32 @@ function loadConfig(){
   $('#apiBase').value = localStorage.getItem(STORE.base) || 'mainnet';
   $('#corsProxy').value = localStorage.getItem(STORE.proxy) || '';
   $('#concurrency').value = localStorage.getItem(STORE.concurrency) || '3';
+  const depthSel=$('#matchDepth');
+  if(depthSel){
+    const saved=localStorage.getItem(STORE.matchDepth);
+    const valid=Array.from(depthSel.options).some(o=>o.value===saved);
+    depthSel.value = valid ? saved : String(MATCH_DEPTH_DEFAULT);
+  }
 }
 function saveConfig(silent=false){
   localStorage.setItem(STORE.base, $('#apiBase').value);
   localStorage.setItem(STORE.proxy, $('#corsProxy').value.trim());
   localStorage.setItem(STORE.concurrency, $('#concurrency').value);
+  if($('#matchDepth')) localStorage.setItem(STORE.matchDepth, $('#matchDepth').value);
   if(!silent) toast(t('configSaved'));
 }
-$('#saveConfig').addEventListener('click', () => saveConfig(false));
+function currentMatchDepth(){ const v=parseInt($('#matchDepth')?.value,10); return Number.isFinite(v) && v>=0 ? v : MATCH_DEPTH_DEFAULT; }
+function refreshDynamicStatLabels(){
+  const sub=$('#statVolSub');
+  if(sub){
+    const d=currentMatchDepth();
+    sub.textContent = d<=0 ? t('statVolSubSkipped') : t('statVolSub',{n:d.toLocaleString(locale())});
+  }
+}
+$('#saveConfig')?.addEventListener('click', () => saveConfig(false));
 loadConfig();
+$('#matchDepth')?.addEventListener('change', () => { localStorage.setItem(STORE.matchDepth, $('#matchDepth').value); refreshDynamicStatLabels(); });
+refreshDynamicStatLabels();
 
 function updateOnlineStatus(){ $('#offlineBanner').style.display = navigator.onLine ? 'none' : 'block'; }
 window.addEventListener('online',updateOnlineStatus); window.addEventListener('offline',updateOnlineStatus); updateOnlineStatus();
@@ -538,9 +576,20 @@ function dedupePointRecords(records){
   }
   return Array.from(map.values()).map((r,i)=>({...r,_seq:i}));
 }
+let pointIndex=new Map();
+function rebuildPointIndex(){
+  pointIndex=new Map();
+  for(const r of pointsRecords){
+    const key=String(r.address||'').toLowerCase();
+    if(!pointIndex.has(key)) pointIndex.set(key,[]);
+    pointIndex.get(key).push(r);
+  }
+  for(const list of pointIndex.values()){
+    list.sort((x,y)=>pointSortValue(y)-pointSortValue(x));
+  }
+}
 function pointRecordsFor(addr){
-  const a=String(addr||'').toLowerCase();
-  return pointsRecords.filter(r=>String(r.address).toLowerCase()===a).sort((x,y)=>pointSortValue(y)-pointSortValue(x));
+  return pointIndex.get(String(addr||'').toLowerCase()) || [];
 }
 function pointSortValue(r){
   const round=Number(r.roundId), week=Number(r.week), seq=Number(r._seq)||0;
@@ -620,6 +669,7 @@ async function loadPointsData(){
   const localRows=getLocalPoints();
   staticPointCount=staticRows.length; localPointCount=localRows.length;
   pointsRecords=dedupePointRecords([...staticRows, ...localRows]);
+  rebuildPointIndex();
   updatePointsStatus();
   if(resultMeta.length) renderAll();
 }
@@ -683,7 +733,23 @@ function proxiedUrl(url){
   if(!p) return url;
   return p.includes('{url}') ? p.replaceAll('{url}', encodeURIComponent(url)) : p + encodeURIComponent(url);
 }
-function timeoutSignal(ms){ const c=new AbortController(); const t=setTimeout(()=>c.abort(new Error('timeout')), ms); if(runController){ runController.signal.addEventListener('abort',()=>c.abort(new Error('user abort')),{once:true}); } return {signal:c.signal, cleanup:()=>clearTimeout(t)}; }
+function timeoutSignal(ms){
+  const c=new AbortController();
+  const timer=setTimeout(()=>c.abort(new Error('timeout')), ms);
+  let onParentAbort=null;
+  if(runController){
+    onParentAbort=()=>c.abort(new Error('user abort'));
+    runController.signal.addEventListener('abort', onParentAbort, {once:true});
+  }
+  return {
+    signal:c.signal,
+    cleanup:()=>{
+      clearTimeout(timer);
+      if(runController && onParentAbort) runController.signal.removeEventListener('abort', onParentAbort);
+    }
+  };
+}
+function isRetryableStatus(s){ return !s || s===408 || s===425 || s===429 || s>=500; }
 async function fetchJ(url, tries=2){
   await rateLimitWait();
   for(let i=0;i<tries;i++){
@@ -692,17 +758,30 @@ async function fetchJ(url, tries=2){
       const res=await fetch(proxiedUrl(url),{method:'GET',headers:requestHeaders(),signal:ctl.signal});
       const text=await res.text();
       let json=null; try{ json=text?JSON.parse(text):null; }catch{ json=null; }
-      if(!res.ok){ const msg=json?.message || json?.error || text.slice(0,140) || res.statusText; throw new Error(`HTTP ${res.status}${msg?` · ${msg}`:''}`); }
+      if(!res.ok){
+        const msg=json?.message || json?.error || text.slice(0,140) || res.statusText;
+        const err=new Error(`HTTP ${res.status}${msg?` · ${msg}`:''}`);
+        err.status=res.status;
+        throw err;
+      }
       if(json && json.success===false){ throw new Error(json.message || json.error || 'API 返回 success=false'); }
       return json;
     }catch(e){
       if(abortFlag || e?.message==='user abort') throw new Error('已停止');
       if(i===tries-1) throw e;
+      if(e && typeof e.status==='number' && !isRetryableStatus(e.status)) throw e;
       await new Promise(r=>setTimeout(r, 500*(i+1)));
     }finally{ ctl.cleanup(); }
   }
 }
 function activeChain(){ return $('#apiBase').value === 'testnet' ? CHAIN.testnet : CHAIN.mainnet; }
+function bscscanTxUrl(tx){
+  if(!tx) return '';
+  const base = $('#apiBase').value === 'testnet'
+    ? 'https://testnet.bscscan.com/tx/'
+    : 'https://bscscan.com/tx/';
+  return base + encodeURIComponent(tx);
+}
 function weiToNumber(raw, decimals=18){
   let n=BigInt(raw || 0n); const neg=n<0n; if(neg) n=-n;
   const scale=10n**BigInt(decimals), whole=n/scale, frac=n%scale;
@@ -755,21 +834,23 @@ function readNextCursor(json){
   const cursor = candidates.find(v => typeof v === 'string' && v.trim());
   return cursor ? cursor.trim() : '';
 }
-async function fetchMatches(addr){
+async function fetchMatches(addr, maxMatches=MAX_MATCHES){
+  if(!maxMatches || maxMatches <= 0) return [];
+  const cap = Math.min(maxMatches, MAX_MATCHES);
   let after = '';
   const out = [];
   const seenCursors = new Set();
 
-  while(!abortFlag && out.length < MAX_MATCHES){
-    const first = Math.min(MATCH_PAGE_SIZE, MAX_MATCHES - out.length);
+  while(!abortFlag && out.length < cap){
+    const first = Math.min(MATCH_PAGE_SIZE, cap - out.length);
     const params = { first:String(first), signerAddress:addr };
-    if(after) params.after = after;
+    if(after){ params.after = after; params.cursor = after; }
 
     const j = await fetchJ(apiUrl('/v1/orders/matches', params));
     const data = readMatchesPage(j);
     if(!data.length) break;
 
-    out.push(...data.slice(0, MAX_MATCHES - out.length));
+    out.push(...data.slice(0, cap - out.length));
 
     const next = readNextCursor(j);
     if(!next || next === after || seenCursors.has(next)) break;
@@ -838,12 +919,16 @@ function matchSummary(match, addr){ const side=pickUserSide(match,addr); const m
   };
 }
 
-async function queryOne(addr){
-  const [pRes,mRes,bRes]=await Promise.allSettled([fetchPositions(addr), fetchMatches(addr), fetchUsdtBalance(addr)]);
+async function queryOne(addr, opts={}){
+  const matchDepth = Number.isFinite(opts.matchDepth) ? opts.matchDepth : currentMatchDepth();
+  const matchSkipped = matchDepth <= 0;
+  const matchesPromise = matchSkipped ? Promise.resolve([]) : fetchMatches(addr, matchDepth);
+  const [pRes,mRes,bRes]=await Promise.allSettled([fetchPositions(addr), matchesPromise, fetchUsdtBalance(addr)]);
   const positions = pRes.status==='fulfilled' ? pRes.value : null;
   const matches = mRes.status==='fulfilled' ? mRes.value : null;
   const available = bRes.status==='fulfilled' ? bRes.value : null;
-  if(positions===null && matches===null && available===null){ return {addr, err:String(pRes.reason?.message || mRes.reason?.message || bRes.reason?.message || '接口请求失败')}; }
+  if(positions===null && matches===null && available===null && !matchSkipped){ return {addr, err:String(pRes.reason?.message || mRes.reason?.message || bRes.reason?.message || '接口请求失败')}; }
+  if(positions===null && available===null && matchSkipped){ return {addr, err:String(pRes.reason?.message || bRes.reason?.message || '接口请求失败')}; }
   const posArr=positions || [];
   const matchArr=matches || [];
   const posDetails=posArr.map(p=>{
@@ -861,7 +946,7 @@ async function queryOne(addr){
   const pointRecords=pointRecordsFor(addr);
   const pointSummary=pointSummaryFor(addr);
   const points=pointSummary.totalPoints;
-  return {addr,points,weeklyPointsSum:pointSummary.weeklyPointsSum,pointCnt:pointSummary.recordCount,pointRecords,pointSummary,pointLatest:pointSummary.latest,available,value,total,pnl,cost,posCnt:posDetails.length,marketCnt,vol,fillCnt:matchDetails.length,last,positions:posDetails,matches:matchDetails,partial:{positionsFailed:pRes.status!=='fulfilled',matchesFailed:mRes.status!=='fulfilled',balanceFailed:bRes.status!=='fulfilled' || available===null},detailOpen:false};
+  return {addr,points,weeklyPointsSum:pointSummary.weeklyPointsSum,pointCnt:pointSummary.recordCount,pointRecords,pointSummary,pointLatest:pointSummary.latest,available,value,total,pnl,cost,posCnt:posDetails.length,marketCnt,vol,fillCnt:matchDetails.length,last,positions:posDetails,matches:matchDetails,matchSkipped,matchDepth,partial:{positionsFailed:pRes.status!=='fulfilled',matchesFailed:!matchSkipped && mRes.status!=='fulfilled',balanceFailed:bRes.status!=='fulfilled' || available===null},detailOpen:false};
 }
 async function runPool(tasks, concurrency, onDone){ let i=0; async function worker(){ while(i<tasks.length && !abortFlag){ const idx=i++; try{ const res=await tasks[idx](); onDone(res,idx); }catch(e){ onDone({addr:tasks[idx].addr || '', err:String(e?.message||e)}, idx); } } } await Promise.all(Array.from({length:Math.min(concurrency,tasks.length)},worker)); }
 
@@ -883,8 +968,8 @@ function renderRow(m, visualIdx){
       <td class="num">${fmtUsd(m.total)}</td>
       <td class="num ${cssClassSigned(m.pnl)}">${signedMoney(m.pnl)} <div class="small ${cssClassSigned(m.pnl)}">${signedPct(pnlPct)}</div></td>
       <td class="num">${fmtInt(m.posCnt)}</td>
-      <td class="num">${fmtUsd(m.vol)}</td>
-      <td>${fmtDate(m.last)}</td>
+      <td class="num">${m.matchSkipped ? `<span class="muted small">${esc(t('matchSkippedDetail'))}</span>` : fmtUsd(m.vol)}</td>
+      <td>${m.matchSkipped ? `<span class="muted small">${esc(t('matchSkippedDetail'))}</span>` : fmtDate(m.last)}</td>
       <td><input class="note-input" placeholder="${t('notePlaceholder')}" value="${esc(getNote(m.addr))}"></td>
       <td class="nowrap"><button class="btn-sm btn-outline" data-detail>${m.detailOpen?t('collapse'):t('details')}</button> <button class="btn-sm btn-ghost" data-refresh title="${t('refreshTitle')}">↻</button></td>`;
   }
@@ -898,9 +983,12 @@ function renderRow(m, visualIdx){
 function renderDetailRow(m){
   const tbody=$('#tbl tbody'); const tr=document.createElement('tr'); tr.className='detail-row'; tr.dataset.search='';
   const posHtml=m.positions.length ? m.positions.slice(0,12).map(p=>`<div class="detail-item"><div class="detail-title">${p.url?`<a href="${esc(p.url)}" target="_blank" rel="noopener noreferrer">${esc(p.title)}</a>`:esc(p.title)}</div><span class="pill">${esc(p.outcome)}</span> ${t('shares')} ${fmtShares(p.shares)} · ${t('avgPrice')} ${p.entryCents!==null?p.entryCents.toFixed(2)+'c':'-'}${p.markCents!==null?' → '+t('currentPrice')+' '+p.markCents.toFixed(2)+'c':''}<br>${t('value')} $${fmtMoney(p.value)} · <span class="${cssClassSigned(p.pnl)}">${signedMoney(p.pnl)} ${signedPct(p.pnlPct)}</span></div>`).join('') : `<div class="muted">${t('noHoldings')}</div>`;
-  const matchHtml=m.matches.length ? m.matches.slice(0,12).map(x=>`<div class="detail-item"><div class="detail-title">${x.url?`<a href="${esc(x.url)}" target="_blank" rel="noopener noreferrer">${esc(x.title)}</a>`:esc(x.title)}</div><span class="pill">${esc(x.side)}</span><span class="pill">${esc(x.outcome)}</span> ${fmtShares(x.shares)} @ ${x.price!==null?x.price.toFixed(2)+'c':'-'} = $${fmtMoney(x.value)}<br>${esc(fmtDate(new Date(x.executedAt).getTime()))}${x.tx?` · <a href="https://bscscan.com/tx/${esc(x.tx)}" target="_blank" rel="noopener noreferrer">Tx</a>`:''}</div>`).join('') : `<div class="muted">${t('noRecentFills')}</div>`;
+  let matchHtml;
+  if(m.matchSkipped) matchHtml = `<div class="muted">${t('matchSkippedDetail')}</div>`;
+  else matchHtml = m.matches.length ? m.matches.slice(0,12).map(x=>{ const txUrl=bscscanTxUrl(x.tx); return `<div class="detail-item"><div class="detail-title">${x.url?`<a href="${esc(x.url)}" target="_blank" rel="noopener noreferrer">${esc(x.title)}</a>`:esc(x.title)}</div><span class="pill">${esc(x.side)}</span><span class="pill">${esc(x.outcome)}</span> ${fmtShares(x.shares)} @ ${x.price!==null?x.price.toFixed(2)+'c':'-'} = $${fmtMoney(x.value)}<br>${esc(fmtDate(new Date(x.executedAt).getTime()))}${txUrl?` · <a href="${esc(txUrl)}" target="_blank" rel="noopener noreferrer">Tx</a>`:''}</div>`; }).join('') : `<div class="muted">${t('noRecentFills')}</div>`;
   const pointHtml=(m.pointRecords||[]).length ? m.pointRecords.slice(0,12).map(r=>`<div class="detail-item"><div class="detail-title">${r.totalPoints!==null?`${t('totalPoints')} ${fmtPoints(r.totalPoints)}`:t('points')+' '+fmtPoints(r.points)}${r.name?` · ${esc(r.name)}`:''}</div>${r.week!==null?`<span class="pill">Week ${fmtInt(r.week)}</span>`:''}${r.roundId!==null?`<span class="pill">Round ${fmtInt(r.roundId)}</span>`:''}${r.weeklyPoints!==null?`<span class="pill">${t('weekPoints')} ${fmtPoints(r.weeklyPoints)}</span>`:''}${r.rank!==null?`<span class="pill">${t('rank')} #${fmtInt(r.rank)}</span>`:''}${r.ppRank!==null?`<span class="pill">PP #${fmtInt(r.ppRank)}</span>`:''}${r.grade?`<span class="pill">${esc(r.grade)}</span>`:''}<br>${esc(r.createdAt||r.source||'-')}${r.volumeUsd!==null?` · ${t('fillVolume')} $${fmtMoney(r.volumeUsd)}`:''}${r.note?` · ${esc(r.note)}`:''}</div>`).join('') : `<div class="muted">${t('noPointRecord')}</div>`;
-  tr.innerHTML=`<td colspan="12"><div class="detail-grid"><div class="detail-box"><h4>${t('holdingsTitle')}</h4><div class="detail-list">${posHtml}</div></div><div class="detail-box"><h4>${t('recentFillsTitle')}</h4><div class="detail-list">${matchHtml}</div></div><div class="detail-box"><h4>${t('pointsRecordsTitle')}</h4><div class="detail-list">${pointHtml}</div></div></div></td>`;
+  const fillsTitle = m.matchSkipped ? t('recentFillsTitleSkipped') : t('recentFillsTitle',{n:Number.isFinite(m.matchDepth)&&m.matchDepth>0 ? m.matchDepth.toLocaleString(locale()) : MATCH_DEPTH_DEFAULT.toLocaleString(locale())});
+  tr.innerHTML=`<td colspan="12"><div class="detail-grid"><div class="detail-box"><h4>${t('holdingsTitle')}</h4><div class="detail-list">${posHtml}</div></div><div class="detail-box"><h4>${esc(fillsTitle)}</h4><div class="detail-list">${matchHtml}</div></div><div class="detail-box"><h4>${t('pointsRecordsTitle')}</h4><div class="detail-list">${pointHtml}</div></div></div></td>`;
   tbody.appendChild(tr);
 }
 function getSorted(){
@@ -926,21 +1014,42 @@ function renderAll(){
   getSorted().forEach((m,i)=>renderRow(m,i+1));
   updateStats(); applyFilter();
 }
+let renderScheduled=false;
+function scheduleRender(){
+  if(renderScheduled) return;
+  renderScheduled=true;
+  requestAnimationFrame(()=>{ renderScheduled=false; renderAll(); });
+}
 function updateStats(){
   const valid=resultMeta.filter(m=>!m.err);
   if(!valid.length){ $('#statsCards').style.display='none'; return; }
-  const totalAvail=valid.reduce((s,m)=>s+(toNum(m.available)||0),0);
+  const balanceOk=valid.filter(m=>Number.isFinite(toNum(m.available)));
+  const balanceMissing=valid.length-balanceOk.length;
+  const totalAvail=balanceOk.reduce((s,m)=>s+toNum(m.available),0);
   const totalValue=valid.reduce((s,m)=>s+(m.value||0),0);
   const totalNet=totalAvail+totalValue;
   const totalPnl=valid.reduce((s,m)=>s+(m.pnl||0),0);
-  const totalVol=valid.reduce((s,m)=>s+(m.vol||0),0);
+  const volRows=valid.filter(m=>!m.matchSkipped);
+  const volSkippedCnt=valid.length-volRows.length;
+  const totalVol=volRows.reduce((s,m)=>s+(m.vol||0),0);
   const totalPos=valid.reduce((s,m)=>s+(m.posCnt||0),0);
   const totalPoints=valid.reduce((s,m)=>s+(toNum(m.points)||0),0);
   $('#statAvail').textContent=fmtUsd(totalAvail);
+  const availSub=$('#statAvailSub');
+  if(availSub) availSub.textContent = balanceMissing ? t('statAvailSubMissing',{n:balanceMissing.toLocaleString(locale())}) : t('statAvailSub');
+  if(availSub) availSub.classList.toggle('negative', balanceMissing>0);
   $('#statValue').textContent=fmtUsd(totalValue);
   $('#statTotal').textContent=fmtUsd(totalNet);
   $('#statPnl').textContent=signedMoney(totalPnl); $('#statPnl').className='stat-value '+cssClassSigned(totalPnl);
-  $('#statVol').textContent=fmtUsd(totalVol);
+  $('#statVol').textContent = volRows.length ? fmtUsd(totalVol) : '-';
+  const volSub=$('#statVolSub');
+  if(volSub){
+    if(volSkippedCnt && !volRows.length) volSub.textContent = t('statVolSubSkipped');
+    else{
+      const d=currentMatchDepth();
+      volSub.textContent = d<=0 ? t('statVolSubSkipped') : t('statVolSub',{n:d.toLocaleString(locale())});
+    }
+  }
   $('#statPos').textContent=fmtInt(totalPos);
   $('#statPoints').textContent=fmtPoints(totalPoints);
   $('#statsCards').style.display='grid';
@@ -957,11 +1066,26 @@ async function refreshRow(m){
   finally{ $$('[data-refresh]').forEach(b=>b.disabled=false); }
 }
 
+function parseAddressesWithStats(text){
+  const raw=String(text||'');
+  const matches=raw.match(ETH_RE_G) || [];
+  const map=new Map(matches.map(a=>[a.toLowerCase(),a]));
+  const list=[...map.values()];
+  const lines=raw.split(/\r?\n/).map(s=>s.trim()).filter(Boolean);
+  let invalid=0;
+  for(const ln of lines){
+    for(const tok of ln.split(/[\s,;|"']+/).filter(Boolean)){
+      if(/^0x[0-9a-fA-F]+$/.test(tok) && !ETH_RE.test(tok)) invalid++;
+    }
+  }
+  return {list, invalidLines:invalid};
+}
+
 $('#run').addEventListener('click',async()=>{
   saveConfig(true);
-  const list=parseAddresses(inputEl.value);
+  const {list, invalidLines}=parseAddressesWithStats(inputEl.value);
   if(!list.length) return toast(t('queryRequired'));
-  const invalid=list.filter(a=>!ETH_RE.test(a)); if(invalid.length) return toast(t('invalidAddrCount',{count:invalid.length}));
+  if(invalidLines>0) toast(t('extractedWithIgnored',{valid:list.length, invalid:invalidLines}));
   saveHistory(list);
   abortFlag=false; runController=new AbortController(); resultMeta=[]; sortKey=null; sortAsc=true; rateLimitQueue=Promise.resolve();
   $('#tbl tbody').innerHTML=''; $('#summary').style.display='none'; $('#statsCards').style.display='none'; $('#filterRow').style.display='flex'; $('#filterInput').value='';
@@ -970,15 +1094,17 @@ $('#run').addEventListener('click',async()=>{
   const tbody=$('#tbl tbody');
   const placeholders=list.map((addr,i)=>{ const tr=document.createElement('tr'); tr.className='row-placeholder'; tr.innerHTML=`<td>${i+1}</td><td class="mono">${fmtShort(addr)}<button class="copy-btn">${t('copy')}</button></td><td colspan="10">${t('querying')}</td>`; tr.querySelector('button').addEventListener('click',()=>copyText(addr)); tbody.appendChild(tr); return tr; });
   let done=0, fail=0;
-  const tasks=list.map((addr,idx)=>{ const f=()=>queryOne(addr); f.addr=addr; f.idx=idx; return f; });
+  const matchDepth=currentMatchDepth();
+  const tasks=list.map((addr,idx)=>{ const f=()=>queryOne(addr,{matchDepth}); f.addr=addr; f.idx=idx; return f; });
   await runPool(tasks, parseInt($('#concurrency').value,10)||3, (res,idx)=>{
     done++; if(placeholders[idx]) placeholders[idx].remove();
     res.addr = res.addr || list[idx]; res._origIdx=idx; if(res.err) fail++;
     resultMeta.push(res);
     $('#bar').value=(done/list.length)*100; $('#barTxt').textContent=t('queryProgress',{done,total:list.length});
-    renderAll();
+    scheduleRender();
   });
   placeholders.forEach(p=>p.remove());
+  renderAll();
   $('#loading').style.display='none'; $('#stop').style.display='none'; $('#run').disabled=false; $('#csv').disabled=$('#json').disabled=!resultMeta.length;
   const ok=resultMeta.length-fail; $('#summary').textContent=t('queryDone',{total:list.length,ok,fail,interrupted:abortFlag?t('interrupted'):''}); $('#summary').style.display='block';
 });
