@@ -886,9 +886,32 @@ function entryPriceCents(p){
 }
 function markPriceCents(p){
   const o=positionOutcome(p), m=positionMarket(p);
-  let raw = p.currentPrice ?? o.price ?? o.currentPrice;
-  let idx = p.outcomeIndex ?? o.index ?? o.indexSet;
-  if(raw===undefined && idx!==undefined){ const prices=m.outcomePrices || m.prices || []; const i=parseInt(idx,10); if(Array.isArray(prices) && prices[i]!==undefined) raw=prices[i]; }
+  let raw = p.currentPrice ?? p.markPrice ?? p.lastPrice ?? o.price ?? o.currentPrice ?? o.lastPrice ?? o.markPrice;
+  if(raw===undefined || raw===null || raw===''){
+    const bid=safeNum(o?.bestBid?.price);
+    const ask=safeNum(o?.bestAsk?.price);
+    if(bid!==null && ask!==null) raw=(bid+ask)/2;
+    else if(bid!==null) raw=bid;
+    else if(ask!==null) raw=ask;
+  }
+  if(raw===undefined || raw===null || raw===''){
+    const idx = p.outcomeIndex ?? o.index ?? o.indexSet;
+    if(idx!==undefined){
+      const prices=m.outcomePrices || m.prices || [];
+      const i=parseInt(idx,10);
+      if(Array.isArray(prices) && prices[i]!==undefined) raw=prices[i];
+      else if(Array.isArray(m.outcomes)){
+        const oc=m.outcomes.find(x=>x && (x.indexSet===idx || x.index===idx));
+        if(oc){
+          const bid=safeNum(oc.bestBid?.price);
+          const ask=safeNum(oc.bestAsk?.price);
+          if(bid!==null && ask!==null) raw=(bid+ask)/2;
+          else if(bid!==null) raw=bid;
+          else if(ask!==null) raw=ask;
+        }
+      }
+    }
+  }
   return normPriceToCents(raw);
 }
 function positionValue(p){ return safeNum(p.valueUsd ?? p.value_usd ?? p.currentValueUsd ?? p.current_value_usd) ?? 0; }
@@ -904,13 +927,25 @@ function positionPnl(p){
     p.pnlValueUsd ?? p.pnl_value_usd ??
     p.pnl ?? p.profit ?? p.pnlValue
   );
-  if(direct!==null) return direct;
-  const shares=positionShares(p), entry=entryPriceCents(p), mark=markPriceCents(p);
-  if(shares!==null && entry!==null && mark!==null) return shares*(mark-entry)/100;
+  const shares=positionShares(p);
   const value=safeNum(p.valueUsd ?? p.value_usd ?? p.currentValueUsd ?? p.current_value_usd);
-  const cost=safeNum(p.costUsd ?? p.cost_usd ?? p.totalCost ?? p.totalCostUsd ?? p.initialValue ?? p.initialValueUsd);
-  if(value!==null && cost!==null) return value-cost;
-  return null;
+  let cost=safeNum(p.costUsd ?? p.cost_usd ?? p.totalCost ?? p.totalCostUsd ?? p.initialValue ?? p.initialValueUsd);
+  if(cost===null && shares!==null){
+    const avgUsd=safeNum(p.averageBuyPriceUsd ?? p.avgBuyPriceUsd ?? p.average_buy_price_usd);
+    if(avgUsd!==null) cost=shares*avgUsd;
+  }
+  let computed=null;
+  if(value!==null && cost!==null) computed=value-cost;
+  else{
+    const entry=entryPriceCents(p), mark=markPriceCents(p);
+    if(shares!==null && entry!==null && mark!==null) computed=shares*(mark-entry)/100;
+  }
+  // Predict API rounds tiny PnLs to "0"; if our computed value is meaningful, prefer it.
+  if(direct!==null){
+    if(direct===0 && computed!==null && Math.abs(computed)>=0.005) return computed;
+    return direct;
+  }
+  return computed;
 }
 function positionCost(p){
   const direct=safeNum(p.costUsd ?? p.cost_usd ?? p.totalCost ?? p.totalCostUsd ?? p.initialValue ?? p.initialValueUsd);
