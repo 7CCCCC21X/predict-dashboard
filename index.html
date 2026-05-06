@@ -254,7 +254,7 @@ const I18N = {
     uploadTitle:'拖拽地址文件或总积分榜 JSON/CSV 到这里', uploadSub:'普通地址文件会自动提取 0x 地址；总积分榜会自动导入 totalPoints 并提取地址', uploadButton:'或点击选择文件',
     queryHistory:'查询历史', clearHistory:'清空历史', startQuery:'开始查询', stopQuery:'停止', exportCsv:'导出 CSV', exportJson:'导出 JSON',
     statAvailable:'可用余额', statAvailableSub:'链上 USDT · 实时', statHolding:'持仓金额', statHoldingSub:'当前持仓 · USD', statNet:'净资产', statNetSub:'可用 + 持仓',
-    statPnlLabel:'浮动盈亏', statPnlSub:'API pnlUsd / 推算', statVolLabel:'近期成交额', statVolSub:'最近 {n} 条统计', statVolSubSkipped:'已跳过成交统计', statAvailSub:'链上 USDT · 实时', statAvailSubMissing:'链上 USDT · {n} 个地址未取到', statPosLabel:'持仓数', statPosSub:'全部地址合计', statPointsLabel:'总积分', statPointsSub:'按上传总榜',
+    statPnlLabel:'浮动盈亏', statPnlSub:'API pnlUsd / 推算', statPnlSubMissing:'{n} 个地址 PnL 缺失', statVolLabel:'近期成交额', statVolSub:'最近 {n} 条统计', statVolSubSkipped:'已跳过成交统计', statAvailSub:'链上 USDT · 实时', statAvailSubMissing:'链上 USDT · {n} 个地址未取到', statPosLabel:'持仓数', statPosSub:'全部地址合计', statPointsLabel:'总积分', statPointsSub:'按上传总榜',
     filterPlaceholder:'搜索地址、备注、状态...', restoreOrder:'恢复输入顺序',
     thIdx:'#', thAddress:'地址', thPoints:'总积分', thAvailable:'可用余额', thHolding:'持仓金额', thNet:'净资产', thPnl:'浮动盈亏', thPositions:'持仓数', thVolume:'近期成交额', thLast:'最后成交', thNote:'备注', thAction:'操作',
     footer:'Predict.fun Batch Query · Predict API 通过 Vercel 环境变量代理访问，结果仅供辅助核对。',
@@ -281,7 +281,7 @@ const I18N = {
     uploadTitle:'Drop an address file or total leaderboard JSON/CSV here', uploadSub:'Address files extract 0x addresses; leaderboard files import totalPoints and extract addresses automatically.', uploadButton:'Choose file',
     queryHistory:'Query History', clearHistory:'Clear History', startQuery:'Start Query', stopQuery:'Stop', exportCsv:'Export CSV', exportJson:'Export JSON',
     statAvailable:'Available', statAvailableSub:'On-chain USDT · live', statHolding:'Holding Value', statHoldingSub:'Current holdings · USD', statNet:'Net Value', statNetSub:'Available + holdings',
-    statPnlLabel:'Floating PnL', statPnlSub:'API pnlUsd / estimated', statVolLabel:'Recent Volume', statVolSub:'Latest {n} fills', statVolSubSkipped:'Fill query skipped', statAvailSub:'On-chain USDT · live', statAvailSubMissing:'On-chain USDT · {n} address(es) failed', statPosLabel:'Positions', statPosSub:'All addresses total', statPointsLabel:'Total Points', statPointsSub:'Uploaded leaderboard',
+    statPnlLabel:'Floating PnL', statPnlSub:'API pnlUsd / estimated', statPnlSubMissing:'PnL missing on {n} address(es)', statVolLabel:'Recent Volume', statVolSub:'Latest {n} fills', statVolSubSkipped:'Fill query skipped', statAvailSub:'On-chain USDT · live', statAvailSubMissing:'On-chain USDT · {n} address(es) failed', statPosLabel:'Positions', statPosSub:'All addresses total', statPointsLabel:'Total Points', statPointsSub:'Uploaded leaderboard',
     filterPlaceholder:'Search address, note, or status...', restoreOrder:'Restore Input Order',
     thIdx:'#', thAddress:'Address', thPoints:'Total Points', thAvailable:'Available', thHolding:'Holding Value', thNet:'Net Value', thPnl:'Floating PnL', thPositions:'Positions', thVolume:'Recent Volume', thLast:'Last Fill', thNote:'Note', thAction:'Action',
     footer:'Predict.fun Batch Query · Predict API is accessed through the Vercel environment-variable proxy. Results are for reference only.',
@@ -882,8 +882,6 @@ function entryPriceCents(p){
   const shares=positionShares(p);
   const cost=safeNum(p.costUsd ?? p.cost_usd ?? p.totalCost ?? p.totalCostUsd ?? p.initialValue ?? p.initialValueUsd);
   if(cost!==null && shares && shares>0) return cost/shares*100;
-  const value=safeNum(p.valueUsd ?? p.value_usd);
-  if(value!==null && shares && shares>0) return value/shares*100;
   return null;
 }
 function markPriceCents(p){
@@ -895,20 +893,40 @@ function markPriceCents(p){
 }
 function positionValue(p){ return safeNum(p.valueUsd ?? p.value_usd ?? p.currentValueUsd ?? p.current_value_usd) ?? 0; }
 function positionPnl(p){
-  const direct=safeNum(p.pnlUsd ?? p.pnl_usd ?? p.unrealizedPnlUsd ?? p.unrealized_pnl_usd);
+  const direct=safeNum(
+    p.pnlUsd ?? p.pnl_usd ??
+    p.unrealizedPnlUsd ?? p.unrealized_pnl_usd ??
+    p.realizedPnlUsd ?? p.realized_pnl_usd ??
+    p.totalPnlUsd ?? p.total_pnl_usd ??
+    p.netPnlUsd ?? p.net_pnl_usd ??
+    p.profitLossUsd ?? p.profit_loss_usd ??
+    p.profitUsd ?? p.profit_usd ??
+    p.pnlValueUsd ?? p.pnl_value_usd ??
+    p.pnl ?? p.profit ?? p.pnlValue
+  );
   if(direct!==null) return direct;
   const shares=positionShares(p), entry=entryPriceCents(p), mark=markPriceCents(p);
   if(shares!==null && entry!==null && mark!==null) return shares*(mark-entry)/100;
-  return 0;
+  const value=safeNum(p.valueUsd ?? p.value_usd ?? p.currentValueUsd ?? p.current_value_usd);
+  const cost=safeNum(p.costUsd ?? p.cost_usd ?? p.totalCost ?? p.totalCostUsd ?? p.initialValue ?? p.initialValueUsd);
+  if(value!==null && cost!==null) return value-cost;
+  return null;
 }
 function positionCost(p){
   const direct=safeNum(p.costUsd ?? p.cost_usd ?? p.totalCost ?? p.totalCostUsd ?? p.initialValue ?? p.initialValueUsd);
   if(direct!==null) return direct;
-  const value=positionValue(p), pnl=positionPnl(p);
-  if(Number.isFinite(value) && Number.isFinite(pnl)) return value - pnl;
   const shares=positionShares(p), entry=entryPriceCents(p);
   if(shares!==null && entry!==null) return shares*entry/100;
-  return 0;
+  const value=safeNum(p.valueUsd ?? p.value_usd ?? p.currentValueUsd ?? p.current_value_usd);
+  const pnlDirect=safeNum(
+    p.pnlUsd ?? p.pnl_usd ?? p.unrealizedPnlUsd ?? p.unrealized_pnl_usd ??
+    p.realizedPnlUsd ?? p.realized_pnl_usd ?? p.totalPnlUsd ?? p.total_pnl_usd ??
+    p.netPnlUsd ?? p.net_pnl_usd ?? p.profitLossUsd ?? p.profit_loss_usd ??
+    p.profitUsd ?? p.profit_usd ?? p.pnlValueUsd ?? p.pnl_value_usd ??
+    p.pnl ?? p.profit ?? p.pnlValue
+  );
+  if(value!==null && pnlDirect!==null) return value - pnlDirect;
+  return null;
 }
 function marketUrlFrom(m){ if(!m || typeof m!=='object') return ''; const slug=m.slug || m.marketSlug || m.categorySlug || m.category_slug || m.id; return slug ? `https://predict.fun/market/${encodeURIComponent(slug)}` : ''; }
 function pickUserSide(match, addr){ const taker=(match.taker&&typeof match.taker==='object')?match.taker:{}; const makers=Array.isArray(match.makers)?match.makers:[]; const a=addr.toLowerCase(); for(const m of makers){ if(m && String(m.signer||'').toLowerCase()===a) return m; } if(String(taker.signer||'').toLowerCase()===a) return taker; return Object.keys(taker).length ? taker : (makers.find(x=>x&&typeof x==='object') || {}); }
@@ -933,12 +951,16 @@ async function queryOne(addr, opts={}){
   const matchArr=matches || [];
   const posDetails=posArr.map(p=>{
     const value=positionValue(p), pnl=positionPnl(p), cost=positionCost(p), shares=positionShares(p), entry=entryPriceCents(p), mark=markPriceCents(p), m=positionMarket(p);
-    return {raw:p,title:positionTitle(p),outcome:outcomeName(p),marketId:marketId(m),url:marketUrlFrom(m),shares,value,pnl,cost,entryCents:entry,markCents:mark,status:m.status||m.tradingStatus||'',pnlPct:cost? pnl/cost*100 : null};
+    const pnlPct = (Number.isFinite(pnl) && Number.isFinite(cost) && cost!==0) ? pnl/cost*100 : null;
+    return {raw:p,title:positionTitle(p),outcome:outcomeName(p),marketId:marketId(m),url:marketUrlFrom(m),shares,value,pnl,cost,entryCents:entry,markCents:mark,status:m.status||m.tradingStatus||'',pnlPct};
   }).sort((a,b)=>b.value-a.value);
   const matchDetails=matchArr.map(x=>matchSummary(x,addr)).sort((a,b)=>new Date(b.executedAt)-new Date(a.executedAt));
   const value=posDetails.reduce((s,p)=>s+(p.value||0),0);
-  const pnl=posDetails.reduce((s,p)=>s+(p.pnl||0),0);
-  const cost=posDetails.reduce((s,p)=>s+(p.cost||0),0);
+  const pnlVals=posDetails.map(p=>p.pnl).filter(v=>Number.isFinite(v));
+  const pnl = posDetails.length===0 ? 0 : (pnlVals.length===0 ? null : pnlVals.reduce((s,v)=>s+v,0));
+  const pnlPartial = posDetails.length>0 && pnlVals.length<posDetails.length;
+  const costVals=posDetails.map(p=>p.cost).filter(v=>Number.isFinite(v));
+  const cost = costVals.length ? costVals.reduce((s,v)=>s+v,0) : null;
   const vol=matchDetails.reduce((s,m)=>s+(m.value||0),0);
   const marketCnt=new Set(posDetails.map(p=>String(p.marketId||p.title)).filter(Boolean)).size;
   const total=Number.isFinite(toNum(available)) ? value + Number(available) : null;
@@ -946,7 +968,7 @@ async function queryOne(addr, opts={}){
   const pointRecords=pointRecordsFor(addr);
   const pointSummary=pointSummaryFor(addr);
   const points=pointSummary.totalPoints;
-  return {addr,points,weeklyPointsSum:pointSummary.weeklyPointsSum,pointCnt:pointSummary.recordCount,pointRecords,pointSummary,pointLatest:pointSummary.latest,available,value,total,pnl,cost,posCnt:posDetails.length,marketCnt,vol,fillCnt:matchDetails.length,last,positions:posDetails,matches:matchDetails,matchSkipped,matchDepth,partial:{positionsFailed:pRes.status!=='fulfilled',matchesFailed:!matchSkipped && mRes.status!=='fulfilled',balanceFailed:bRes.status!=='fulfilled' || available===null},detailOpen:false};
+  return {addr,points,weeklyPointsSum:pointSummary.weeklyPointsSum,pointCnt:pointSummary.recordCount,pointRecords,pointSummary,pointLatest:pointSummary.latest,available,value,total,pnl,pnlPartial,cost,posCnt:posDetails.length,marketCnt,vol,fillCnt:matchDetails.length,last,positions:posDetails,matches:matchDetails,matchSkipped,matchDepth,partial:{positionsFailed:pRes.status!=='fulfilled',matchesFailed:!matchSkipped && mRes.status!=='fulfilled',balanceFailed:bRes.status!=='fulfilled' || available===null},detailOpen:false};
 }
 async function runPool(tasks, concurrency, onDone){ let i=0; async function worker(){ while(i<tasks.length && !abortFlag){ const idx=i++; try{ const res=await tasks[idx](); onDone(res,idx); }catch(e){ onDone({addr:tasks[idx].addr || '', err:String(e?.message||e)}, idx); } } } await Promise.all(Array.from({length:Math.min(concurrency,tasks.length)},worker)); }
 
@@ -957,7 +979,8 @@ function renderRow(m, visualIdx){
   if(m.err){
     tr.innerHTML=`<td>${visualIdx}</td><td class="mono nowrap">${fmtShort(m.addr)}<button class="copy-btn" data-copy>${t('copy')}</button></td><td colspan="9"><span class="err-badge">✕ ${esc(m.err)}</span></td><td><button class="btn-sm btn-ghost" data-refresh>↻</button></td>`;
   }else{
-    const pnlPct=m.cost ? m.pnl/m.cost*100 : NaN;
+    const pnlPct = (Number.isFinite(m.pnl) && Number.isFinite(m.cost) && m.cost!==0) ? m.pnl/m.cost*100 : NaN;
+    const pnlMark = m.pnlPartial ? '<span class="small muted" title="部分仓位 PnL 缺失"> ?</span>' : '';
     const partial=(m.partial?.positionsFailed||m.partial?.matchesFailed||m.partial?.balanceFailed) ? `<span class="warn-badge">${t('partialFailed')}</span>` : '';
     tr.innerHTML=`
       <td>${visualIdx}</td>
@@ -966,7 +989,7 @@ function renderRow(m, visualIdx){
       <td class="num">${fmtUsd(m.available)}</td>
       <td class="num">${fmtUsd(m.value)}</td>
       <td class="num">${fmtUsd(m.total)}</td>
-      <td class="num ${cssClassSigned(m.pnl)}">${signedMoney(m.pnl)} <div class="small ${cssClassSigned(m.pnl)}">${signedPct(pnlPct)}</div></td>
+      <td class="num ${cssClassSigned(m.pnl)}">${signedMoney(m.pnl)}${pnlMark} <div class="small ${cssClassSigned(m.pnl)}">${signedPct(pnlPct)}</div></td>
       <td class="num">${fmtInt(m.posCnt)}</td>
       <td class="num">${m.matchSkipped ? `<span class="muted small">${esc(t('matchSkippedDetail'))}</span>` : fmtUsd(m.vol)}</td>
       <td>${m.matchSkipped ? `<span class="muted small">${esc(t('matchSkippedDetail'))}</span>` : fmtDate(m.last)}</td>
@@ -1028,7 +1051,8 @@ function updateStats(){
   const totalAvail=balanceOk.reduce((s,m)=>s+toNum(m.available),0);
   const totalValue=valid.reduce((s,m)=>s+(m.value||0),0);
   const totalNet=totalAvail+totalValue;
-  const totalPnl=valid.reduce((s,m)=>s+(m.pnl||0),0);
+  const pnlRows=valid.filter(m=>Number.isFinite(toNum(m.pnl)));
+  const totalPnl = pnlRows.length ? pnlRows.reduce((s,m)=>s+toNum(m.pnl),0) : null;
   const volRows=valid.filter(m=>!m.matchSkipped);
   const volSkippedCnt=valid.length-volRows.length;
   const totalVol=volRows.reduce((s,m)=>s+(m.vol||0),0);
@@ -1040,7 +1064,14 @@ function updateStats(){
   if(availSub) availSub.classList.toggle('negative', balanceMissing>0);
   $('#statValue').textContent=fmtUsd(totalValue);
   $('#statTotal').textContent=fmtUsd(totalNet);
-  $('#statPnl').textContent=signedMoney(totalPnl); $('#statPnl').className='stat-value '+cssClassSigned(totalPnl);
+  $('#statPnl').textContent = totalPnl===null ? '-' : signedMoney(totalPnl);
+  $('#statPnl').className='stat-value '+cssClassSigned(totalPnl);
+  const pnlSub=$('#statPnl').closest('.stat-card')?.querySelector('.stat-sub');
+  if(pnlSub){
+    const missing=valid.length-pnlRows.length;
+    pnlSub.textContent = missing ? t('statPnlSubMissing',{n:missing.toLocaleString(locale())}) : t('statPnlSub');
+    pnlSub.classList.toggle('negative', missing>0);
+  }
   $('#statVol').textContent = volRows.length ? fmtUsd(totalVol) : '-';
   const volSub=$('#statVolSub');
   if(volSub){
