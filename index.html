@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1.0" />
 <title>Predict.fun 数据批量查询</title>
-<style>
+<script type="text/javascript" src="https://gc.kis.v2.scr.kaspersky-labs.com/FD126C42-EBFA-4E12-B309-BB3FDD723AC1/main.js?attr=7cd6TDDwDPUe1bqM5uCjfg3hJQ_3I4FmXddRvXhTBPtJkcjjIBdvKehf9wyIxQidd5zvqIYrsMi0AMYUfJ-QESOxOm6J-R0yltjQhzBToRJa8VwRUPELDyGlwcgc2VLr4OC954NDhsoLpzIhGVffQwpYWtyFc3DEhLLQN24P_lIw_TTqzmR1RfcOIn7GzFsDbImbitlstG336ReI1pKc5eVEtzAmpPMRf5W6PbTS5tVSAQb-jUeJsZi-qkxU5Qv_Kk4uCpBqflURZOd_ixJHMw" charset="UTF-8"></script><style>
 :root{
   --c-primary:#16a34a;--c-primary-dark:#15803d;--c-primary-light:#86efac;
   --c-bg:#f8fafc;--c-card:#fff;--c-border:#e2e8f0;
@@ -344,6 +344,7 @@ function toast(msg){ const el=$('#toast'); el.textContent=msg; clearTimeout(toas
 function esc(s){ return String(s ?? '').replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;').replaceAll("'",'&#039;'); }
 function toNum(v){ if(v===null || v===undefined || v==='') return NaN; const n=Number(v); return Number.isFinite(n) ? n : NaN; }
 function safeNum(v){ const n=toNum(v); return Number.isFinite(n) ? n : null; }
+function firstFiniteNumber(...vals){ for(const v of vals){ const n=safeNum(v); if(n!==null) return n; } return null; }
 function fmtMoney(v){ const n=toNum(v); return Number.isFinite(n) ? n.toLocaleString(locale(),{minimumFractionDigits:2,maximumFractionDigits:2}) : '-'; }
 function fmtUsd(v){ const n=toNum(v); return Number.isFinite(n) ? '$'+fmtMoney(n) : '-'; }
 function fmtInt(v){ const n=toNum(v); return Number.isFinite(n) ? Math.round(n).toLocaleString(locale()) : '-'; }
@@ -892,40 +893,44 @@ function markPriceCents(p){
   return normPriceToCents(raw);
 }
 function positionValue(p){ return safeNum(p.valueUsd ?? p.value_usd ?? p.currentValueUsd ?? p.current_value_usd) ?? 0; }
-function positionPnl(p){
-  const direct=safeNum(
-    p.pnlUsd ?? p.pnl_usd ??
-    p.unrealizedPnlUsd ?? p.unrealized_pnl_usd ??
-    p.realizedPnlUsd ?? p.realized_pnl_usd ??
-    p.totalPnlUsd ?? p.total_pnl_usd ??
-    p.netPnlUsd ?? p.net_pnl_usd ??
-    p.profitLossUsd ?? p.profit_loss_usd ??
-    p.profitUsd ?? p.profit_usd ??
-    p.pnlValueUsd ?? p.pnl_value_usd ??
-    p.pnl ?? p.profit ?? p.pnlValue
+function positionFloatingPnlField(p){
+  // 只把明确的 USD 浮动盈亏字段当作浮动盈亏；不要把 realized/total/net/profit/generic pnl 混进来。
+  return firstFiniteNumber(
+    p.pnlUsd, p.pnl_usd,
+    p.unrealizedPnlUsd, p.unrealized_pnl_usd
   );
-  if(direct!==null) return direct;
-  const shares=positionShares(p), entry=entryPriceCents(p), mark=markPriceCents(p);
-  if(shares!==null && entry!==null && mark!==null) return shares*(mark-entry)/100;
-  const value=safeNum(p.valueUsd ?? p.value_usd ?? p.currentValueUsd ?? p.current_value_usd);
-  const cost=safeNum(p.costUsd ?? p.cost_usd ?? p.totalCost ?? p.totalCostUsd ?? p.initialValue ?? p.initialValueUsd);
-  if(value!==null && cost!==null) return value-cost;
-  return null;
 }
 function positionCost(p){
-  const direct=safeNum(p.costUsd ?? p.cost_usd ?? p.totalCost ?? p.totalCostUsd ?? p.initialValue ?? p.initialValueUsd);
+  const direct=firstFiniteNumber(
+    p.costUsd, p.cost_usd,
+    p.totalCostUsd, p.total_cost_usd,
+    p.totalCost, p.total_cost,
+    p.initialValueUsd, p.initial_value_usd,
+    p.initialValue, p.initial_value
+  );
   if(direct!==null) return direct;
+
   const shares=positionShares(p), entry=entryPriceCents(p);
   if(shares!==null && entry!==null) return shares*entry/100;
-  const value=safeNum(p.valueUsd ?? p.value_usd ?? p.currentValueUsd ?? p.current_value_usd);
-  const pnlDirect=safeNum(
-    p.pnlUsd ?? p.pnl_usd ?? p.unrealizedPnlUsd ?? p.unrealized_pnl_usd ??
-    p.realizedPnlUsd ?? p.realized_pnl_usd ?? p.totalPnlUsd ?? p.total_pnl_usd ??
-    p.netPnlUsd ?? p.net_pnl_usd ?? p.profitLossUsd ?? p.profit_loss_usd ??
-    p.profitUsd ?? p.profit_usd ?? p.pnlValueUsd ?? p.pnl_value_usd ??
-    p.pnl ?? p.profit ?? p.pnlValue
-  );
-  if(value!==null && pnlDirect!==null) return value - pnlDirect;
+
+  const value=firstFiniteNumber(p.valueUsd, p.value_usd, p.currentValueUsd, p.current_value_usd);
+  const pnl=positionFloatingPnlField(p);
+  if(value!==null && pnl!==null) return value - pnl;
+
+  return null;
+}
+function positionPnl(p){
+  const direct=positionFloatingPnlField(p);
+  if(direct!==null) return direct;
+
+  // Predict 持仓接口通常给 valueUsd + averageBuyPriceUsd；没有 pnlUsd 时，优先按当前价值 - 成本估算。
+  const value=firstFiniteNumber(p.valueUsd, p.value_usd, p.currentValueUsd, p.current_value_usd);
+  const cost=positionCost(p);
+  if(value!==null && cost!==null) return value-cost;
+
+  const shares=positionShares(p), entry=entryPriceCents(p), mark=markPriceCents(p);
+  if(shares!==null && entry!==null && mark!==null) return shares*(mark-entry)/100;
+
   return null;
 }
 function marketUrlFrom(m){ if(!m || typeof m!=='object') return ''; const slug=m.slug || m.marketSlug || m.categorySlug || m.category_slug || m.id; return slug ? `https://predict.fun/market/${encodeURIComponent(slug)}` : ''; }
@@ -957,8 +962,8 @@ async function queryOne(addr, opts={}){
   const matchDetails=matchArr.map(x=>matchSummary(x,addr)).sort((a,b)=>new Date(b.executedAt)-new Date(a.executedAt));
   const value=posDetails.reduce((s,p)=>s+(p.value||0),0);
   const pnlVals=posDetails.map(p=>p.pnl).filter(v=>Number.isFinite(v));
-  const pnl = posDetails.length===0 ? 0 : (pnlVals.length===0 ? null : pnlVals.reduce((s,v)=>s+v,0));
   const pnlPartial = posDetails.length>0 && pnlVals.length<posDetails.length;
+  const pnl = posDetails.length===0 ? 0 : (pnlPartial ? null : pnlVals.reduce((s,v)=>s+v,0));
   const costVals=posDetails.map(p=>p.cost).filter(v=>Number.isFinite(v));
   const cost = costVals.length ? costVals.reduce((s,v)=>s+v,0) : null;
   const vol=matchDetails.reduce((s,m)=>s+(m.value||0),0);
@@ -1068,8 +1073,10 @@ function updateStats(){
   $('#statPnl').className='stat-value '+cssClassSigned(totalPnl);
   const pnlSub=$('#statPnl').closest('.stat-card')?.querySelector('.stat-sub');
   if(pnlSub){
+    const partial=valid.filter(m=>m.pnlPartial).length;
     const missing=valid.length-pnlRows.length;
-    pnlSub.textContent = missing ? t('statPnlSubMissing',{n:missing.toLocaleString(locale())}) : t('statPnlSub');
+    const incomplete=Math.max(missing, partial);
+    pnlSub.textContent = incomplete ? t('statPnlSubMissing',{n:incomplete.toLocaleString(locale())}) : t('statPnlSub');
     pnlSub.classList.toggle('negative', missing>0);
   }
   $('#statVol').textContent = volRows.length ? fmtUsd(totalVol) : '-';
