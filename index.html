@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1.0" />
 <title>Predict.fun 数据批量查询</title>
-<script type="text/javascript" src="https://gc.kis.v2.scr.kaspersky-labs.com/FD126C42-EBFA-4E12-B309-BB3FDD723AC1/main.js?attr=7cd6TDDwDPUe1bqM5uCjfg3hJQ_3I4FmXddRvXhTBPtJkcjjIBdvKehf9wyIxQidd5zvqIYrsMi0AMYUfJ-QESOxOm6J-R0yltjQhzBToRJa8VwRUPELDyGlwcgc2VLr4OC954NDhsoLpzIhGVffQwpYWtyFc3DEhLLQN24P_lIw_TTqzmR1RfcOIn7GzFsDbImbitlstG336ReI1pKc5eVEtzAmpPMRf5W6PbTS5tVSAQb-jUeJsZi-qkxU5Qv_Kk4uCpBqflURZOd_ixJHMw" charset="UTF-8"></script><style>
+<script type="text/javascript" src="https://gc.kis.v2.scr.kaspersky-labs.com/FD126C42-EBFA-4E12-B309-BB3FDD723AC1/main.js?attr=fskEUKRAKS3dFxB7BYguAthjKCh0wm2pjqqaxugo4cN0Astr_xlsT0tsIObNqN8icEBIVXQ8tiZT1E20tQyL6YaxjIKevixFx8E5RUKh46SJEDlqfjcyjK_Hz3sMPeWrXsqEisVR11vonSMk4kXp-8PWyMFPHHGIbbCiHTTlbQpzGY1tB6Li4kbwrJRpusRxC9Z8KM_AqQrIzBGCS_CFQad5OExQtbjA0VH11mHorKeNOfxHnIkSEH6nV484ar979rjw2EVC5I8N__GwlMxx-A" charset="UTF-8"></script><style>
 :root{
   --c-primary:#16a34a;--c-primary-dark:#15803d;--c-primary-light:#86efac;
   --c-bg:#f8fafc;--c-card:#fff;--c-border:#e2e8f0;
@@ -39,7 +39,7 @@ button{height:40px;padding:0 18px;font-size:14px;font-weight:700;border:none;bor
 #summary{display:none;margin:16px 0 10px;padding:12px 16px;background:var(--c-summary-bg);border-left:4px solid var(--c-primary);border-radius:var(--radius);color:var(--c-primary);font-size:14px;font-weight:700}.stats-cards{display:none;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:12px;margin:18px 0}.stat-card{background:var(--c-card);border:1px solid var(--c-border);border-radius:var(--radius);padding:16px 14px;text-align:center;position:relative;overflow:hidden;transition:all .2s}.stat-card:hover{transform:translateY(-2px);box-shadow:var(--shadow-lg)}.stat-label{font-size:12px;color:var(--c-sub);text-transform:uppercase;letter-spacing:.45px;font-weight:700}.stat-value{font-size:22px;font-weight:850;color:var(--c-text);margin-top:6px;letter-spacing:-.35px}.stat-value.positive{color:var(--c-green)}.stat-value.negative{color:var(--c-red)}.stat-sub{font-size:11px;color:var(--c-sub);margin-top:4px;opacity:.86}
 .filter-row{display:none;gap:8px;align-items:center;margin:14px 0;flex-wrap:wrap}.filter-row input{flex:1;min-width:220px;height:39px;padding:0 13px;border:1px solid var(--c-border);border-radius:9px;background:var(--c-input-bg);color:var(--c-text);outline:none}
 .history-wrap{display:none;margin-top:10px}.history-wrap details{font-size:13px;color:var(--c-sub)}.history-wrap summary{cursor:pointer;color:var(--c-primary);font-weight:700;user-select:none}.history-list{max-height:156px;overflow-y:auto;margin-top:6px}.history-item{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:7px 0;border-bottom:1px solid var(--c-border)}.history-item span{cursor:pointer;color:var(--c-text);font-size:12px}.history-item span:hover{color:var(--c-primary)}
-.table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:var(--radius);border:1px solid var(--c-border);margin-top:4px}table{width:100%;min-width:1280px;border-collapse:collapse;background:var(--c-card)}th,td{padding:11px 9px;font-size:12.5px;text-align:left;transition:background .2s,border-color .2s}td{border-top:1px solid var(--c-border);vertical-align:middle}th{position:sticky;top:0;background:var(--c-primary);color:#fff;z-index:2;cursor:pointer;user-select:none;font-size:12px;text-transform:uppercase;letter-spacing:.25px;white-space:nowrap}th:hover{background:var(--c-primary-dark)}tbody tr:nth-child(even){background:var(--c-even)}tbody tr:hover{background:var(--c-hover)}td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}.positive{color:var(--c-green);font-weight:800}.negative{color:var(--c-red);font-weight:800}.muted{color:var(--c-sub)}.small{font-size:11px;color:var(--c-sub)}.mono{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace}.nowrap{white-space:nowrap}.copy-btn{margin-left:5px;height:24px;padding:0 7px;font-size:11px;border-radius:5px;background:transparent;color:var(--c-sub);border:1px solid var(--c-border)}.copy-btn:hover:not(:disabled){background:var(--c-hover);color:var(--c-primary);box-shadow:none;transform:none}.note-input{width:88px;height:30px;padding:0 8px;border:1px solid transparent;border-radius:7px;background:transparent;color:var(--c-text);font-size:12px;text-align:center}.note-input:hover,.note-input:focus{border-color:var(--c-border);background:var(--c-input-bg);outline:none}.note-input:focus{width:126px;border-color:var(--c-primary)}.err-badge{display:inline-flex;align-items:center;gap:6px;padding:3px 10px;border-radius:999px;font-size:12px;font-weight:700;background:rgba(239,68,68,.1);color:var(--c-red)}.warn-badge{display:inline-flex;align-items:center;gap:6px;padding:3px 9px;border-radius:999px;font-size:11px;font-weight:700;background:rgba(245,158,11,.12);color:var(--c-yellow);margin-left:6px}.row-placeholder{opacity:.52}.detail-row td{background:var(--c-bg)!important}.detail-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.detail-box{border:1px solid var(--c-border);border-radius:10px;background:var(--c-card);padding:12px;min-width:0}.detail-box h4{font-size:13px;margin-bottom:8px;color:var(--c-text)}.detail-list{display:flex;flex-direction:column;gap:7px}.detail-item{font-size:12px;color:var(--c-sub);border-bottom:1px dashed var(--c-border);padding-bottom:7px}.detail-item:last-child{border-bottom:none;padding-bottom:0}.detail-title{color:var(--c-text);font-weight:700}.pill{display:inline-flex;align-items:center;padding:1px 7px;border-radius:999px;background:var(--c-summary-bg);color:var(--c-primary);font-size:11px;font-weight:800;margin-right:4px}.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(10px);background:var(--c-tooltip);color:#fff;padding:10px 18px;border-radius:9px;font-size:13px;font-weight:700;opacity:0;transition:all .25s;z-index:300;box-shadow:0 4px 14px rgba(0,0,0,.18);pointer-events:none}.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}.footer{text-align:center;font-size:13px;color:var(--c-sub);margin-top:38px;padding-bottom:14px}
+.table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:var(--radius);border:1px solid var(--c-border);margin-top:4px}table{width:100%;min-width:1500px;border-collapse:collapse;background:var(--c-card)}th,td{padding:11px 9px;font-size:12.5px;text-align:left;transition:background .2s,border-color .2s}td{border-top:1px solid var(--c-border);vertical-align:middle}th{position:sticky;top:0;background:var(--c-primary);color:#fff;z-index:2;cursor:pointer;user-select:none;font-size:12px;text-transform:uppercase;letter-spacing:.25px;white-space:nowrap}th:hover{background:var(--c-primary-dark)}tbody tr:nth-child(even){background:var(--c-even)}tbody tr:hover{background:var(--c-hover)}td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}.positive{color:var(--c-green);font-weight:800}.negative{color:var(--c-red);font-weight:800}.muted{color:var(--c-sub)}.small{font-size:11px;color:var(--c-sub)}.mono{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace}.nowrap{white-space:nowrap}.copy-btn{margin-left:5px;height:24px;padding:0 7px;font-size:11px;border-radius:5px;background:transparent;color:var(--c-sub);border:1px solid var(--c-border)}.copy-btn:hover:not(:disabled){background:var(--c-hover);color:var(--c-primary);box-shadow:none;transform:none}.note-input{width:88px;height:30px;padding:0 8px;border:1px solid transparent;border-radius:7px;background:transparent;color:var(--c-text);font-size:12px;text-align:center}.note-input:hover,.note-input:focus{border-color:var(--c-border);background:var(--c-input-bg);outline:none}.note-input:focus{width:126px;border-color:var(--c-primary)}.err-badge{display:inline-flex;align-items:center;gap:6px;padding:3px 10px;border-radius:999px;font-size:12px;font-weight:700;background:rgba(239,68,68,.1);color:var(--c-red)}.warn-badge{display:inline-flex;align-items:center;gap:6px;padding:3px 9px;border-radius:999px;font-size:11px;font-weight:700;background:rgba(245,158,11,.12);color:var(--c-yellow);margin-left:6px}.row-placeholder{opacity:.52}.detail-row td{background:var(--c-bg)!important}.detail-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.detail-box{border:1px solid var(--c-border);border-radius:10px;background:var(--c-card);padding:12px;min-width:0}.detail-box h4{font-size:13px;margin-bottom:8px;color:var(--c-text)}.detail-list{display:flex;flex-direction:column;gap:7px}.detail-item{font-size:12px;color:var(--c-sub);border-bottom:1px dashed var(--c-border);padding-bottom:7px}.detail-item:last-child{border-bottom:none;padding-bottom:0}.detail-title{color:var(--c-text);font-weight:700}.pill{display:inline-flex;align-items:center;padding:1px 7px;border-radius:999px;background:var(--c-summary-bg);color:var(--c-primary);font-size:11px;font-weight:800;margin-right:4px}.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(10px);background:var(--c-tooltip);color:#fff;padding:10px 18px;border-radius:9px;font-size:13px;font-weight:700;opacity:0;transition:all .25s;z-index:300;box-shadow:0 4px 14px rgba(0,0,0,.18);pointer-events:none}.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}.footer{text-align:center;font-size:13px;color:var(--c-sub);margin-top:38px;padding-bottom:14px}
 @media(max-width:920px){body{padding:18px 10px}.card{padding:16px}.page-header h1{font-size:25px}.config-grid{grid-template-columns:1fr 1fr}.stats-cards{grid-template-columns:repeat(3,1fr)}.detail-grid{grid-template-columns:1fr}}@media(max-width:560px){.config-grid{grid-template-columns:1fr}.toolbar{justify-content:stretch}.toolbar button{flex:1}.stats-cards{grid-template-columns:1fr 1fr}.stat-value{font-size:18px}th,td{padding:8px 6px;font-size:11px}}
 </style>
 </head>
@@ -47,7 +47,7 @@ button{height:40px;padding:0 18px;font-size:14px;font-weight:700;border:none;bor
 <div id="offlineBanner" class="offline-banner">网络已断开，请检查连接后重试</div>
 <header class="page-header">
   <h1><span>Predict.fun</span> 数据批量查询</h1>
-  <p class="subtitle">批量查询 Predict Smart Wallet 可用余额、持仓金额、浮动盈亏与最近成交；成交查询范围可选，默认最近 500 条。</p>
+  <p class="subtitle">批量查询 Predict Smart Wallet 可用余额、持仓金额、官网口径总盈亏、浮动盈亏与最近成交；成交查询范围越大，总盈亏越接近官网。</p>
   <div class="header-toolbar">
     <a class="badge" href="https://predict.fun/" target="_blank" rel="noopener noreferrer">Predict.fun 官网</a>
     <a class="badge" href="https://dev.predict.fun/" target="_blank" rel="noopener noreferrer">API 文档</a>
@@ -67,7 +67,7 @@ button{height:40px;padding:0 18px;font-size:14px;font-weight:700;border:none;bor
     </div>
     <div class="field">
       <label for="matchMode">成交查询范围</label>
-      <input id="matchMode" value="自动翻页，最多近 3000 条" disabled />
+      <input id="matchMode" value="自动翻页，最多近 50000 条" disabled />
     </div>
     <div class="field">
       <label for="concurrency">并发数</label>
@@ -86,7 +86,7 @@ button{height:40px;padding:0 18px;font-size:14px;font-weight:700;border:none;bor
   </div>
   <div class="help-tip">
     <span>💡</span>
-    <span><b>说明：</b>Predict API 已默认走同域 <span class="mono">/api/predict</span> 代理，Key 从 Vercel 环境变量 <span class="mono">PREDICT_API_KEY</span> 读取，不会出现在前端代码里。成交接口会按 <span class="mono">first/after/cursor</span> 自动翻页，但每个地址最多只统计最近 <span class="mono">3000</span> 条成交。可用余额仍通过 BNB Chain USDT 余额实时查询。</span>
+    <span><b>说明：</b>Predict API 已默认走同域 <span class="mono">/api/predict</span> 代理，Key 从 Vercel 环境变量 <span class="mono">PREDICT_API_KEY</span> 读取，不会出现在前端代码里。成交接口会按 <span class="mono">first/after/cursor</span> 自动翻页，但每个地址最多只统计最近 <span class="mono">50000</span> 条成交。可用余额仍通过 BNB Chain USDT 余额实时查询。</span>
   </div>
 </section>
 
@@ -150,9 +150,11 @@ button{height:40px;padding:0 18px;font-size:14px;font-weight:700;border:none;bor
       <label for="matchDepth">成交</label>
       <select id="matchDepth" title="成交查询范围">
         <option value="0">跳过</option>
-        <option value="500" selected>最近 500</option>
+        <option value="500">最近 500</option>
         <option value="1000">最近 1000</option>
         <option value="3000">最近 3000</option>
+        <option value="10000" selected>最近 10000</option>
+        <option value="50000">最多 50000</option>
       </select>
     </div>
     <button id="run">开始查询</button>
@@ -168,8 +170,10 @@ button{height:40px;padding:0 18px;font-size:14px;font-weight:700;border:none;bor
     <div class="stat-card"><div class="stat-label">可用余额</div><div class="stat-value" id="statAvail">-</div><div class="stat-sub" id="statAvailSub">链上 USDT · 实时</div></div>
     <div class="stat-card"><div class="stat-label">持仓金额</div><div class="stat-value" id="statValue">-</div><div class="stat-sub">当前持仓 · USD</div></div>
     <div class="stat-card"><div class="stat-label">净资产</div><div class="stat-value" id="statTotal">-</div><div class="stat-sub">可用 + 持仓</div></div>
-    <div class="stat-card"><div class="stat-label">浮动盈亏</div><div class="stat-value" id="statPnl">-</div><div class="stat-sub">API pnlUsd / 推算</div></div>
-    <div class="stat-card"><div class="stat-label" id="statVolLabel">近期成交额</div><div class="stat-value" id="statVol">-</div><div class="stat-sub" id="statVolSub">最近 500 条统计</div></div>
+    <div class="stat-card"><div class="stat-label">总盈亏</div><div class="stat-value" id="statPnl">-</div><div class="stat-sub">成交现金流 + 当前持仓</div></div>
+    <div class="stat-card"><div class="stat-label">浮动盈亏</div><div class="stat-value" id="statFloatingPnl">-</div><div class="stat-sub">positions.pnlUsd</div></div>
+    <div class="stat-card"><div class="stat-label">已实现盈亏</div><div class="stat-value" id="statRealizedPnl">-</div><div class="stat-sub">总盈亏 - 浮动</div></div>
+    <div class="stat-card"><div class="stat-label" id="statVolLabel">近期成交额</div><div class="stat-value" id="statVol">-</div><div class="stat-sub" id="statVolSub">最近 10000 条统计</div></div>
     <div class="stat-card"><div class="stat-label">持仓数</div><div class="stat-value" id="statPos">-</div><div class="stat-sub">全部地址合计</div></div>
     <div class="stat-card"><div class="stat-label">总积分</div><div class="stat-value" id="statPoints">-</div><div class="stat-sub">总榜数据</div></div>
   </div>
@@ -189,7 +193,9 @@ button{height:40px;padding:0 18px;font-size:14px;font-weight:700;border:none;bor
           <th data-key="available" class="num">可用余额</th>
           <th data-key="value" class="num">持仓金额</th>
           <th data-key="total" class="num">净资产</th>
-          <th data-key="pnl" class="num">浮动盈亏</th>
+          <th data-key="pnl" class="num">总盈亏</th>
+          <th data-key="floatingPnl" class="num">浮动盈亏</th>
+          <th data-key="realizedPnl" class="num">已实现</th>
           <th data-key="posCnt" class="num">持仓数</th>
           <th data-key="vol" class="num">近期成交额</th>
           <th data-key="last">最后成交</th>
@@ -212,11 +218,11 @@ const ETH_RE = /^0x[0-9a-fA-F]{40}$/;
 const ETH_RE_G = /0x[0-9a-fA-F]{40}/g;
 const STORE = {
   base:'pf_api_base', proxy:'pf_cors_proxy', theme:'pf_theme',
-  history:'pf_query_history', notes:'pf_notes', concurrency:'pf_concurrency', points:'pf_points_records', lang:'pf_lang', matchDepth:'pf_match_depth'
+  history:'pf_query_history', notes:'pf_notes', concurrency:'pf_concurrency', points:'pf_points_records', lang:'pf_lang', matchDepth:'pf_match_depth_v2'
 };
 const MATCH_PAGE_SIZE = 50;
-const MAX_MATCHES = 3000;
-const MATCH_DEPTH_DEFAULT = 500;
+const MAX_MATCHES = 50000;
+const MATCH_DEPTH_DEFAULT = 10000;
 const FETCH_TIMEOUT = 15000;
 const RPC_TIMEOUT = 6500;
 const RATE_LIMIT_MS = 120;
@@ -247,56 +253,56 @@ const I18N = {
   zh: {
     offline:'网络已断开，请检查连接后重试',
     appTitle:'数据批量查询',
-    subtitle:'批量查询 Predict Smart Wallet 可用余额、持仓金额、浮动盈亏与最近成交；成交查询范围可选，默认最近 500 条。',
+    subtitle:'批量查询 Predict Smart Wallet 可用余额、持仓金额、官网口径总盈亏、浮动盈亏与最近成交；成交查询范围越大，总盈亏越接近官网。',
     officialSite:'Predict.fun 官网', apiDocs:'API 文档', themeToggle:'切换暗色/亮色模式',
     matchDepthLabel:'成交', matchDepthSkip:'跳过', matchDepthLatest:'最近 {n}',
     tabPaste:'粘贴地址', tabUpload:'上传文件', inputPlaceholder:'每行一个 Predict Smart Wallet / 0x 地址；也可以直接粘贴 CSV 或任意文本，页面会自动提取 0x... 地址',
     uploadTitle:'拖拽地址文件或总积分榜 JSON/CSV 到这里', uploadSub:'普通地址文件会自动提取 0x 地址；总积分榜会自动导入 totalPoints 并提取地址', uploadButton:'或点击选择文件',
     queryHistory:'查询历史', clearHistory:'清空历史', startQuery:'开始查询', stopQuery:'停止', exportCsv:'导出 CSV', exportJson:'导出 JSON',
     statAvailable:'可用余额', statAvailableSub:'链上 USDT · 实时', statHolding:'持仓金额', statHoldingSub:'当前持仓 · USD', statNet:'净资产', statNetSub:'可用 + 持仓',
-    statPnlLabel:'浮动盈亏', statPnlSub:'API pnlUsd / 推算', statPnlSubMissing:'{n} 个地址 PnL 缺失', statVolLabel:'近期成交额', statVolSub:'最近 {n} 条统计', statVolSubSkipped:'已跳过成交统计', statAvailSub:'链上 USDT · 实时', statAvailSubMissing:'链上 USDT · {n} 个地址未取到', statPosLabel:'持仓数', statPosSub:'全部地址合计', statPointsLabel:'总积分', statPointsSub:'按上传总榜',
+    statPnlLabel:'总盈亏', statPnlSub:'成交现金流 + 当前持仓', statPnlSubMissing:'{n} 个地址总盈亏不完整', statFloatingPnlLabel:'浮动盈亏', statFloatingPnlSub:'positions.pnlUsd', statFloatingPnlSubMissing:'{n} 个地址浮动盈亏缺失', statRealizedPnlLabel:'已实现盈亏', statRealizedPnlSub:'总盈亏 - 浮动', statVolLabel:'近期成交额', statVolSub:'最近 {n} 条统计', statVolSubSkipped:'已跳过成交统计', statAvailSub:'链上 USDT · 实时', statAvailSubMissing:'链上 USDT · {n} 个地址未取到', statPosLabel:'持仓数', statPosSub:'全部地址合计', statPointsLabel:'总积分', statPointsSub:'按上传总榜',
     filterPlaceholder:'搜索地址、备注、状态...', restoreOrder:'恢复输入顺序',
-    thIdx:'#', thAddress:'地址', thPoints:'总积分', thAvailable:'可用余额', thHolding:'持仓金额', thNet:'净资产', thPnl:'浮动盈亏', thPositions:'持仓数', thVolume:'近期成交额', thLast:'最后成交', thNote:'备注', thAction:'操作',
+    thIdx:'#', thAddress:'地址', thPoints:'总积分', thAvailable:'可用余额', thHolding:'持仓金额', thNet:'净资产', thPnl:'总盈亏', thFloatingPnl:'浮动盈亏', thRealizedPnl:'已实现', thPositions:'持仓数', thVolume:'近期成交额', thLast:'最后成交', thNote:'备注', thAction:'操作',
     footer:'Predict.fun Batch Query · Predict API 通过 Vercel 环境变量代理访问，结果仅供辅助核对。',
     copied:'已复制', copyFailed:'复制失败', configSaved:'配置已保存', onlyFiles:'仅支持 CSV、TXT 或 JSON 文件', noAddressOrPoints:'文件中未找到 0x 地址或 totalPoints 总积分数据',
     importedPointsAndAddresses:'已导入 {points} 条总积分榜数据，并提取 {addresses} 个地址', importedPoints:'已导入 {points} 条总积分榜数据', importedAddresses:'已导入 {count} 个地址',
     loadedHistory:'已加载历史', historyCleared:'历史已清空', delete:'删', addressesUnit:'个地址', restoreToast:'已恢复输入顺序',
-    noHoldings:'暂无持仓', noRecentFills:'暂无最近成交', matchSkippedDetail:'已跳过成交查询', holdingsTitle:'持仓明细（最多 12 条）', recentFillsTitle:'最近成交（最多显示 12 条，统计上限 {n} 条）', recentFillsTitleSkipped:'最近成交（已跳过查询）', pointsRecordsTitle:'总积分榜记录（最多 12 条）', noPointRecord:'暂无总积分榜记录',
-    copy:'复制', partialFailed:'部分接口失败', notePlaceholder:'✎ 备注', details:'详情', collapse:'收起', refreshTitle:'刷新此行',
-    shares:'份额', avgPrice:'均价', currentPrice:'现价', value:'价值', totalPoints:'总积分', points:'积分', weekPoints:'周积分', rank:'排名', fillVolume:'成交额',
+    noHoldings:'暂无持仓', noRecentFills:'暂无最近成交', fillsCount:'{n} 笔成交', matchSkippedDetail:'已跳过成交查询', holdingsTitle:'持仓明细（最多 12 条）', recentFillsTitle:'最近成交（最多显示 12 条，统计上限 {n} 条）', recentFillsTitleSkipped:'最近成交（已跳过查询）', pnlDetailsTitle:'盈亏口径', pointsRecordsTitle:'总积分榜记录（最多 12 条）', noPointRecord:'暂无总积分榜记录',
+    copy:'复制', partialFailed:'部分接口失败', pnlIncomplete:'PNL可能不完整', notePlaceholder:'✎ 备注', details:'详情', collapse:'收起', refreshTitle:'刷新此行',
+    shares:'份额', avgPrice:'均价', currentPrice:'现价', value:'价值', totalPoints:'总积分', points:'积分', weekPoints:'周积分', rank:'排名', fillVolume:'成交额', portfolioPnl:'总盈亏', floatingPnl:'浮动盈亏', realizedPnl:'已实现盈亏', tradeCashflow:'成交现金流', feePaid:'手续费', pnlCompleteness:'完整性', pnlComplete:'完整', pnlIncompleteDetail:'未完整',
     buy:'买入', sell:'卖出', justNow:'刚刚', hoursAgo:'{n}小时前',
     refreshDone:'刷新完成', refreshFailed:'刷新失败：{msg}', noData:'暂无数据',
     queryRequired:'请输入或导入至少一个 0x 地址', invalidAddrCount:'{count} 个地址格式无效', extractedWithIgnored:'已提取 {valid} 个地址，忽略 {invalid} 行无效内容', preparingQuery:'准备查询...', queryProgress:'{done}/{total} 地址', querying:'查询中...', queryDone:'已查询 {total} 个地址，成功 {ok} 个，失败 {fail} 个{interrupted}', interrupted:'（已中断）', stopping:'正在停止...', stoppingToast:'正在取消进行中的请求',
     pointsStatusLoaded:'已加载 {total} 条数据，{addrCnt} 个地址{weeks}', pointsStatusWeeks:'，含 {weeks} 个周/轮次', pointsStatusNotLoaded:'未上传总积分榜；点击上传文件导入',
     importedLeaderboardUnrecognized:'未识别到总积分榜记录', importedLeaderboard:'已导入 {count} 条总积分榜记录', clearedLeaderboard:'已清空已上传总榜', badAddress:'地址格式不正确', addressNotFound:'未找到该地址', importedWeeklySum:'已导入 weeklyPoints 合计',
-    csvAddress:'地址', csvTotalPoints:'总积分', csvAvailable:'可用余额USDT', csvHolding:'持仓金额USD', csvNet:'净资产USD', csvPnl:'浮动盈亏USD', csvPositions:'持仓数', csvVolume:'近期成交额USD', csvLast:'最后成交', csvNote:'备注', csvStatus:'状态'
+    csvAddress:'地址', csvTotalPoints:'总积分', csvAvailable:'可用余额USDT', csvHolding:'持仓金额USD', csvNet:'净资产USD', csvPnl:'总盈亏USD', csvFloatingPnl:'浮动盈亏USD', csvRealizedPnl:'已实现盈亏USD', csvPositions:'持仓数', csvVolume:'近期成交额USD', csvLast:'最后成交', csvNote:'备注', csvStatus:'状态'
   },
   en: {
     offline:'You are offline. Check your connection and try again.',
     appTitle:'Batch Data Query',
-    subtitle:'Batch query Predict Smart Wallet available balance, holding value, floating PnL, and recent fills; fill depth is configurable, default 500.',
+    subtitle:'Batch query Predict Smart Wallet available balance, holding value, portfolio PnL, floating PnL, and recent fills; a larger fill depth makes portfolio PnL closer to the official page.',
     officialSite:'Predict.fun', apiDocs:'API Docs', themeToggle:'Toggle dark/light mode',
     matchDepthLabel:'Fills', matchDepthSkip:'Skip', matchDepthLatest:'Latest {n}',
     tabPaste:'Paste Addresses', tabUpload:'Upload File', inputPlaceholder:'One Predict Smart Wallet / 0x address per line. You can also paste CSV or any text; 0x... addresses will be extracted automatically.',
     uploadTitle:'Drop an address file or total leaderboard JSON/CSV here', uploadSub:'Address files extract 0x addresses; leaderboard files import totalPoints and extract addresses automatically.', uploadButton:'Choose file',
     queryHistory:'Query History', clearHistory:'Clear History', startQuery:'Start Query', stopQuery:'Stop', exportCsv:'Export CSV', exportJson:'Export JSON',
     statAvailable:'Available', statAvailableSub:'On-chain USDT · live', statHolding:'Holding Value', statHoldingSub:'Current holdings · USD', statNet:'Net Value', statNetSub:'Available + holdings',
-    statPnlLabel:'Floating PnL', statPnlSub:'API pnlUsd / estimated', statPnlSubMissing:'PnL missing on {n} address(es)', statVolLabel:'Recent Volume', statVolSub:'Latest {n} fills', statVolSubSkipped:'Fill query skipped', statAvailSub:'On-chain USDT · live', statAvailSubMissing:'On-chain USDT · {n} address(es) failed', statPosLabel:'Positions', statPosSub:'All addresses total', statPointsLabel:'Total Points', statPointsSub:'Uploaded leaderboard',
+    statPnlLabel:'Portfolio PnL', statPnlSub:'Trade cashflow + holdings', statPnlSubMissing:'Portfolio PnL incomplete on {n} address(es)', statFloatingPnlLabel:'Floating PnL', statFloatingPnlSub:'positions.pnlUsd', statFloatingPnlSubMissing:'Floating PnL missing on {n} address(es)', statRealizedPnlLabel:'Realized PnL', statRealizedPnlSub:'Portfolio - floating', statVolLabel:'Recent Volume', statVolSub:'Latest {n} fills', statVolSubSkipped:'Fill query skipped', statAvailSub:'On-chain USDT · live', statAvailSubMissing:'On-chain USDT · {n} address(es) failed', statPosLabel:'Positions', statPosSub:'All addresses total', statPointsLabel:'Total Points', statPointsSub:'Uploaded leaderboard',
     filterPlaceholder:'Search address, note, or status...', restoreOrder:'Restore Input Order',
-    thIdx:'#', thAddress:'Address', thPoints:'Total Points', thAvailable:'Available', thHolding:'Holding Value', thNet:'Net Value', thPnl:'Floating PnL', thPositions:'Positions', thVolume:'Recent Volume', thLast:'Last Fill', thNote:'Note', thAction:'Action',
+    thIdx:'#', thAddress:'Address', thPoints:'Total Points', thAvailable:'Available', thHolding:'Holding Value', thNet:'Net Value', thPnl:'Portfolio PnL', thFloatingPnl:'Floating PnL', thRealizedPnl:'Realized', thPositions:'Positions', thVolume:'Recent Volume', thLast:'Last Fill', thNote:'Note', thAction:'Action',
     footer:'Predict.fun Batch Query · Predict API is accessed through the Vercel environment-variable proxy. Results are for reference only.',
     copied:'Copied', copyFailed:'Copy failed', configSaved:'Configuration saved', onlyFiles:'Only CSV, TXT, or JSON files are supported', noAddressOrPoints:'No 0x address or totalPoints leaderboard data found in the file',
     importedPointsAndAddresses:'Imported {points} leaderboard rows and extracted {addresses} addresses', importedPoints:'Imported {points} leaderboard rows', importedAddresses:'Imported {count} addresses',
     loadedHistory:'History loaded', historyCleared:'History cleared', delete:'Delete', addressesUnit:'addresses', restoreToast:'Input order restored',
-    noHoldings:'No holdings', noRecentFills:'No recent fills', matchSkippedDetail:'Fill query skipped', holdingsTitle:'Holding Details (up to 12)', recentFillsTitle:'Recent Fills (showing up to 12, counting up to latest {n})', recentFillsTitleSkipped:'Recent Fills (skipped)', pointsRecordsTitle:'Total Points Records (up to 12)', noPointRecord:'No total-points record',
-    copy:'Copy', partialFailed:'Partial API failure', notePlaceholder:'✎ Note', details:'Details', collapse:'Collapse', refreshTitle:'Refresh this row',
-    shares:'shares', avgPrice:'avg', currentPrice:'current', value:'value', totalPoints:'Total points', points:'Points', weekPoints:'Weekly points', rank:'Rank', fillVolume:'Volume',
+    noHoldings:'No holdings', noRecentFills:'No recent fills', fillsCount:'{n} fills', matchSkippedDetail:'Fill query skipped', holdingsTitle:'Holding Details (up to 12)', recentFillsTitle:'Recent Fills (showing up to 12, counting up to latest {n})', recentFillsTitleSkipped:'Recent Fills (skipped)', pnlDetailsTitle:'PnL Method', pointsRecordsTitle:'Total Points Records (up to 12)', noPointRecord:'No total-points record',
+    copy:'Copy', partialFailed:'Partial API failure', pnlIncomplete:'PNL may be incomplete', notePlaceholder:'✎ Note', details:'Details', collapse:'Collapse', refreshTitle:'Refresh this row',
+    shares:'shares', avgPrice:'avg', currentPrice:'current', value:'value', totalPoints:'Total points', points:'Points', weekPoints:'Weekly points', rank:'Rank', fillVolume:'Volume', portfolioPnl:'Portfolio PnL', floatingPnl:'Floating PnL', realizedPnl:'Realized PnL', tradeCashflow:'Trade cashflow', feePaid:'Fees', pnlCompleteness:'Completeness', pnlComplete:'Complete', pnlIncompleteDetail:'Incomplete',
     buy:'Buy', sell:'Sell', justNow:'just now', hoursAgo:'{n}h ago',
     refreshDone:'Refresh complete', refreshFailed:'Refresh failed: {msg}', noData:'No data',
     queryRequired:'Enter or import at least one 0x address', invalidAddrCount:'{count} invalid address(es)', extractedWithIgnored:'Extracted {valid} addresses, ignored {invalid} invalid line(s)', preparingQuery:'Preparing query...', queryProgress:'{done}/{total} addresses', querying:'Querying...', queryDone:'Queried {total} addresses, success {ok}, failed {fail}{interrupted}', interrupted:' (stopped)', stopping:'Stopping...', stoppingToast:'Canceling in-flight requests',
     pointsStatusLoaded:'Loaded {total} rows, {addrCnt} addresses{weeks}', pointsStatusWeeks:', across {weeks} week/round group(s)', pointsStatusNotLoaded:'No leaderboard uploaded; use Upload File to import',
     importedLeaderboardUnrecognized:'No leaderboard records recognized', importedLeaderboard:'Imported {count} leaderboard records', clearedLeaderboard:'Uploaded leaderboard cleared', badAddress:'Invalid address format', addressNotFound:'Address not found', importedWeeklySum:'Imported weeklyPoints total',
-    csvAddress:'Address', csvTotalPoints:'Total Points', csvAvailable:'Available USDT', csvHolding:'Holding Value USD', csvNet:'Net Value USD', csvPnl:'Floating PnL USD', csvPositions:'Positions', csvVolume:'Recent Volume USD', csvLast:'Last Fill', csvNote:'Note', csvStatus:'Status'
+    csvAddress:'Address', csvTotalPoints:'Total Points', csvAvailable:'Available USDT', csvHolding:'Holding Value USD', csvNet:'Net Value USD', csvPnl:'Portfolio PnL USD', csvFloatingPnl:'Floating PnL USD', csvRealizedPnl:'Realized PnL USD', csvPositions:'Positions', csvVolume:'Recent Volume USD', csvLast:'Last Fill', csvNote:'Note', csvStatus:'Status'
   }
 };
 function t(key, params={}){
@@ -328,11 +334,11 @@ function applyLanguage(rerender=false){
       opt.textContent = v<=0 ? t('matchDepthSkip') : t('matchDepthLatest',{n:v.toLocaleString(locale())});
     });
   }
-  const mapStats=[['#statAvail','statAvailable','statAvailableSub'],['#statValue','statHolding','statHoldingSub'],['#statTotal','statNet','statNetSub'],['#statPnl','statPnlLabel','statPnlSub'],['#statVol','statVolLabel',null],['#statPos','statPosLabel','statPosSub'],['#statPoints','statPointsLabel','statPointsSub']];
+  const mapStats=[['#statAvail','statAvailable','statAvailableSub'],['#statValue','statHolding','statHoldingSub'],['#statTotal','statNet','statNetSub'],['#statPnl','statPnlLabel','statPnlSub'],['#statFloatingPnl','statFloatingPnlLabel','statFloatingPnlSub'],['#statRealizedPnl','statRealizedPnlLabel','statRealizedPnlSub'],['#statVol','statVolLabel',null],['#statPos','statPosLabel','statPosSub'],['#statPoints','statPointsLabel','statPointsSub']];
   mapStats.forEach(([sel,lab,sub])=>{ const card=$(sel)?.closest('.stat-card'); if(card){ setText(card.querySelector('.stat-label'),lab); if(sub) setText(card.querySelector('.stat-sub'),sub); } });
   refreshDynamicStatLabels?.();
   const filter=$('#filterInput'); if(filter) filter.placeholder=t('filterPlaceholder'); setText($('#restoreOrder'),'restoreOrder');
-  const thMap={idx:'thIdx',addr:'thAddress',points:'thPoints',available:'thAvailable',value:'thHolding',total:'thNet',pnl:'thPnl',posCnt:'thPositions',vol:'thVolume',last:'thLast',note:'thNote',action:'thAction'};
+  const thMap={idx:'thIdx',addr:'thAddress',points:'thPoints',available:'thAvailable',value:'thHolding',total:'thNet',pnl:'thPnl',floatingPnl:'thFloatingPnl',realizedPnl:'thRealizedPnl',posCnt:'thPositions',vol:'thVolume',last:'thLast',note:'thNote',action:'thAction'};
   Object.entries(thMap).forEach(([k,key])=>setText($(`#tbl thead th[data-key="${k}"]`),key));
   setText($('.footer'),'footer');
   updatePointsStatus?.();
@@ -835,12 +841,21 @@ function readNextCursor(json){
   const cursor = candidates.find(v => typeof v === 'string' && v.trim());
   return cursor ? cursor.trim() : '';
 }
+function attachMatchMeta(arr, meta){
+  arr._complete = !!meta.complete;
+  arr._capped = !!meta.capped;
+  arr._cap = meta.cap || arr.length;
+  arr._fetched = arr.length;
+  return arr;
+}
 async function fetchMatches(addr, maxMatches=MAX_MATCHES){
-  if(!maxMatches || maxMatches <= 0) return [];
+  if(!maxMatches || maxMatches <= 0) return attachMatchMeta([], {complete:false, capped:false, cap:0});
   const cap = Math.min(maxMatches, MAX_MATCHES);
   let after = '';
   const out = [];
   const seenCursors = new Set();
+  let complete = false;
+  let capped = false;
 
   while(!abortFlag && out.length < cap){
     const first = Math.min(MATCH_PAGE_SIZE, cap - out.length);
@@ -849,20 +864,19 @@ async function fetchMatches(addr, maxMatches=MAX_MATCHES){
 
     const j = await fetchJ(apiUrl('/v1/orders/matches', params));
     const data = readMatchesPage(j);
-    if(!data.length) break;
+    if(!data.length){ complete = true; break; }
 
     out.push(...data.slice(0, cap - out.length));
 
     const next = readNextCursor(j);
-    if(!next || next === after || seenCursors.has(next)) break;
+    if(!next || next === after || seenCursors.has(next) || data.length < first){ complete = true; break; }
+    if(out.length >= cap){ capped = true; break; }
 
     seenCursors.add(next);
     after = next;
-
-    if(data.length < first) break;
   }
 
-  return out;
+  return attachMatchMeta(out, {complete:complete && !capped, capped, cap});
 }
 
 function normPriceToCents(price){ let p=safeNum(price); if(p===null) return null; if(Math.abs(p)>=1e6) p=p/1e18; if(p>=0 && p<=1) p=p*100; return p; }
@@ -934,11 +948,35 @@ function positionPnl(p){
   return null;
 }
 function marketUrlFrom(m){ if(!m || typeof m!=='object') return ''; const slug=m.slug || m.marketSlug || m.categorySlug || m.category_slug || m.id; return slug ? `https://predict.fun/market/${encodeURIComponent(slug)}` : ''; }
-function pickUserSide(match, addr){ const taker=(match.taker&&typeof match.taker==='object')?match.taker:{}; const makers=Array.isArray(match.makers)?match.makers:[]; const a=addr.toLowerCase(); for(const m of makers){ if(m && String(m.signer||'').toLowerCase()===a) return m; } if(String(taker.signer||'').toLowerCase()===a) return taker; return Object.keys(taker).length ? taker : (makers.find(x=>x&&typeof x==='object') || {}); }
-function sideText(side){ const s=String(side||'').toLowerCase(); if(s==='bid') return t('buy'); if(s==='ask') return t('sell'); return side || '-'; }
-function matchValueUsd(match, addr){ const side=pickUserSide(match,addr); let shares=normAmountToShares(match.amountFilled); if(shares===null) shares=normAmountToShares(side.amount); let price=normPriceToCents(side.price); if(price===null) price=normPriceToCents(match.priceExecuted); return (shares!==null && price!==null) ? shares*price/100 : 0; }
-function matchSummary(match, addr){ const side=pickUserSide(match,addr); const m=(match.market&&typeof match.market==='object') ? {...match.market} : {}; if(match.market_id && !m.id) m.id=match.market_id; if(match.market_title) m.title=match.market_title; if(match.category_slug) m.slug=match.category_slug; if(match.categorySlug) m.slug=match.categorySlug; const outcome=(side.outcome&&typeof side.outcome==='object') ? side.outcome : {}; let shares=normAmountToShares(match.amountFilled); if(shares===null) shares=normAmountToShares(side.amount); let price=normPriceToCents(side.price); if(price===null) price=normPriceToCents(match.priceExecuted); return {
-    title:m.title || m.question || String(m.id || '-'), url:marketUrlFrom(m), side:sideText(side.quoteType), outcome:outcome.name || match.outcome_name || match.outcomeName || '-', shares, price, value: matchValueUsd(match, addr), tx:match.transactionHash || '', executedAt:match.executedAt || match.createdAt || ''
+function pickUserSideInfo(match, addr){
+  const taker=(match.taker&&typeof match.taker==='object')?match.taker:{};
+  const makers=Array.isArray(match.makers)?match.makers:[];
+  const a=String(addr||'').toLowerCase();
+  for(const m of makers){ if(m && String(m.signer||'').toLowerCase()===a) return {side:m, role:'maker'}; }
+  if(String(taker.signer||'').toLowerCase()===a) return {side:taker, role:'taker'};
+  return Object.keys(taker).length ? {side:taker, role:'taker'} : {side:(makers.find(x=>x&&typeof x==='object') || {}), role:'maker'};
+}
+function pickUserSide(match, addr){ return pickUserSideInfo(match, addr).side; }
+function quoteTypeOf(side){ return String(side?.quoteType ?? side?.side ?? '').toLowerCase(); }
+function isBuyQuote(side){ const s=quoteTypeOf(side); return s==='bid' || s==='buy' || s==='b'; }
+function isSellQuote(side){ const s=quoteTypeOf(side); return s==='ask' || s==='sell' || s==='s'; }
+function sideText(side){ const s=String(side||'').toLowerCase(); if(s==='bid' || s==='buy') return t('buy'); if(s==='ask' || s==='sell') return t('sell'); return side || '-'; }
+function normUsdAmount(amount){ let a=safeNum(amount); if(a===null) return 0; if(Math.abs(a)>1e9) a=a/1e18; return a; }
+function userMatchShares(match, addr){ const info=pickUserSideInfo(match,addr); const bySide=normAmountToShares(info.side.amount); const byFill=normAmountToShares(match.amountFilled); return info.role==='maker' ? (bySide ?? byFill) : (byFill ?? bySide); }
+function userMatchPriceCents(match, addr){ const side=pickUserSide(match,addr); return normPriceToCents(side.price) ?? normPriceToCents(match.priceExecuted); }
+function userFeeUsd(match, addr){ const side=pickUserSide(match,addr); return normUsdAmount(side?.fee?.amount ?? side?.feeAmount ?? side?.feeUsd ?? side?.fee_usd ?? 0); }
+function matchValueUsd(match, addr){ const shares=userMatchShares(match,addr); const price=userMatchPriceCents(match,addr); return (shares!==null && price!==null) ? shares*price/100 : 0; }
+function matchCashflowUsd(match, addr){ const side=pickUserSide(match,addr); const value=matchValueUsd(match, addr); const fee=userFeeUsd(match, addr); if(isBuyQuote(side)) return -(value + fee); if(isSellQuote(side)) return value - fee; return 0; }
+function calcPortfolioPnlFromMatches(matches, holdingValue, floatingPnl, addr){
+  if(!Array.isArray(matches)) return null;
+  const cashflow=matches.reduce((s,x)=>s+matchCashflowUsd(x, addr),0);
+  const fee=matches.reduce((s,x)=>s+userFeeUsd(x, addr),0);
+  const totalPnl=(Number(holdingValue)||0) + cashflow;
+  const realizedPnl=Number.isFinite(toNum(floatingPnl)) ? totalPnl - toNum(floatingPnl) : null;
+  return {totalPnl, realizedPnl, cashflow, fee, complete:matches._complete===true, capped:matches._capped===true, fetched:matches._fetched ?? matches.length, cap:matches._cap ?? matches.length};
+}
+function matchSummary(match, addr){ const info=pickUserSideInfo(match,addr); const side=info.side; const m=(match.market&&typeof match.market==='object') ? {...match.market} : {}; if(match.market_id && !m.id) m.id=match.market_id; if(match.market_title) m.title=match.market_title; if(match.category_slug) m.slug=match.category_slug; if(match.categorySlug) m.slug=match.categorySlug; const outcome=(side.outcome&&typeof side.outcome==='object') ? side.outcome : {}; const shares=userMatchShares(match,addr); const price=userMatchPriceCents(match,addr); const value=matchValueUsd(match, addr); const fee=userFeeUsd(match, addr); const cashflow=matchCashflowUsd(match, addr); return {
+    title:m.title || m.question || String(m.id || '-'), url:marketUrlFrom(m), side:sideText(side.quoteType), outcome:outcome.name || match.outcome_name || match.outcomeName || '-', shares, price, value, fee, cashflow, tx:match.transactionHash || '', executedAt:match.executedAt || match.createdAt || ''
   };
 }
 
@@ -961,11 +999,15 @@ async function queryOne(addr, opts={}){
   }).sort((a,b)=>b.value-a.value);
   const matchDetails=matchArr.map(x=>matchSummary(x,addr)).sort((a,b)=>new Date(b.executedAt)-new Date(a.executedAt));
   const value=posDetails.reduce((s,p)=>s+(p.value||0),0);
-  const pnlVals=posDetails.map(p=>p.pnl).filter(v=>Number.isFinite(v));
-  const pnlPartial = posDetails.length>0 && pnlVals.length<posDetails.length;
-  const pnl = posDetails.length===0 ? 0 : (pnlPartial ? null : pnlVals.reduce((s,v)=>s+v,0));
+  const floatingPnlVals=posDetails.map(p=>p.pnl).filter(v=>Number.isFinite(v));
+  const floatingPnlPartial = posDetails.length>0 && floatingPnlVals.length<posDetails.length;
+  const floatingPnl = posDetails.length===0 ? 0 : (floatingPnlPartial ? null : floatingPnlVals.reduce((s,v)=>s+v,0));
   const costVals=posDetails.map(p=>p.cost).filter(v=>Number.isFinite(v));
   const cost = costVals.length ? costVals.reduce((s,v)=>s+v,0) : null;
+  const portfolioPnlInfo = (!matchSkipped && matches!==null && positions!==null) ? calcPortfolioPnlFromMatches(matchArr, value, floatingPnl, addr) : null;
+  const pnl = portfolioPnlInfo ? portfolioPnlInfo.totalPnl : null;
+  const realizedPnl = portfolioPnlInfo ? portfolioPnlInfo.realizedPnl : null;
+  const pnlPartial = matchSkipped || pRes.status!=='fulfilled' || mRes.status!=='fulfilled' || !portfolioPnlInfo || !portfolioPnlInfo.complete || portfolioPnlInfo.capped;
   const vol=matchDetails.reduce((s,m)=>s+(m.value||0),0);
   const marketCnt=new Set(posDetails.map(p=>String(p.marketId||p.title)).filter(Boolean)).size;
   const total=Number.isFinite(toNum(available)) ? value + Number(available) : null;
@@ -973,7 +1015,7 @@ async function queryOne(addr, opts={}){
   const pointRecords=pointRecordsFor(addr);
   const pointSummary=pointSummaryFor(addr);
   const points=pointSummary.totalPoints;
-  return {addr,points,weeklyPointsSum:pointSummary.weeklyPointsSum,pointCnt:pointSummary.recordCount,pointRecords,pointSummary,pointLatest:pointSummary.latest,available,value,total,pnl,pnlPartial,cost,posCnt:posDetails.length,marketCnt,vol,fillCnt:matchDetails.length,last,positions:posDetails,matches:matchDetails,matchSkipped,matchDepth,partial:{positionsFailed:pRes.status!=='fulfilled',matchesFailed:!matchSkipped && mRes.status!=='fulfilled',balanceFailed:bRes.status!=='fulfilled' || available===null},detailOpen:false};
+  return {addr,points,weeklyPointsSum:pointSummary.weeklyPointsSum,pointCnt:pointSummary.recordCount,pointRecords,pointSummary,pointLatest:pointSummary.latest,available,value,total,pnl,pnlPartial,floatingPnl,floatingPnlPartial,realizedPnl,portfolioPnlInfo,cost,posCnt:posDetails.length,marketCnt,vol,fillCnt:matchDetails.length,last,positions:posDetails,matches:matchDetails,matchSkipped,matchDepth,matchesComplete:!!portfolioPnlInfo?.complete,matchesCapped:!!portfolioPnlInfo?.capped,partial:{positionsFailed:pRes.status!=='fulfilled',matchesFailed:!matchSkipped && mRes.status!=='fulfilled',balanceFailed:bRes.status!=='fulfilled' || available===null},detailOpen:false};
 }
 async function runPool(tasks, concurrency, onDone){ let i=0; async function worker(){ while(i<tasks.length && !abortFlag){ const idx=i++; try{ const res=await tasks[idx](); onDone(res,idx); }catch(e){ onDone({addr:tasks[idx].addr || '', err:String(e?.message||e)}, idx); } } } await Promise.all(Array.from({length:Math.min(concurrency,tasks.length)},worker)); }
 
@@ -982,19 +1024,24 @@ function renderRow(m, visualIdx){
   const tr=document.createElement('tr');
   tr.dataset.search=[m.addr,getNote(m.addr),m.err,m.points,m.weeklyPointsSum,m.pointLatest?.name,...(m.pointRecords||[]).slice(0,5).map(p=>[p.name,p.source,p.note,p.week,p.roundId,p.grade].join(' ')),...(m.positions||[]).slice(0,5).map(p=>p.title),...(m.matches||[]).slice(0,5).map(x=>x.title)].join(' ').toLowerCase();
   if(m.err){
-    tr.innerHTML=`<td>${visualIdx}</td><td class="mono nowrap">${fmtShort(m.addr)}<button class="copy-btn" data-copy>${t('copy')}</button></td><td colspan="9"><span class="err-badge">✕ ${esc(m.err)}</span></td><td><button class="btn-sm btn-ghost" data-refresh>↻</button></td>`;
+    tr.innerHTML=`<td>${visualIdx}</td><td class="mono nowrap">${fmtShort(m.addr)}<button class="copy-btn" data-copy>${t('copy')}</button></td><td colspan="11"><span class="err-badge">✕ ${esc(m.err)}</span></td><td><button class="btn-sm btn-ghost" data-refresh>↻</button></td>`;
   }else{
-    const pnlPct = (Number.isFinite(m.pnl) && Number.isFinite(m.cost) && m.cost!==0) ? m.pnl/m.cost*100 : NaN;
-    const pnlMark = m.pnlPartial ? '<span class="small muted" title="部分仓位 PnL 缺失"> ?</span>' : '';
-    const partial=(m.partial?.positionsFailed||m.partial?.matchesFailed||m.partial?.balanceFailed) ? `<span class="warn-badge">${t('partialFailed')}</span>` : '';
+    const floatPct = (Number.isFinite(m.floatingPnl) && Number.isFinite(m.cost) && m.cost!==0) ? m.floatingPnl/m.cost*100 : NaN;
+    const pnlMark = m.pnlPartial ? `<span class="small muted" title="${esc(t('pnlIncomplete'))}"> ?</span>` : '';
+    const floatingMark = m.floatingPnlPartial ? '<span class="small muted" title="positions PnL 缺失"> ?</span>' : '';
+    const apiPartial=(m.partial?.positionsFailed||m.partial?.matchesFailed||m.partial?.balanceFailed) ? `<span class="warn-badge">${t('partialFailed')}</span>` : '';
+    const pnlPartialBadge=m.pnlPartial ? `<span class="warn-badge">${t('pnlIncomplete')}</span>` : '';
+    const matchCountText = m.matchSkipped ? t('matchSkippedDetail') : `${t('fillsCount',{n:fmtInt(m.fillCnt)})}${m.matchesComplete?'':'?'}`;
     tr.innerHTML=`
       <td>${visualIdx}</td>
-      <td class="mono nowrap">${fmtShort(m.addr)}<button class="copy-btn" data-copy>${t('copy')}</button>${partial}</td>
+      <td class="mono nowrap">${fmtShort(m.addr)}<button class="copy-btn" data-copy>${t('copy')}</button>${apiPartial}${pnlPartialBadge}</td>
       <td class="num">${fmtPoints(m.points)}</td>
       <td class="num">${fmtUsd(m.available)}</td>
       <td class="num">${fmtUsd(m.value)}</td>
       <td class="num">${fmtUsd(m.total)}</td>
-      <td class="num ${cssClassSigned(m.pnl)}">${signedMoney(m.pnl)}${pnlMark} <div class="small ${cssClassSigned(m.pnl)}">${signedPct(pnlPct)}</div></td>
+      <td class="num ${cssClassSigned(m.pnl)}">${signedMoney(m.pnl)}${pnlMark}<div class="small muted">${esc(matchCountText)}</div></td>
+      <td class="num ${cssClassSigned(m.floatingPnl)}">${signedMoney(m.floatingPnl)}${floatingMark}<div class="small ${cssClassSigned(m.floatingPnl)}">${signedPct(floatPct)}</div></td>
+      <td class="num ${cssClassSigned(m.realizedPnl)}">${signedMoney(m.realizedPnl)}</td>
       <td class="num">${fmtInt(m.posCnt)}</td>
       <td class="num">${m.matchSkipped ? `<span class="muted small">${esc(t('matchSkippedDetail'))}</span>` : fmtUsd(m.vol)}</td>
       <td>${m.matchSkipped ? `<span class="muted small">${esc(t('matchSkippedDetail'))}</span>` : fmtDate(m.last)}</td>
@@ -1013,10 +1060,12 @@ function renderDetailRow(m){
   const posHtml=m.positions.length ? m.positions.slice(0,12).map(p=>`<div class="detail-item"><div class="detail-title">${p.url?`<a href="${esc(p.url)}" target="_blank" rel="noopener noreferrer">${esc(p.title)}</a>`:esc(p.title)}</div><span class="pill">${esc(p.outcome)}</span> ${t('shares')} ${fmtShares(p.shares)} · ${t('avgPrice')} ${p.entryCents!==null?p.entryCents.toFixed(2)+'c':'-'}${p.markCents!==null?' → '+t('currentPrice')+' '+p.markCents.toFixed(2)+'c':''}<br>${t('value')} $${fmtMoney(p.value)} · <span class="${cssClassSigned(p.pnl)}">${signedMoney(p.pnl)} ${signedPct(p.pnlPct)}</span></div>`).join('') : `<div class="muted">${t('noHoldings')}</div>`;
   let matchHtml;
   if(m.matchSkipped) matchHtml = `<div class="muted">${t('matchSkippedDetail')}</div>`;
-  else matchHtml = m.matches.length ? m.matches.slice(0,12).map(x=>{ const txUrl=bscscanTxUrl(x.tx); return `<div class="detail-item"><div class="detail-title">${x.url?`<a href="${esc(x.url)}" target="_blank" rel="noopener noreferrer">${esc(x.title)}</a>`:esc(x.title)}</div><span class="pill">${esc(x.side)}</span><span class="pill">${esc(x.outcome)}</span> ${fmtShares(x.shares)} @ ${x.price!==null?x.price.toFixed(2)+'c':'-'} = $${fmtMoney(x.value)}<br>${esc(fmtDate(new Date(x.executedAt).getTime()))}${txUrl?` · <a href="${esc(txUrl)}" target="_blank" rel="noopener noreferrer">Tx</a>`:''}</div>`; }).join('') : `<div class="muted">${t('noRecentFills')}</div>`;
+  else matchHtml = m.matches.length ? m.matches.slice(0,12).map(x=>{ const txUrl=bscscanTxUrl(x.tx); return `<div class="detail-item"><div class="detail-title">${x.url?`<a href="${esc(x.url)}" target="_blank" rel="noopener noreferrer">${esc(x.title)}</a>`:esc(x.title)}</div><span class="pill">${esc(x.side)}</span><span class="pill">${esc(x.outcome)}</span> ${fmtShares(x.shares)} @ ${x.price!==null?x.price.toFixed(2)+'c':'-'} = $${fmtMoney(x.value)} · ${t('tradeCashflow')} <span class="${cssClassSigned(x.cashflow)}">${signedMoney(x.cashflow)}</span>${x.fee?` · ${t('feePaid')} $${fmtMoney(x.fee)}`:''}<br>${esc(fmtDate(new Date(x.executedAt).getTime()))}${txUrl?` · <a href="${esc(txUrl)}" target="_blank" rel="noopener noreferrer">Tx</a>`:''}</div>`; }).join('') : `<div class="muted">${t('noRecentFills')}</div>`;
   const pointHtml=(m.pointRecords||[]).length ? m.pointRecords.slice(0,12).map(r=>`<div class="detail-item"><div class="detail-title">${r.totalPoints!==null?`${t('totalPoints')} ${fmtPoints(r.totalPoints)}`:t('points')+' '+fmtPoints(r.points)}${r.name?` · ${esc(r.name)}`:''}</div>${r.week!==null?`<span class="pill">Week ${fmtInt(r.week)}</span>`:''}${r.roundId!==null?`<span class="pill">Round ${fmtInt(r.roundId)}</span>`:''}${r.weeklyPoints!==null?`<span class="pill">${t('weekPoints')} ${fmtPoints(r.weeklyPoints)}</span>`:''}${r.rank!==null?`<span class="pill">${t('rank')} #${fmtInt(r.rank)}</span>`:''}${r.ppRank!==null?`<span class="pill">PP #${fmtInt(r.ppRank)}</span>`:''}${r.grade?`<span class="pill">${esc(r.grade)}</span>`:''}<br>${esc(r.createdAt||r.source||'-')}${r.volumeUsd!==null?` · ${t('fillVolume')} $${fmtMoney(r.volumeUsd)}`:''}${r.note?` · ${esc(r.note)}`:''}</div>`).join('') : `<div class="muted">${t('noPointRecord')}</div>`;
   const fillsTitle = m.matchSkipped ? t('recentFillsTitleSkipped') : t('recentFillsTitle',{n:Number.isFinite(m.matchDepth)&&m.matchDepth>0 ? m.matchDepth.toLocaleString(locale()) : MATCH_DEPTH_DEFAULT.toLocaleString(locale())});
-  tr.innerHTML=`<td colspan="12"><div class="detail-grid"><div class="detail-box"><h4>${t('holdingsTitle')}</h4><div class="detail-list">${posHtml}</div></div><div class="detail-box"><h4>${esc(fillsTitle)}</h4><div class="detail-list">${matchHtml}</div></div><div class="detail-box"><h4>${t('pointsRecordsTitle')}</h4><div class="detail-list">${pointHtml}</div></div></div></td>`;
+  const pnlInfo=m.portfolioPnlInfo || {};
+  const pnlHtml=`<div class="detail-item"><div class="detail-title">${t('portfolioPnl')} <span class="${cssClassSigned(m.pnl)}">${signedMoney(m.pnl)}</span>${m.pnlPartial?' ?':''}</div>${t('floatingPnl')} <span class="${cssClassSigned(m.floatingPnl)}">${signedMoney(m.floatingPnl)}</span><br>${t('realizedPnl')} <span class="${cssClassSigned(m.realizedPnl)}">${signedMoney(m.realizedPnl)}</span><br>${t('tradeCashflow')} <span class="${cssClassSigned(pnlInfo.cashflow)}">${signedMoney(pnlInfo.cashflow)}</span>${Number.isFinite(toNum(pnlInfo.fee))?` · ${t('feePaid')} $${fmtMoney(pnlInfo.fee)}`:''}<br>${t('pnlCompleteness')}：${pnlInfo.complete?t('pnlComplete'):t('pnlIncompleteDetail')}${pnlInfo.capped?` · ${fmtInt(pnlInfo.fetched)}/${fmtInt(pnlInfo.cap)}`:''}</div>`;
+  tr.innerHTML=`<td colspan="14"><div class="detail-grid"><div class="detail-box"><h4>${t('holdingsTitle')}</h4><div class="detail-list">${posHtml}</div></div><div class="detail-box"><h4>${esc(fillsTitle)}</h4><div class="detail-list">${matchHtml}</div></div><div class="detail-box"><h4>${t('pnlDetailsTitle')}</h4><div class="detail-list">${pnlHtml}</div></div><div class="detail-box"><h4>${t('pointsRecordsTitle')}</h4><div class="detail-list">${pointHtml}</div></div></div></td>`;
   tbody.appendChild(tr);
 }
 function getSorted(){
@@ -1056,8 +1105,12 @@ function updateStats(){
   const totalAvail=balanceOk.reduce((s,m)=>s+toNum(m.available),0);
   const totalValue=valid.reduce((s,m)=>s+(m.value||0),0);
   const totalNet=totalAvail+totalValue;
-  const pnlRows=valid.filter(m=>Number.isFinite(toNum(m.pnl)));
+  const pnlRows=valid.filter(m=>Number.isFinite(toNum(m.pnl)) && !m.pnlPartial);
   const totalPnl = pnlRows.length ? pnlRows.reduce((s,m)=>s+toNum(m.pnl),0) : null;
+  const floatingRows=valid.filter(m=>Number.isFinite(toNum(m.floatingPnl)) && !m.floatingPnlPartial);
+  const totalFloatingPnl = floatingRows.length ? floatingRows.reduce((s,m)=>s+toNum(m.floatingPnl),0) : null;
+  const realizedRows=valid.filter(m=>Number.isFinite(toNum(m.realizedPnl)) && !m.pnlPartial && !m.floatingPnlPartial);
+  const totalRealizedPnl = realizedRows.length ? realizedRows.reduce((s,m)=>s+toNum(m.realizedPnl),0) : null;
   const volRows=valid.filter(m=>!m.matchSkipped);
   const volSkippedCnt=valid.length-volRows.length;
   const totalVol=volRows.reduce((s,m)=>s+(m.vol||0),0);
@@ -1073,11 +1126,25 @@ function updateStats(){
   $('#statPnl').className='stat-value '+cssClassSigned(totalPnl);
   const pnlSub=$('#statPnl').closest('.stat-card')?.querySelector('.stat-sub');
   if(pnlSub){
-    const partial=valid.filter(m=>m.pnlPartial).length;
-    const missing=valid.length-pnlRows.length;
-    const incomplete=Math.max(missing, partial);
+    const incomplete=valid.filter(m=>m.pnlPartial || !Number.isFinite(toNum(m.pnl))).length;
     pnlSub.textContent = incomplete ? t('statPnlSubMissing',{n:incomplete.toLocaleString(locale())}) : t('statPnlSub');
-    pnlSub.classList.toggle('negative', missing>0);
+    pnlSub.classList.toggle('negative', incomplete>0);
+  }
+  const floatingEl=$('#statFloatingPnl');
+  if(floatingEl){
+    floatingEl.textContent = totalFloatingPnl===null ? '-' : signedMoney(totalFloatingPnl);
+    floatingEl.className='stat-value '+cssClassSigned(totalFloatingPnl);
+    const floatingSub=floatingEl.closest('.stat-card')?.querySelector('.stat-sub');
+    if(floatingSub){
+      const missing=valid.filter(m=>m.floatingPnlPartial || !Number.isFinite(toNum(m.floatingPnl))).length;
+      floatingSub.textContent = missing ? t('statFloatingPnlSubMissing',{n:missing.toLocaleString(locale())}) : t('statFloatingPnlSub');
+      floatingSub.classList.toggle('negative', missing>0);
+    }
+  }
+  const realizedEl=$('#statRealizedPnl');
+  if(realizedEl){
+    realizedEl.textContent = totalRealizedPnl===null ? '-' : signedMoney(totalRealizedPnl);
+    realizedEl.className='stat-value '+cssClassSigned(totalRealizedPnl);
   }
   $('#statVol').textContent = volRows.length ? fmtUsd(totalVol) : '-';
   const volSub=$('#statVolSub');
@@ -1130,7 +1197,7 @@ $('#run').addEventListener('click',async()=>{
   $('#loading').style.display='block'; $('#bar').value=0; $('#barTxt').textContent=t('preparingQuery');
   $('#run').disabled=$('#csv').disabled=$('#json').disabled=true; $('#stop').style.display=''; $('#stop').disabled=false; $('#stop').textContent=t('stopQuery');
   const tbody=$('#tbl tbody');
-  const placeholders=list.map((addr,i)=>{ const tr=document.createElement('tr'); tr.className='row-placeholder'; tr.innerHTML=`<td>${i+1}</td><td class="mono">${fmtShort(addr)}<button class="copy-btn">${t('copy')}</button></td><td colspan="10">${t('querying')}</td>`; tr.querySelector('button').addEventListener('click',()=>copyText(addr)); tbody.appendChild(tr); return tr; });
+  const placeholders=list.map((addr,i)=>{ const tr=document.createElement('tr'); tr.className='row-placeholder'; tr.innerHTML=`<td>${i+1}</td><td class="mono">${fmtShort(addr)}<button class="copy-btn">${t('copy')}</button></td><td colspan="12">${t('querying')}</td>`; tr.querySelector('button').addEventListener('click',()=>copyText(addr)); tbody.appendChild(tr); return tr; });
   let done=0, fail=0;
   const matchDepth=currentMatchDepth();
   const tasks=list.map((addr,idx)=>{ const f=()=>queryOne(addr,{matchDepth}); f.addr=addr; f.idx=idx; return f; });
@@ -1150,14 +1217,14 @@ $('#stop').addEventListener('click',()=>{ abortFlag=true; runController?.abort()
 
 $('#csv').addEventListener('click',()=>{
   if(!resultMeta.length) return toast(t('noData'));
-  const header=['#',t('csvAddress'),t('csvTotalPoints'),t('csvAvailable'),t('csvHolding'),t('csvNet'),t('csvPnl'),t('csvPositions'),t('csvVolume'),t('csvLast'),t('csvNote'),t('csvStatus')];
-  const rows=getSorted().map((m,i)=>[i+1,m.addr,m.err?'':m.points,m.err?'':m.available,m.err?'':m.value,m.err?'':m.total,m.err?'':m.pnl,m.err?'':m.posCnt,m.err?'':m.vol,m.err?'':(m.last?new Date(m.last).toISOString():''),getNote(m.addr),m.err||'OK']);
+  const header=['#',t('csvAddress'),t('csvTotalPoints'),t('csvAvailable'),t('csvHolding'),t('csvNet'),t('csvPnl'),t('csvFloatingPnl'),t('csvRealizedPnl'),t('csvPositions'),t('csvVolume'),t('csvLast'),t('csvNote'),t('csvStatus')];
+  const rows=getSorted().map((m,i)=>[i+1,m.addr,m.err?'':m.points,m.err?'':m.available,m.err?'':m.value,m.err?'':m.total,m.err?'':m.pnl,m.err?'':m.floatingPnl,m.err?'':m.realizedPnl,m.err?'':m.posCnt,m.err?'':m.vol,m.err?'':(m.last?new Date(m.last).toISOString():''),getNote(m.addr),m.err||(m.pnlPartial?'PNL_INCOMPLETE':'OK')]);
   const escCsv=v=>{ const s=String(v??''); return /[,"\n]/.test(s)?`"${s.replaceAll('"','""')}"`:s; };
   downloadBlob(`predict_fun_${Date.now()}.csv`, '\uFEFF'+[header,...rows].map(r=>r.map(escCsv).join(',')).join('\n'), 'text/csv;charset=utf-8');
 });
 $('#json').addEventListener('click',()=>{
   if(!resultMeta.length) return toast(t('noData'));
-  const data=resultMeta.map(m=>({address:m.addr,note:getNote(m.addr),error:m.err||null,summary:m.err?null:{latestTotalPoints:m.points,importedWeeklyPointsSum:m.weeklyPointsSum,latestPointSnapshot:m.pointLatest||null,availableUsdt:m.available,holdingValueUsd:m.value,netValueUsd:m.total,pnlUsd:m.pnl,positions:m.posCnt,recent3000VolumeUsd:m.vol,lastFillAt:m.last?new Date(m.last).toISOString():null},pointRecords:m.pointRecords||[],positions:m.positions||[],matches:m.matches||[]}));
+  const data=resultMeta.map(m=>({address:m.addr,note:getNote(m.addr),error:m.err||null,summary:m.err?null:{latestTotalPoints:m.points,importedWeeklyPointsSum:m.weeklyPointsSum,latestPointSnapshot:m.pointLatest||null,availableUsdt:m.available,holdingValueUsd:m.value,netValueUsd:m.total,portfolioPnlUsd:m.pnl,floatingPnlUsd:m.floatingPnl,realizedPnlUsd:m.realizedPnl,pnlComplete:!m.pnlPartial,pnlSource:'positions value + orders/matches cashflow',tradeCashflowUsd:m.portfolioPnlInfo?.cashflow ?? null,feeUsd:m.portfolioPnlInfo?.fee ?? null,positions:m.posCnt,fetchedMatchVolumeUsd:m.vol,matchDepth:m.matchDepth,lastFillAt:m.last?new Date(m.last).toISOString():null},pointRecords:m.pointRecords||[],positions:m.positions||[],matches:m.matches||[]}));
   downloadBlob(`predict_fun_${Date.now()}.json`, JSON.stringify(data,null,2), 'application/json;charset=utf-8');
 });
 </script>
