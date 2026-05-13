@@ -2,6 +2,9 @@
   "functions": {
     "api/predict.js": {
       "maxDuration": 30
+    },
+    "api/portfolio-pnl.js": {
+      "maxDuration": 30
     }
   }
 }
